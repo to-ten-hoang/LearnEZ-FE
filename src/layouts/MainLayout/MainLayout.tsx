@@ -1,7 +1,10 @@
 import { Outlet, Link } from 'react-router-dom';
+import useAuthStore from '../../store/authStore';
 // import './MainLayout.css';
 
 const MainLayout = () => {
+
+  const {isAuthenticated, user} = useAuthStore();
   return (
     <div>
       <header>
@@ -9,8 +12,19 @@ const MainLayout = () => {
           <Link to="/">Trang chủ</Link>
           <Link to="/courses">Khóa học</Link>
           <Link to="/blog">Blog</Link>
-          <Link to="/login">Đăng nhập</Link>
-          <Link to="/register">Đăng ký</Link>
+          {isAuthenticated ? (
+            <>
+              <Link to={`/${user?.role}/dashboard`}>Lớp học của tôi</Link>
+              <button onClick={()=> useAuthStore.getState().logout}>
+                Đăng xuất
+              </button>
+            </>
+          ) :
+            <>
+              <Link to="/login">Đăng nhập</Link>
+              <Link to="/register">Đăng ký</Link>
+            </>
+          }
           <Link to="/test">Test Toeic</Link>
         </nav>
       </header>
