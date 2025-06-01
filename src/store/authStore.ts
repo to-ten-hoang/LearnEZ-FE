@@ -1,31 +1,34 @@
-// src/store/authStore.ts
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
 interface User {
+  email: string;
+  password: string;
   id: string;
   name: string;
-  role: 'student' | 'teacher' | null;
+  role: 'student' | 'teacher' | 'manager' | 'consultant' | null;
 }
 
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
+  token: string | null;
   login: (user: User) => void;
   logout: () => void;
+  setToken: (token: string) => void;
 }
 
 const useAuthStore = create<AuthState>()(
-  devtools(
-    persist(
-      (set) => ({
-        user: null,
-        isAuthenticated: false,
-        login: (user) => set({ user, isAuthenticated: true }),
-        logout: () => set({ user: null, isAuthenticated: false }),
-      }),
-      { name: 'auth-storage' },
-    ),
+  persist(
+    (set) => ({
+      user: null,
+      isAuthenticated: false,
+      token: null,
+      login: (user) => set({ user, isAuthenticated: true }),
+      logout: () => set({ user: null, isAuthenticated: false, token: null }),
+      setToken: (token) => set({ token }),
+    }),
+    { name: 'auth-storage' },
   ),
 );
 

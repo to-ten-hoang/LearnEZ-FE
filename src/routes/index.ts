@@ -1,8 +1,6 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Home from '../pages/common/Home/Home';
-import Login from '../pages/common/Login/Login';
-import Register from '../pages/common/Register/Register';
 import StudentDashboard from '../pages/student/DashBoard/StudentDashboard';
 import TeacherDashboard from '../pages/teacher/DashBoard/TeacherDashboard';
 import MainLayout from '../layouts/MainLayout/MainLayout';
@@ -16,8 +14,6 @@ const router = createBrowserRouter([
     element: React.createElement(MainLayout),
     children: [
       { path: '/', element: React.createElement(Home) },
-      { path: '/login', element: React.createElement(Login) },
-      { path: '/register', element: React.createElement(Register) },
       { path: '/courses', element: React.createElement(Courses) },
       { path: '/blog', element: React.createElement(Blog) },
       { path: '/test', element: React.createElement(Test) },
