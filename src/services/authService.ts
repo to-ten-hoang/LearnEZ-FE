@@ -40,7 +40,7 @@ export const login = async (data: LoginRequest) => {
   try {
     const response = await loginApi(data);
     if (response.code === 200 && response.data) {
-      const { token, authenticated, role } = response.data;
+      const { token, role } = response.data;
       const userRole = roleMapping[role] || 'student';
       useAuthStore.getState().login({
         id: '', // ID không được trả về từ API, có thể cần thêm vào API

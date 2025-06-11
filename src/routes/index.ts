@@ -7,6 +7,7 @@ import MainLayout from '../layouts/MainLayout/MainLayout';
 import Courses from '../pages/common/Courses/Course';
 import Blog from '../pages/common/Blog/Blog';
 import Test from '../pages/common/Test/Test';
+import Profile from '../pages/Profile/Profile';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: '/test', element: React.createElement(Test) },
       { path: '/student/dashboard', element: React.createElement(StudentDashboard) },
       { path: '/teacher/dashboard', element: React.createElement(TeacherDashboard) },
+      { path: '/profile', element: React.createElement(Profile) },
     ],
   },
 ]);

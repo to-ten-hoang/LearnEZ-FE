@@ -1,0 +1,9 @@
+.notification-icon {
+  font-size: 20px;
+  /* color: #1890ff; */
+  cursor: pointer;
+}
+
+.notification-icon:hover {
+  color: #40a9ff;
+}

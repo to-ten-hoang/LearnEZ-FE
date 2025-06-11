@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { Menu, Button, Layout } from 'antd';
 import useAuthStore from '../../store/authStore';
-import { logout as logoutService } from '../../services/authService';
 import logo from '../../assets/logo.svg';
 import LoginModal from '../../components/common/LoginModal/LoginModal';
 import RegisterModal from '../../components/common/RegisterModal/RegisterModal';
+import NotificationIcon from '../../components/common/NotificationIcon/NotificationIcon';
+import UserProfileDropdown from '../../components/common/UserProfileDropdown/UserProfileDropDown';
 import './MainLayout.css';
 
 const { Header } = Layout;
 
 const MainLayout = () => {
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   const [isLoginVisible, setIsLoginVisible] = useState(false);
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
-  const navigate = useNavigate();
 
   const showLogin = () => {
     setIsLoginVisible(true);
@@ -32,21 +32,10 @@ const MainLayout = () => {
     setIsRegisterVisible(false);
   };
 
-  const handleLogout = async () => {
-    // Modal.confirm({
-    //   title: 'Bạn có chắc chắn muốn đăng xuất?',
-    //   onOk: async () => {
-    //     try {
-    //       await logoutService();
-    //       navigate('/');
-    //     } catch (error) {
-    //       console.error('Logout failed:', error);
-    //     }
-    //   },
-    // });
-    await logoutService();
-    navigate('/');
-  };
+  // const handleLogout = async () => {
+  //   await logoutService();
+  //   navigate('/');
+  // };
 
   const menuItems = [
     { key: 'home', label: <Link to="/">Trang chủ</Link> },
@@ -74,12 +63,8 @@ const MainLayout = () => {
             <div className="auth-buttons">
               {isAuthenticated ? (
                 <>
-                  <Button type="link">
-                    <Link to={`/${user?.role}/dashboard`}>Lớp học của tôi</Link>
-                  </Button>
-                  <Button type="primary" onClick={handleLogout}>
-                    Đăng xuất
-                  </Button>
+                  <NotificationIcon />
+                  <UserProfileDropdown />
                 </>
               ) : (
                 <>

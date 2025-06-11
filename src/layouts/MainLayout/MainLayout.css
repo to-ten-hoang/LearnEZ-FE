@@ -24,9 +24,9 @@
   align-items: center;
 }
 
-.logo-link{
-    display: flex;
-    align-items: center;
+.logo-link {
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
@@ -42,18 +42,19 @@
 
 .main-menu {
   border-bottom: none !important;
-  line-height: 64px; /* Chiều cao của header Ant Design mặc định */
+  line-height: 64px;
 }
 
 .main-menu .ant-menu-item {
   font-size: 16px;
   font-weight: 500;
-  margin: 0 16px; /* Khoảng cách giữa các mục */
+  margin: 0 16px;
 }
 
 .auth-buttons {
   display: flex;
-  gap: 8px;
+  gap: 16px;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
