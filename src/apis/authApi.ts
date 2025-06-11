@@ -29,6 +29,25 @@ interface LogoutResponse {
   data: null;
 }
 
+interface UserProfileResponse {
+  code: number;
+  message: string;
+  data: {
+    firstName: string;
+    lastName: string;
+    phone: string | null;
+    address: string | null;
+    dob: string | null;
+    gender: string | null;
+    avatarUrl: string | null;
+    isActive: boolean | null;
+    isDelete: boolean | null;
+    education: string | null;
+    major: string | null;
+    student: any | null;
+  };
+}
+
 export const register = async (data: RegisterRequest): Promise<LogoutResponse> => {
   const response = await api.post('/api/v1/auth/register', data);
   return response.data;
@@ -46,5 +65,10 @@ export const logout = async (): Promise<LogoutResponse> => {
 
 export const refreshToken = async (): Promise<AuthResponse> => {
   const response = await api.get('/api/v1/auth/refresh');
+  return response.data;
+};
+
+export const getUserProfile = async (): Promise<UserProfileResponse> => {
+  const response = await api.get('/api/v1/user');
   return response.data;
 };

@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { login as loginApi, register as registerApi, logout as logoutApi, refreshToken as refreshTokenApi } from '../apis/authApi';
+import { login as loginApi, register as registerApi, logout as logoutApi, refreshToken as refreshTokenApi, getUserProfile as getUserProfileApi } from '../apis/authApi';
 import useAuthStore from '../store/authStore';
 
 interface RegisterRequest {
@@ -14,6 +14,25 @@ interface LoginRequest {
   email: string;
   password: string;
 }
+
+// interface UserProfileResponse {
+//   code: number;
+//   message: string;
+//   data: {
+//     firstName: string;
+//     lastName: string;
+//     phone: string | null;
+//     address: string | null;
+//     dob: string | null;
+//     gender: string | null;
+//     avatarUrl: string | null;
+//     isActive: boolean | null;
+//     isDelete: boolean | null;
+//     education: string | null;
+//     major: string | null;
+//     student: any | null;
+//   };
+// }
 
 const roleMapping: { [key: number]: 'student' | 'teacher' | 'manager' | 'consultant' } = {
   1: 'manager',
@@ -89,3 +108,18 @@ export const refreshToken = async () => {
     throw error;
   }
 };
+
+export const getUserProfile = async () => {
+  try{
+    const response = await getUserProfileApi();
+    if(response.code === 202 && response.data){
+      message.success('Lấy thông tin cá nhân thành công');
+      return response.data;
+    }
+    throw new Error(response.message || 'Lấy thông tin cá nhân thất bại.');
+  } catch(error:any){
+    message.error(error.message || 'Đã có lỗi xảy ra khi lấy thông tin cá nhân.');
+    throw error;
+  }
+
+}
