@@ -3,10 +3,10 @@ import { Link, Outlet } from 'react-router-dom';
 import { Menu, Button, Layout } from 'antd';
 import useAuthStore from '../../store/authStore';
 import logo from '../../assets/logo.svg';
-import LoginModal from '../../components/common/LoginModal/LoginModal';
-import RegisterModal from '../../components/common/RegisterModal/RegisterModal';
-import NotificationIcon from '../../components/common/NotificationIcon/NotificationIcon';
-import UserProfileDropdown from '../../components/common/UserProfileDropdown/UserProfileDropDown';
+import LoginModal from '../../components/common/Auth/LoginModal/LoginModal';
+import RegisterModal from '../../components/common/Auth/RegisterModal/RegisterModal';
+import Notification from '../../components/common/Notification/Notification';
+import UserMenu from '../../components/common/UserMenu/UserMenu';
 import './MainLayout.css';
 
 const { Header } = Layout;
@@ -31,11 +31,6 @@ const MainLayout = () => {
   const handleCloseRegister = () => {
     setIsRegisterVisible(false);
   };
-
-  // const handleLogout = async () => {
-  //   await logoutService();
-  //   navigate('/');
-  // };
 
   const menuItems = [
     { key: 'home', label: <Link to="/">Trang chủ</Link> },
@@ -63,8 +58,8 @@ const MainLayout = () => {
             <div className="auth-buttons">
               {isAuthenticated ? (
                 <>
-                  <NotificationIcon />
-                  <UserProfileDropdown />
+                  <Notification />
+                  <UserMenu />
                 </>
               ) : (
                 <>

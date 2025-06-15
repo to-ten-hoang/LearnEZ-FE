@@ -1,5 +1,5 @@
 import { Modal, Form, Input, Button } from 'antd';
-import { login as loginService } from '../../../services/authService';
+import { login as loginService } from '../../../../services/authService';
 import './LoginModal.css';
 
 interface LoginModalProps {

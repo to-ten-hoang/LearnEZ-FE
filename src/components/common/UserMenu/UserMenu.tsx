@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { UserOutlined, LogoutOutlined, BookOutlined } from '@ant-design/icons';
-import { Dropdown, type MenuProps} from 'antd';
+import { Dropdown, type MenuProps } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../../store/authStore';
-import './UserProfileDropdown.css';
+import './UserMenu.css';
 
-const UserProfileDropdown = () => {
+const UserMenu = () => {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -44,4 +44,4 @@ const UserProfileDropdown = () => {
   );
 };
 
-export default UserProfileDropdown;
+export default UserMenu;

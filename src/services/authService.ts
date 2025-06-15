@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { login as loginApi, register as registerApi, logout as logoutApi, refreshToken as refreshTokenApi, getUserProfile as getUserProfileApi } from '../apis/authApi';
+import { login as loginApi, register as registerApi, logout as logoutApi, refreshToken as refreshTokenApi, getUserProfile as getUserProfileApi } from '../api/auth/authApi';
 import useAuthStore from '../store/authStore';
 
 interface RegisterRequest {

@@ -1,5 +1,5 @@
 import { Modal, Form, Input, Button } from 'antd';
-import { register as registerService } from '../../../services/authService';
+import { register as registerService } from '../../../../services/authService';
 import './RegisterModal.css';
 
 interface RegisterModalProps {
