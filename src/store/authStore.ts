@@ -2,10 +2,11 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  id: string;
-  name: string;
   role: 'student' | 'teacher' | 'manager' | 'consultant' | null;
 }
 

@@ -25,7 +25,7 @@ const Navigation = () => {
     <div className="profile-sidebar">
       <div className="avatar-section">
         <img src="https://mcdn.coolmate.me/image/March2023/meme-meo-cute-hai-huoc-1297_521.jpg" alt="" className="avatar-img" />
-        <h3>{user?.role === 'teacher' ? 'Giáo viên' : 'Học sinh'}: {user?.name || 'User'}</h3>
+        <h3>{user?.role === 'teacher' ? 'Giáo viên' : 'Học sinh'}: {`${user?.firstName} ${user?.lastName}` || 'User'}</h3>
       </div>
       <Menu
         selectedKeys={[selectedKey]}

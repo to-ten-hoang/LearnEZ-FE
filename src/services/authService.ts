@@ -60,15 +60,17 @@ export const login = async (data: LoginRequest) => {
     const response = await loginApi(data);
     if (response.code === 200 && response.data) {
       const { token, role } = response.data;
+      useAuthStore.getState().setToken(token);
+      const userProfile = await getUserProfileApi(); // Lấy thông tin profile sau khi login
       const userRole = roleMapping[role] || 'student';
       useAuthStore.getState().login({
-        id: '', // ID không được trả về từ API, có thể cần thêm vào API
-        name: data.email.split('@')[0],
+        id:  '',
+        firstName: userProfile.data.firstName || '',
+        lastName: userProfile.data.lastName || '',
         email: data.email,
         password: data.password,
         role: userRole,
       });
-      useAuthStore.getState().setToken(token);
       message.success('Đăng nhập thành công!');
       return response;
     }
@@ -112,7 +114,7 @@ export const refreshToken = async () => {
 export const getUserProfile = async () => {
   try{
     const response = await getUserProfileApi();
-    if(response.code === 202 && response.data){
+    if(response.code === 200 && response.data){
       message.success('Lấy thông tin cá nhân thành công');
       return response.data;
     }
