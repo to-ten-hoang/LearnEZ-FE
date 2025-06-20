@@ -67,6 +67,8 @@ export const login = async (data: LoginRequest) => {
         id:  '',
         firstName: userProfile.data.firstName || '',
         lastName: userProfile.data.lastName || '',
+        // firstName: '',
+        // lastName: '',
         email: data.email,
         password: data.password,
         role: userRole,

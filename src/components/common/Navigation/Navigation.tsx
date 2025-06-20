@@ -16,7 +16,7 @@ const Navigation = () => {
     { key: 'offline', icon: <TeamOutlined />, label: 'Lớp học offline' },
   ];
   const teacherItems = [
-    ...studentItems,
+    { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
     { key: 'manage', icon: <TeamOutlined />, label: 'Quản lý lớp học' },
   ];
   const items = user?.role === 'teacher' ? teacherItems : studentItems;
