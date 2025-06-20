@@ -12,12 +12,12 @@ const Navigation = () => {
 
   const studentItems = [
     { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
-    { key: 'video', icon: <VideoCameraOutlined />, label: 'Khóa học video' },
-    { key: 'offline', icon: <TeamOutlined />, label: 'Lớp học offline' },
+    { key: 'video-courses', icon: <VideoCameraOutlined />, label: 'Khóa học video' },
+    { key: 'offline-classes', icon: <TeamOutlined />, label: 'Lớp học offline' },
   ];
   const teacherItems = [
     { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
-    { key: 'manage', icon: <TeamOutlined />, label: 'Quản lý lớp học' },
+    { key: 'class-management', icon: <TeamOutlined />, label: 'Quản lý lớp học' },
   ];
   const items = user?.role === 'teacher' ? teacherItems : studentItems;
 
@@ -33,7 +33,7 @@ const Navigation = () => {
         items={items.map(item => ({
           key: item.key,
           icon: item.icon,
-          label: <Link to={`/profile/${item.key}`}>{item.label}</Link>,
+          label: <Link to={`/dashboard/${item.key}`}>{item.label}</Link>,
         }))}
       />
     </div>

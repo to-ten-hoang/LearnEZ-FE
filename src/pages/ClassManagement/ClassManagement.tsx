@@ -1,6 +1,7 @@
+import './ClassManagement.css'
 const ClassManagement = () => {
   return (
-    <div>ClassManagement</div>
+    <div className="class-management">ClassManagement</div>
   )
 }
 

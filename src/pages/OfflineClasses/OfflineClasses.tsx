@@ -1,6 +1,7 @@
+import './OfflineClasses.css'
 const OfflineClasses = () => {
   return (
-    <div>OfflineClasses</div>
+    <div className='offline-classes'>OfflineClasses</div>
   )
 }
 

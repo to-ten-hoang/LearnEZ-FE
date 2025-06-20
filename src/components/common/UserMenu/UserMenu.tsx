@@ -12,9 +12,9 @@ const UserMenu = () => {
 
   const items: MenuProps['items'] = [
     {
-      key: 'profile',
+      key: 'dashboard',
       icon: <UserOutlined />,
-      label: <Link to="/profile">Thông tin cá nhân</Link>,
+      label: <Link to="/dashboard/profile">Thông tin cá nhân</Link>,
     },
     {
       key: 'courses',
