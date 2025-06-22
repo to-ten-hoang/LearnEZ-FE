@@ -1,18 +1,13 @@
-.profile{
-    display: flex;
-    margin-left: 270px;
-    width: 100%;
-}
-/* .profile{
-  display: flex;
+.statistics {
   margin-left: 270px;
   padding: 20px;
   min-height: calc(100vh - 64px);
   background: #f5f7fa;
 }
-.profile{
+
+.statistics h2 {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 20px;
   color: #1890ff;
-} */
+}

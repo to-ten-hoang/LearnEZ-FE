@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Form, Input, DatePicker, Select, Button } from 'antd';
-import { getUserProfile } from '../../../services/authService';
+import { getUserProfile } from '../../../../services/authService';
 import './ProfileCard.css';
 
 const { Option } = Select;
