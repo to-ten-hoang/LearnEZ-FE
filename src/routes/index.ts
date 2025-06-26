@@ -17,6 +17,7 @@ import CourseManagement from '../pages/CourseManagement/CourseManagement';
 import BlogApproval from '../pages/BlogApproval/BlogApproval';
 import Business from '../pages/Business/Business';
 import WriteBlog from '../pages/WriteBlog/WriteBlog';
+import ProtectedRoute from '../components/common/ProtectedRoute/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -28,20 +29,64 @@ const router = createBrowserRouter([
       { path: '/blog', element: React.createElement(Blog) },
       { path: '/test', element: React.createElement(Test) },
       {
-        path: '/dashboard/:tab?',
+        path: '/dashboard',
         element: React.createElement(Dashboard),
         children: [
-          { path: 'profile', element: React.createElement(Profile) },
-          { path: 'video-courses', element: React.createElement(VideoCourses) },
-          { path: 'offline-classes', element: React.createElement(OfflineClasses) },
-          { path: 'class-management', element: React.createElement(ClassManagement) },
-          { path: 'question-bank', element: React.createElement(QuestionBank) },
-          { path: 'statistics', element: React.createElement(Statistics) },
-          { path: 'member-management', element: React.createElement(MemberManagement) },
-          { path: 'course-management', element: React.createElement(CourseManagement) },
-          { path: 'blog-approval', element: React.createElement(BlogApproval) },
-          { path: 'business', element: React.createElement(Business) },
-          { path: 'write-blog', element: React.createElement(WriteBlog) },
+          {
+            path: 'profile',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'profile' }),
+            children: [{ path: '', element: React.createElement(Profile) }],
+          },
+          {
+            path: 'video-courses',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'video-courses' }),
+            children: [{ path: '', element: React.createElement(VideoCourses) }],
+          },
+          {
+            path: 'offline-classes',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'offline-classes' }),
+            children: [{ path: '', element: React.createElement(OfflineClasses) }],
+          },
+          {
+            path: 'class-management',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'class-management' }),
+            children: [{ path: '', element: React.createElement(ClassManagement) }],
+          },
+          {
+            path: 'question-bank',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'question-bank' }),
+            children: [{ path: '', element: React.createElement(QuestionBank) }],
+          },
+          {
+            path: 'statistics',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'statistics' }),
+            children: [{ path: '', element: React.createElement(Statistics) }],
+          },
+          {
+            path: 'member-management',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'member-management' }),
+            children: [{ path: '', element: React.createElement(MemberManagement) }],
+          },
+          {
+            path: 'course-management',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'course-management' }),
+            children: [{ path: '', element: React.createElement(CourseManagement) }],
+          },
+          {
+            path: 'blog-approval',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'blog-approval' }),
+            children: [{ path: '', element: React.createElement(BlogApproval) }],
+          },
+          {
+            path: 'business',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'business' }),
+            children: [{ path: '', element: React.createElement(Business) }],
+          },
+          {
+            path: 'write-blog',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'write-blog' }),
+            children: [{ path: '', element: React.createElement(WriteBlog) }],
+          },
         ],
       },
     ],

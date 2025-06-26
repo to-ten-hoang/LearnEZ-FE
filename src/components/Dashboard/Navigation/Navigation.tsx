@@ -14,6 +14,7 @@ const Navigation = () => {
     { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
     { key: 'video-courses', icon: <VideoCameraOutlined />, label: 'Khóa học video' },
     { key: 'offline-classes', icon: <TeamOutlined />, label: 'Lớp học offline' },
+    { key: 'member-management', icon: <SolutionOutlined />, label: 'Quản lý thành viên' },
   ];
 
   const teacherItems = [
