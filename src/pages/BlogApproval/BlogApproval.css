@@ -1,3 +1,4 @@
+/* BlogApproval.css */
 .blog-approval {
   margin-left: 270px;
   padding: 20px;
@@ -10,4 +11,72 @@
   font-weight: 600;
   margin-bottom: 20px;
   color: #1890ff;
+}
+
+.blog-approval .ant-form {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-approval .ant-form-item {
+  margin-bottom: 0;
+}
+
+.blog-approval .ant-input,
+.blog-approval .ant-select,
+.blog-approval .ant-picker {
+  width: 200px;
+}
+
+.blog-approval .ant-table {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-approval .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.status-approved {
+  color: #52c41a;
+  font-weight: 500;
+}
+
+.status-pending {
+  color: #fa8c16;
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons .ant-btn {
+  height: 32px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .blog-approval {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .blog-approval .ant-form {
+    flex-direction: column;
+  }
+
+  .blog-approval .ant-input,
+  .blog-approval .ant-select,
+  .blog-approval .ant-picker {
+    width: 100%;
+  }
 }
