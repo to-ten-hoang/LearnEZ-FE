@@ -1,10 +1,10 @@
 import { Button, message, Table, Input, Select, DatePicker, Form, Switch, Modal } from 'antd';
 import { useEffect, useState } from 'react';
-import { getAllPosts, updatePostStatus } from '../../services/blogService';
+import { getAllPostsService, updatePostStatusService } from '../../services/blogService';
 import moment from 'moment';
 import './BlogApproval.css';
 import { categories } from '../../constants/categories';
-import type { AllPostsRequest } from 'types';
+import type { AllPostsRequest } from 'types/blog';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -28,6 +28,11 @@ const BlogApproval = () => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
 
+  // State cho Modal xác nhận duyệt/hủy duyệt
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalChecked, setModalChecked] = useState<boolean>(false);
+  const [modalPostId, setModalPostId] = useState<number | null>(null);
+
   const fetchPosts = async (values: any = {}) => {
     setLoading(true);
     try {
@@ -38,7 +43,7 @@ const BlogApproval = () => {
         title: title || null,
         categoryPost: categoryPost ? [categoryPost] : [],
       };
-      const response = await getAllPosts(dataBody);
+      const response = await getAllPostsService(dataBody);
       setPosts(response.data.content);
     } catch (error) {
       message.error('Lỗi khi lấy danh sách bài đăng.');
@@ -51,31 +56,39 @@ const BlogApproval = () => {
     fetchPosts();
   }, []);
 
-  const handleToggleActive = async (postId: number, checked: boolean) => {
-    Modal.confirm({
-      title: checked ? 'Xác nhận duyệt bài đăng' : 'Xác nhận hủy duyệt bài đăng',
-      content: checked
-        ? 'Bạn có chắc chắn muốn duyệt bài đăng này?'
-        : 'Bạn có chắc chắn muốn hủy duyệt bài đăng này?',
-      okText: 'Xác nhận',
-      cancelText: 'Hủy',
-      onOk: async () => {
-        try {
-          const response = await updatePostStatus({ id: postId, isActive: checked });
-          if (response.code === 200) {
-            message.success(checked ? 'Duyệt bài đăng thành công!' : 'Hủy duyệt bài đăng thành công!');
-            setPosts(posts.map(post => (post.id === postId ? { ...post, isActive: checked } : post)));
-          }
-        } catch (error) {
-          message.error('Lỗi khi cập nhật trạng thái bài đăng.');
-        }
-      },
-    });
+  // Khi đổi trạng thái Switch, mở Modal xác nhận
+  const handleToggleActive = (postId: number, checked: boolean) => {
+    setModalOpen(true);
+    setModalChecked(checked);
+    setModalPostId(postId);
+  };
+
+  // Khi xác nhận trên Modal
+  const handleModalOk = async () => {
+    if (modalPostId === null) return;
+    try {
+      const response = await updatePostStatusService({ id: modalPostId, isActive: modalChecked });
+      if (response.code === 200) {
+        message.success(modalChecked ? 'Duyệt bài đăng thành công!' : 'Hủy duyệt bài đăng thành công!');
+        setPosts(posts.map(post => (post.id === modalPostId ? { ...post, isActive: modalChecked } : post)));
+      }
+    } catch (error) {
+      message.error('Lỗi khi cập nhật trạng thái bài đăng.');
+    } finally {
+      setModalOpen(false);
+      setModalPostId(null);
+    }
+  };
+
+  // Khi hủy Modal
+  const handleModalCancel = () => {
+    setModalOpen(false);
+    setModalPostId(null);
   };
 
   const handleDelete = async (postId: number) => {
     try {
-      const response = await updatePostStatus({
+      const response = await updatePostStatusService({
         id: postId,
         isDelete: true,
         isActive: false,
@@ -196,6 +209,20 @@ const BlogApproval = () => {
         dataSource={posts}
         loading={loading}
       />
+      <Modal
+        title={modalChecked ? 'Xác nhận duyệt bài đăng' : 'Xác nhận hủy duyệt bài đăng'}
+        open={modalOpen}
+        onOk={handleModalOk}
+        onCancel={handleModalCancel}
+        okText="Xác nhận"
+        cancelText="Hủy"
+      >
+        <p>
+          {modalChecked
+            ? 'Bạn có chắc chắn muốn duyệt bài đăng này?'
+            : 'Bạn có chắc chắn muốn hủy duyệt bài đăng này?'}
+        </p>
+      </Modal>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Form, Input, Select, Button, Upload, message, Image } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import TipTapEditor from 'components/common/TipTapEditor/TipTapEditor';
-import { createPost, uploadImage } from '../../services/blogService';
+import { createPostService, uploadImageService } from '../../services/blogService';
 import './WriteBlog.css';
 
 const { Option } = Select;
@@ -32,7 +32,7 @@ const WriteBlog = () => {
         categoryId: values.categoryId,
       };
       console.log('Post data:', postData); // Debug dữ liệu gửi lên
-      const response = await createPost(postData);
+      const response = await createPostService(postData);
       if (response.code === 200) {
         message.success('Đăng bài thành công!');
         form.resetFields();
@@ -54,7 +54,7 @@ const WriteBlog = () => {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const response = await uploadImage(formData);
+      const response = await uploadImageService(formData);
       if (response.code === 200) {
         const url = response.data; // Lấy URL từ API
         form.setFieldsValue({ themeUrl: url }); // Cập nhật form

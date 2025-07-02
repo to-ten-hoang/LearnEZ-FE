@@ -1,19 +1,7 @@
 import { message } from 'antd';
-import { login as loginApi, register as registerApi, logout as logoutApi, refreshToken as refreshTokenApi, getUserProfile as getUserProfileApi } from '../api/auth/authApi';
+import { login, register, logout, refreshToken, getUserProfile } from '../api/auth/authApi';
 import useAuthStore from '../store/authStore';
-
-interface RegisterRequest {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  role?: number;
-}
-
-interface LoginRequest {
-  email: string;
-  password: string;
-}
+import type { RegisterRequest, LoginRequest, AuthResponse, LogoutResponse, UserProfileResponse } from '../types/auth';
 
 const roleMapping: { [key: number]: 'student' | 'teacher' | 'manager' | 'consultant' } = {
   1: 'manager',
@@ -22,9 +10,9 @@ const roleMapping: { [key: number]: 'student' | 'teacher' | 'manager' | 'consult
   4: 'student',
 };
 
-export const register = async (data: RegisterRequest) => {
+export const registerService = async (data: RegisterRequest): Promise<LogoutResponse> => {
   try {
-    const response = await registerApi(data);
+    const response = await register(data);
     if (response.code === 200) {
       message.success('Đăng ký thành công! Vui lòng đăng nhập.');
       return response;
@@ -36,20 +24,18 @@ export const register = async (data: RegisterRequest) => {
   }
 };
 
-export const login = async (data: LoginRequest) => {
+export const loginService = async (data: LoginRequest): Promise<AuthResponse> => {
   try {
-    const response = await loginApi(data);
+    const response = await login(data);
     if (response.code === 200 && response.data) {
       const { token, role } = response.data;
       useAuthStore.getState().setToken(token);
-      const userProfile = await getUserProfileApi(); // Lấy thông tin profile sau khi login
+      const userProfile = await getUserProfile();
       const userRole = roleMapping[role] || 'student';
       useAuthStore.getState().login({
-        id:  '',
+        id: '',
         firstName: userProfile.data.firstName || '',
         lastName: userProfile.data.lastName || '',
-        // firstName: '',
-        // lastName: '',
         email: data.email,
         password: data.password,
         role: userRole,
@@ -64,9 +50,9 @@ export const login = async (data: LoginRequest) => {
   }
 };
 
-export const logout = async () => {
+export const logoutService = async (): Promise<LogoutResponse> => {
   try {
-    const response = await logoutApi();
+    const response = await logout();
     if (response.code === 200) {
       useAuthStore.getState().logout();
       message.success('Đăng xuất thành công!');
@@ -79,9 +65,9 @@ export const logout = async () => {
   }
 };
 
-export const refreshToken = async () => {
+export const refreshTokenService = async (): Promise<AuthResponse> => {
   try {
-    const response = await refreshTokenApi();
+    const response = await refreshToken();
     if (response.code === 200 && response.data) {
       const { token } = response.data;
       useAuthStore.getState().setToken(token);
@@ -94,17 +80,16 @@ export const refreshToken = async () => {
   }
 };
 
-export const getUserProfile = async () => {
-  try{
-    const response = await getUserProfileApi();
-    if(response.code === 200 && response.data){
+export const getUserProfileService = async (): Promise<UserProfileResponse> => {
+  try {
+    const response = await getUserProfile();
+    if (response.code === 200 && response.data) {
       message.success('Lấy thông tin cá nhân thành công');
-      return response.data;
+      return response;
     }
     throw new Error(response.message || 'Lấy thông tin cá nhân thất bại.');
-  } catch(error:any){
+  } catch (error: any) {
     message.error(error.message || 'Đã có lỗi xảy ra khi lấy thông tin cá nhân.');
     throw error;
   }
-
-}
+};

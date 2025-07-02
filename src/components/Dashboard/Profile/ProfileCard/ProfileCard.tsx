@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Form, Input, DatePicker, Select, Button } from 'antd';
-import { getUserProfile } from '../../../../services/authService';
+import { getUserProfileService} from '../../../../services/authService';
 import './ProfileCard.css';
 
 const { Option } = Select;
@@ -21,7 +21,8 @@ const ProfileCard = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const data = await getUserProfile();
+        const response = await getUserProfileService();
+        const data = response.data;
         form.setFieldsValue({
           firstName: data.firstName || '',
           lastName: data.lastName || '',
