@@ -29,8 +29,8 @@ const BlogApproval = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   // State cho Modal xác nhận duyệt/hủy duyệt
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalChecked, setModalChecked] = useState<boolean>(false);
+  const [modalOpenActive, setModalOpenActive] = useState(false);
+  const [modalCheckedActive, setModalCheckedActive] = useState<boolean>(false);
   const [modalPostId, setModalPostId] = useState<number | null>(null);
 
   const fetchPosts = async (values: any = {}) => {
@@ -58,31 +58,30 @@ const BlogApproval = () => {
 
   // Khi đổi trạng thái Switch, mở Modal xác nhận
   const handleToggleActive = (postId: number, checked: boolean) => {
-    setModalOpen(true);
-    setModalChecked(checked);
+    setModalOpenActive(true);
+    setModalCheckedActive(checked);
     setModalPostId(postId);
   };
 
   // Khi xác nhận trên Modal
-  const handleModalOk = async () => {
+  const handleModalActiveOk = async () => {
     if (modalPostId === null) return;
     try {
-      const response = await updatePostStatusService({ id: modalPostId, isActive: modalChecked });
+      const response = await updatePostStatusService({ id: modalPostId, isActive: modalCheckedActive });
       if (response.code === 200) {
-        message.success(modalChecked ? 'Duyệt bài đăng thành công!' : 'Hủy duyệt bài đăng thành công!');
-        setPosts(posts.map(post => (post.id === modalPostId ? { ...post, isActive: modalChecked } : post)));
+        message.success(modalCheckedActive ? 'Duyệt bài đăng thành công!' : 'Hủy duyệt bài đăng thành công!');
+        setPosts(posts.map(post => (post.id === modalPostId ? { ...post, isActive: modalCheckedActive } : post)));
       }
     } catch (error) {
       message.error('Lỗi khi cập nhật trạng thái bài đăng.');
     } finally {
-      setModalOpen(false);
+      setModalOpenActive(false);
       setModalPostId(null);
     }
   };
 
-  // Khi hủy Modal
-  const handleModalCancel = () => {
-    setModalOpen(false);
+  const handleModalActiveCancel = () => {
+    setModalOpenActive(false);
     setModalPostId(null);
   };
 
@@ -210,15 +209,15 @@ const BlogApproval = () => {
         loading={loading}
       />
       <Modal
-        title={modalChecked ? 'Xác nhận duyệt bài đăng' : 'Xác nhận hủy duyệt bài đăng'}
-        open={modalOpen}
-        onOk={handleModalOk}
-        onCancel={handleModalCancel}
+        title={modalCheckedActive ? 'Xác nhận duyệt bài đăng' : 'Xác nhận hủy duyệt bài đăng'}
+        open={modalOpenActive}
+        onOk={handleModalActiveOk}
+        onCancel={handleModalActiveCancel}
         okText="Xác nhận"
         cancelText="Hủy"
       >
         <p>
-          {modalChecked
+          {modalCheckedActive
             ? 'Bạn có chắc chắn muốn duyệt bài đăng này?'
             : 'Bạn có chắc chắn muốn hủy duyệt bài đăng này?'}
         </p>
