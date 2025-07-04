@@ -70,6 +70,8 @@ export interface AllPostsRequest {
   toDate: string | null;
   title: string | null;
   categoryPost: number[];
+  page?: number; // Số trang, bắt đầu từ 0
+  size?: number; // Số phần tử mỗi trang
 }
 
 export interface Post {

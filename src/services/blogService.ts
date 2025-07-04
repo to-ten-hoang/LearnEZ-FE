@@ -33,6 +33,8 @@ export const uploadImageService = async (formData: FormData): Promise<UploadResp
 export const getAllPostsService = async (data: AllPostsRequest): Promise<AllPostsResponse> => {
   try {
     const response = await getAllPosts(data);
+    console.log('data',data);
+    
     if (response.code === 200) {
       message.success('Lấy danh sách bài đăng thành công!');
       return response;

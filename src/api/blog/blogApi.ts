@@ -14,7 +14,13 @@ export const uploadImage = async (formData: FormData): Promise<UploadResponse> =
 };
 
 export const getAllPosts = async (data: AllPostsRequest): Promise<AllPostsResponse> => {
-  const response = await api.post('/api/v1/post/all-posts', data);
+  const response = await api.post('/api/v1/post/all-posts', 
+    data,
+    {params: {
+      page: data.page || 0,
+      size: data.size || 10
+    }}
+  );
   return response.data;
 };
 
