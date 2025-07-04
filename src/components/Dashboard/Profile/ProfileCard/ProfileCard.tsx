@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Form, Input, DatePicker, Select, Button } from 'antd';
-import { getUserProfileService} from '../../../../services/authService';
+import { Form, Input, DatePicker, Select, Button, message } from 'antd';
+import { getUserProfileService, updatePasswordService} from '../../../../services/authService';
 import './ProfileCard.css';
+import type { UpdatePasswordRequest } from 'types/auth';
 
 const { Option } = Select;
 
@@ -17,6 +18,7 @@ const ProfileCard = () => {
   const [form] = Form.useForm();
   const [isEditing, setIsEditing] = useState(false);
   const [mode, setMode] = useState<'profile' | 'changePassword'>('profile');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -47,9 +49,32 @@ const ProfileCard = () => {
     setMode('profile');
   };
 
-  const handleSave = (values: any) => {
+  const handleSave = async (values: any) => {
+    setLoading(true);
     console.log('Saved values:', values);
-    setIsEditing(false);
+    try{
+      if(mode === 'changePassword'){
+        const passWordData: UpdatePasswordRequest = {
+          oldPassword: values.oldPassword,
+          password: values.newPassword
+        };
+        const response = await updatePasswordService(passWordData);
+        if(response.code === 200){
+          form.resetFields(['oldPassword', 'newPassword', 'confirmPassword']);
+          // setIsEditing(false);
+          // setMode('profile');
+          message.success('Đổi mật khẩu thành công');
+        }
+      } else{
+        
+      }
+    } catch(error){
+      console.error('Lỗi khi lưu:', error);
+    }finally{
+      setLoading(false);
+    }
+
+
   };
 
   const handleChangePassword = () => {
@@ -61,6 +86,9 @@ const ProfileCard = () => {
     setIsEditing(false);
     setMode('profile');
     // form.resetFields();
+    if(mode === 'changePassword'){
+      form.resetFields(['oldPassword', 'newPassword', 'confirmPassword']);
+    }
   };
 
   return (
@@ -134,7 +162,7 @@ const ProfileCard = () => {
         )}
         {isEditing && (
           <div>
-            <Button type="primary" htmlType="submit" onClick={() => form.submit()} style={{ marginLeft: 10 }}>Lưu</Button>
+            <Button type="primary" htmlType="submit" onClick={() => form.submit()} style={{ marginLeft: 10 }} loading={loading}>Lưu</Button>
             <Button type="default" onClick={handleCancel} style={{ marginLeft: 10 }}>Thoát</Button>
           </div>
         )}

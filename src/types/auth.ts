@@ -45,3 +45,8 @@ export interface UserProfileResponse {
     student: any | null;
   };
 }
+
+export interface UpdatePasswordRequest {
+  password: string;
+  oldPassword: string;
+}

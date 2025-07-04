@@ -1,7 +1,7 @@
 import { message } from 'antd';
-import { login, register, logout, refreshToken, getUserProfile } from '../api/auth/authApi';
+import { login, register, logout, refreshToken, getUserProfile, updatePassword } from '../api/auth/authApi';
 import useAuthStore from '../store/authStore';
-import type { RegisterRequest, LoginRequest, AuthResponse, LogoutResponse, UserProfileResponse } from '../types/auth';
+import type { RegisterRequest, LoginRequest, AuthResponse, LogoutResponse, UserProfileResponse, UpdatePasswordRequest } from '../types/auth';
 
 const roleMapping: { [key: number]: 'student' | 'teacher' | 'manager' | 'consultant' } = {
   1: 'manager',
@@ -93,3 +93,17 @@ export const getUserProfileService = async (): Promise<UserProfileResponse> => {
     throw error;
   }
 };
+
+export const updatePasswordService = async(data: UpdatePasswordRequest) : Promise<UserProfileResponse> => {
+  try{
+    const response = await updatePassword(data);
+    if(response.code === 200 && response.data){
+      message.success('Đổi mật khẩu thành công');
+      return response;
+    }
+    throw new Error(response.message || 'Đổi mật khẩu thất bại.');
+  }catch(error: any) {
+    message.error(error.message || 'Đã có lỗi xảy ra khi đổi mật khẩu.');
+    throw error;
+  }
+}
