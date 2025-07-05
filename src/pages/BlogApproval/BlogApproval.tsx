@@ -30,9 +30,11 @@ const BlogApproval = () => {
     setLoading(true);
     try {
       const { title, dateRange, categoryPost } = values;
+      console.log('daterange', dateRange);
+      
       const dataBody: AllPostsRequest = {
-        fromDate: dateRange?.[0] ? moment(dateRange[0]).toISOString() : null,
-        toDate: dateRange?.[1] ? moment(dateRange[1]).toISOString() : null,
+        fromDate: dateRange?.[0] ? (dateRange[0]).format('YYYY-MM-DD') : null,
+        toDate: dateRange?.[1] ? (dateRange[1]).format('YYYY-MM-DD') : null,
         title: title || null,
         categoryPost: categoryPost ? [categoryPost] : [],
         page,
