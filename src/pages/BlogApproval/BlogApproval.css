@@ -1,4 +1,3 @@
-/* BlogApproval.css */
 .blog-approval {
   margin-left: 270px;
   padding: 20px;
@@ -64,6 +63,14 @@
   font-size: 14px;
 }
 
+/* Thêm container cho các nút hành động */
+.form-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap; /* Giữ các nút trên cùng một hàng */
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .blog-approval {
     margin-left: 0;
@@ -78,5 +85,15 @@
   .blog-approval .ant-select,
   .blog-approval .ant-picker {
     width: 100%;
+  }
+
+  .form-actions {
+    flex-direction: column; /* Xếp dọc trên màn hình nhỏ */
+    gap: 12px;
+    width: 100%;
+  }
+
+  .form-actions .ant-btn {
+    width: 100%; /* Nút chiếm toàn bộ chiều rộng */
   }
 }

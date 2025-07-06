@@ -69,9 +69,10 @@ export interface AllPostsRequest {
   fromDate: string | null;
   toDate: string | null;
   title: string | null;
-  categoryPost: number[];
+  categoryPost: string[];
   page?: number; // Số trang, bắt đầu từ 0
   size?: number; // Số phần tử mỗi trang
+  sort?: string | null;
 }
 
 export interface Post {

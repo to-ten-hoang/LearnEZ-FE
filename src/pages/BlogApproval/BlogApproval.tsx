@@ -1,5 +1,5 @@
 import { Button, message, Table, Input, Select, DatePicker, Form, Switch, Modal } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { getAllPostsService, updatePostStatusService } from '../../services/blogService';
 import moment from 'moment';
 import './BlogApproval.css';
@@ -16,119 +16,131 @@ const BlogApproval = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
+  const [sortField, setSortField] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<string | null>(null);
+  const [modalLoading, setModalLoading] = useState(false);
+  const [modalState, setModalState] = useState({
+    activeOpen: false,
+    activeChecked: false,
+    deleteOpen: false,
+    isDelete: false,
+    postId: null as number | null,
+  });
 
-  // State cho Modal xác nhận duyệt/hủy duyệt
-  const [modalOpenActive, setModalOpenActive] = useState(false);
-  const [modalCheckedActive, setModalCheckedActive] = useState<boolean>(false);
-  const [modalPostId, setModalPostId] = useState<number | null>(null);
-
-  // State cho Modal xác nhận xóa/khôi phục
-  const [modalOpenDelete, setModalOpenDelete] = useState(false);
-  const [modalIsDelete, setModalIsDelete] = useState<boolean>(false);
-
-  const fetchPosts = async (values: any = {}, page: number = 0, size: number = 10) => {
-    setLoading(true);
-    try {
-      const { title, dateRange, categoryPost } = values;
-      // console.log('daterange', dateRange);
-      
-      const dataBody: AllPostsRequest = {
-        fromDate: dateRange?.[0] ? (dateRange[0]).format('YYYY-MM-DD') : null,
-        toDate: dateRange?.[1] ? (dateRange[1]).format('YYYY-MM-DD') : null,
-        title: title || null,
-        categoryPost: categoryPost ? [categoryPost] : [],
-        page,
-        size,
-      };
-      const response = await getAllPostsService(dataBody);
-      setPosts(response.data.content);
-      setTotalPages(response.data.totalPages);
-      setCurrentPage(response.data.pageable.pageNumber);
-      setPageSize(response.data.pageable.pageSize);
-    } catch (error) {
-      message.error('Lỗi khi lấy danh sách bài đăng.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchPosts = useCallback(
+    async (values: any = {}, page: number = 0, size: number = 10) => {
+      setLoading(true);
+      try {
+        const { title, dateRange, categoryPost } = values;
+        const dataBody: AllPostsRequest = {
+          fromDate: dateRange?.[0] ? moment(dateRange[0]).format('YYYY-MM-DD') : null,
+          toDate: dateRange?.[1] ? moment(dateRange[1]).format('YYYY-MM-DD') : null,
+          title: title || null,
+          categoryPost: categoryPost ? [String(categoryPost)] : [], // Chuyển categoryPost thành string
+          page,
+          size,
+          sort: sortField && sortOrder ? `${sortField},${sortOrder}` : null,
+        };
+        const response = await getAllPostsService(dataBody);
+        setPosts(response.data.content);
+        setTotalPages(response.data.totalPages);
+        setCurrentPage(response.data.pageable.pageNumber);
+        setPageSize(response.data.pageable.pageSize);
+      } catch (error) {
+        message.error('Lỗi khi lấy danh sách bài đăng.');
+      } finally {
+        setLoading(false);
+      }
+    },
+    [sortField, sortOrder]
+  );
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [fetchPosts]);
 
-  // Khi đổi trạng thái Switch, mở Modal xác nhận
-  const handleToggleActive = (postId: number, checked: boolean) => {
-    setModalOpenActive(true);
-    setModalCheckedActive(checked);
-    setModalPostId(postId);
-  };
+  const handleToggleActive = useCallback((postId: number, checked: boolean) => {
+    setModalState({
+      ...modalState,
+      activeOpen: true,
+      activeChecked: checked,
+      postId,
+    });
+  }, [modalState]);
 
-  // Khi xác nhận duyệt/hủy duyệt trên Modal
   const handleModalActiveOk = async () => {
-    if (modalPostId === null) return;
+    if (modalState.postId === null) return;
+    setModalLoading(true);
     try {
-      const response = await updatePostStatusService({ id: modalPostId, isActive: modalCheckedActive });
+      const response = await updatePostStatusService({ id: modalState.postId, isActive: modalState.activeChecked });
       if (response.code === 200) {
-        message.success(modalCheckedActive ? 'Duyệt bài đăng thành công!' : 'Hủy duyệt bài đăng thành công!');
-        setPosts(posts.map(post => (post.id === modalPostId ? { ...post, isActive: modalCheckedActive } : post)));
+        message.success(modalState.activeChecked ? 'Duyệt bài đăng thành công!' : 'Hủy duyệt bài đăng thành công!');
+        setPosts(posts.map(post => (post.id === modalState.postId ? { ...post, isActive: modalState.activeChecked } : post)));
       }
     } catch (error) {
       message.error('Lỗi khi cập nhật trạng thái bài đăng.');
     } finally {
-      setModalOpenActive(false);
-      setModalPostId(null);
+      setModalLoading(false);
+      setModalState({ ...modalState, activeOpen: false, postId: null });
     }
   };
 
   const handleModalActiveCancel = () => {
-    setModalOpenActive(false);
-    setModalPostId(null);
+    setModalState({ ...modalState, activeOpen: false, postId: null });
   };
 
-  // Khi nhấn nút Xóa hoặc Khôi phục, mở Modal xác nhận
-  const handleDeleteOrRestore = (postId: number, isDelete: boolean) => {
-    setModalOpenDelete(true);
-    setModalIsDelete(isDelete);
-    setModalPostId(postId);
-  };
+  const handleDeleteOrRestore = useCallback((postId: number, isDelete: boolean) => {
+    setModalState({
+      ...modalState,
+      deleteOpen: true,
+      isDelete,
+      postId,
+    });
+  }, [modalState]);
 
-  // Khi xác nhận xóa/khôi phục trên Modal
   const handleModalDeleteOk = async () => {
-    if (modalPostId === null) return;
+    if (modalState.postId === null) return;
+    setModalLoading(true);
     try {
       const response = await updatePostStatusService({
-        id: modalPostId,
-        isDelete: modalIsDelete,
-        isActive: modalIsDelete ? false : undefined, // Khi xóa, đặt isActive = false
+        id: modalState.postId,
+        isDelete: modalState.isDelete,
+        isActive: modalState.isDelete ? false : undefined,
       });
       if (response.code === 200) {
-        message.success(modalIsDelete ? 'Xóa bài đăng thành công!' : 'Khôi phục bài đăng thành công!');
+        message.success(modalState.isDelete ? 'Xóa bài đăng thành công!' : 'Khôi phục bài đăng thành công!');
         setPosts(
           posts.map(post =>
-            post.id === modalPostId
-              ? { ...post, isDelete: modalIsDelete, isActive: modalIsDelete ? false : post.isActive }
+            post.id === modalState.postId
+              ? { ...post, isDelete: modalState.isDelete, isActive: modalState.isDelete ? false : post.isActive }
               : post
           )
         );
       }
     } catch (error) {
-      message.error(modalIsDelete ? 'Lỗi khi xóa bài đăng.' : 'Lỗi khi khôi phục bài đăng.');
+      message.error(modalState.isDelete ? 'Lỗi khi xóa bài đăng.' : 'Lỗi khi khôi phục bài đăng.');
     } finally {
-      setModalOpenDelete(false);
-      setModalPostId(null);
+      setModalLoading(false);
+      setModalState({ ...modalState, deleteOpen: false, postId: null });
     }
   };
 
   const handleModalDeleteCancel = () => {
-    setModalOpenDelete(false);
-    setModalPostId(null);
+    setModalState({ ...modalState, deleteOpen: false, postId: null });
   };
 
-  // Xử lý chuyển trang
   const handlePageChange = (page: number, pageSize: number) => {
-    setCurrentPage(page - 1); // Ant Design Table dùng page bắt đầu từ 1, API dùng từ 0
+    setCurrentPage(page - 1);
     setPageSize(pageSize);
     fetchPosts(form.getFieldsValue(), page - 1, pageSize);
+  };
+
+  const handleTableChange = (pagination: any, _filters: any, sorter: any) => {
+    const { field, order } = sorter;
+    setSortField(field || null);
+    setSortOrder(order ? (order === 'ascend' ? 'asc' : 'desc') : null);
+    setCurrentPage(0);
+    fetchPosts(form.getFieldsValue(), 0, pagination.pageSize);
   };
 
   const columns = [
@@ -138,12 +150,16 @@ const BlogApproval = () => {
       key: 'title',
       width: 200,
       ellipsis: true,
+      sorter: true,
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortField === 'title' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : null,
     },
     {
       title: 'Chuyên mục',
       dataIndex: 'category',
       key: 'category',
       width: 120,
+      render: (category: any) => category?.name || category || 'Chưa xác định', // Xử lý category là object hoặc string
     },
     {
       title: 'Tác giả',
@@ -158,6 +174,9 @@ const BlogApproval = () => {
       key: 'createdAt',
       width: 150,
       render: (createdAt: string) => moment(createdAt).format('DD/MM/YYYY HH:mm'),
+      sorter: true,
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortField === 'createdAt' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : null,
     },
     {
       title: 'Cập nhật gần nhất',
@@ -166,6 +185,9 @@ const BlogApproval = () => {
       width: 150,
       render: (updatedAt: string | null) =>
         updatedAt ? moment(updatedAt).format('DD/MM/YYYY HH:mm') : 'Chưa cập nhật',
+      sorter: true,
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortField === 'updatedAt' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : null,
     },
     {
       title: 'Trạng thái',
@@ -177,6 +199,7 @@ const BlogApproval = () => {
           checked={isActive}
           onChange={(checked) => handleToggleActive(record.id, checked)}
           disabled={record.isDelete}
+          aria-label={`Bật/tắt trạng thái cho bài đăng ${record.title}`} // Cải thiện accessibility
         />
       ),
     },
@@ -229,50 +252,60 @@ const BlogApproval = () => {
         <Form.Item name="dateRange" label="Khoảng thời gian">
           <RangePicker format="DD/MM/YYYY" />
         </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Tìm kiếm
-          </Button>
-        </Form.Item>
+        <div className="form-actions">
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Tìm kiếm
+            </Button>
+          </Form.Item>
+          {/* <Form.Item>
+            <Button onClick={() => { form.resetFields(); fetchPosts({}, 0, pageSize); }}>
+              Xóa bộ lọc
+            </Button>
+          </Form.Item> */}
+        </div>
       </Form>
       <Table
         columns={columns}
         dataSource={posts}
         loading={loading}
         pagination={{
-          current: currentPage + 1, // Ant Design dùng page bắt đầu từ 1
+          current: currentPage + 1,
           pageSize: pageSize,
           total: totalPages * pageSize,
           onChange: handlePageChange,
           showSizeChanger: true,
-          pageSizeOptions: ['5','10', '20', '50'],
+          pageSizeOptions: ['5', '10', '20', '50'],
         }}
+        onChange={handleTableChange}
       />
       <Modal
-        title={modalCheckedActive ? 'Xác nhận duyệt bài đăng' : 'Xác nhận hủy duyệt bài đăng'}
-        open={modalOpenActive}
+        title={modalState.activeChecked ? 'Xác nhận duyệt bài đăng' : 'Xác nhận hủy duyệt bài đăng'}
+        open={modalState.activeOpen}
         onOk={handleModalActiveOk}
         onCancel={handleModalActiveCancel}
         okText="Xác nhận"
         cancelText="Hủy"
+        confirmLoading={modalLoading}
       >
         <p>
-          {modalCheckedActive
+          {modalState.activeChecked
             ? 'Bạn có chắc chắn muốn duyệt bài đăng này?'
             : 'Bạn có chắc chắn muốn hủy duyệt bài đăng này?'}
         </p>
       </Modal>
       <Modal
-        title={modalIsDelete ? 'Xác nhận xóa bài đăng' : 'Xác nhận khôi phục bài đăng'}
-        open={modalOpenDelete}
+        title={modalState.isDelete ? 'Xác nhận xóa bài đăng' : 'Xác nhận khôi phục bài đăng'}
+        open={modalState.deleteOpen}
         onOk={handleModalDeleteOk}
         onCancel={handleModalDeleteCancel}
         okText="Xác nhận"
         cancelText="Hủy"
-        okType={modalIsDelete ? 'danger' : 'primary'}
+        okType={modalState.isDelete ? 'danger' : 'primary'}
+        confirmLoading={modalLoading}
       >
         <p>
-          {modalIsDelete
+          {modalState.isDelete
             ? 'Bạn có chắc chắn muốn xóa bài đăng này? Hành động này không thể hoàn tác.'
             : 'Bạn có chắc chắn muốn khôi phục bài đăng này?'}
         </p>

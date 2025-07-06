@@ -18,7 +18,8 @@ export const getAllPosts = async (data: AllPostsRequest): Promise<AllPostsRespon
     data,
     {params: {
       page: data.page || 0,
-      size: data.size || 10
+      size: data.size || 10,
+      sort: data.sort || undefined,
     }}
   );
   return response.data;
