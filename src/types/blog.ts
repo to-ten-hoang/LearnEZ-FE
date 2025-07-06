@@ -85,7 +85,7 @@ export interface Post {
   isActive: boolean;
   isDelete: boolean;
   isOwn: boolean | null;
-  category: string;
+  category: string; // Tên danh mục (string)
   author: any | null;
 }
 
@@ -132,4 +132,15 @@ export interface UpdateStatusResponse {
   code: number;
   message: string;
   data: any;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+}
+
+export interface CategoryResponse {
+  code: number;
+  message: string;
+  data: Category[];
 }

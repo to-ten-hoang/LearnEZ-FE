@@ -1,10 +1,10 @@
 import { Button, message, Table, Input, Select, DatePicker, Form, Switch, Modal } from 'antd';
 import { useEffect, useState, useCallback } from 'react';
-import { getAllPostsService, updatePostStatusService } from '../../services/blogService';
+import { getAllPostsService, updatePostStatusService, getCategoriesService } from '../../services/blogService';
 import moment from 'moment';
 import './BlogApproval.css';
-import { categories } from '../../constants/categories';
-import type { AllPostsRequest, Post } from '../../types/blog';
+import type { AllPostsRequest, Post, Category } from '../../types/blog';
+import type { SortOrder } from 'antd/es/table/interface'; // Nhập kiểu SortOrder từ Ant Design
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -13,11 +13,12 @@ const BlogApproval = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [sortField, setSortField] = useState<string | null>(null);
-  const [sortOrder, setSortOrder] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<SortOrder | undefined>(undefined); // Sử dụng kiểu SortOrder
   const [modalLoading, setModalLoading] = useState(false);
   const [modalState, setModalState] = useState({
     activeOpen: false,
@@ -27,37 +28,53 @@ const BlogApproval = () => {
     postId: null as number | null,
   });
 
+  // Lấy danh sách danh mục
+  const fetchCategories = useCallback(async () => {
+    try {
+      const response = await getCategoriesService();
+      if (response.code === 200) {
+        setCategories(response.data);
+      }
+    } catch (error) {
+      message.error('Lỗi khi lấy danh sách danh mục.');
+    }
+  }, []);
+
+  // Lấy danh sách bài đăng
   const fetchPosts = useCallback(
-    async (values: any = {}, page: number = 0, size: number = 10) => {
+    async (values: any = {}, page: number = 0, size: number = 10, sort: string | null = null) => {
       setLoading(true);
       try {
         const { title, dateRange, categoryPost } = values;
         const dataBody: AllPostsRequest = {
-          fromDate: dateRange?.[0] ? moment(dateRange[0]).format('YYYY-MM-DD') : null,
-          toDate: dateRange?.[1] ? moment(dateRange[1]).format('YYYY-MM-DD') : null,
+          fromDate: dateRange?.[0] ? (dateRange[0]).format('YYYY-MM-DD') : null,
+          toDate: dateRange?.[1] ? (dateRange[1]).format('YYYY-MM-DD') : null,
           title: title || null,
-          categoryPost: categoryPost ? [String(categoryPost)] : [], // Chuyển categoryPost thành string
+          categoryPost: categoryPost ? [categoryPost] : [],
           page,
           size,
-          sort: sortField && sortOrder ? `${sortField},${sortOrder}` : null,
+          sort,
         };
         const response = await getAllPostsService(dataBody);
         setPosts(response.data.content);
         setTotalPages(response.data.totalPages);
         setCurrentPage(response.data.pageable.pageNumber);
-        setPageSize(response.data.pageable.pageSize);
+        // setPageSize(response.data.pageable.pageSize);
+        setPageSize(5);
       } catch (error) {
         message.error('Lỗi khi lấy danh sách bài đăng.');
       } finally {
         setLoading(false);
       }
     },
-    [sortField, sortOrder]
+    []
   );
 
+  // Tải dữ liệu ban đầu
   useEffect(() => {
+    fetchCategories();
     fetchPosts();
-  }, [fetchPosts]);
+  }, [fetchCategories, fetchPosts]);
 
   const handleToggleActive = useCallback((postId: number, checked: boolean) => {
     setModalState({
@@ -132,15 +149,27 @@ const BlogApproval = () => {
   const handlePageChange = (page: number, pageSize: number) => {
     setCurrentPage(page - 1);
     setPageSize(pageSize);
-    fetchPosts(form.getFieldsValue(), page - 1, pageSize);
+    fetchPosts(
+      form.getFieldsValue(),
+      page - 1,
+      pageSize,
+      sortField && sortOrder ? `${sortField},${sortOrder === 'ascend' ? 'asc' : 'desc'}` : null
+    );
   };
 
   const handleTableChange = (pagination: any, _filters: any, sorter: any) => {
     const { field, order } = sorter;
-    setSortField(field || null);
-    setSortOrder(order ? (order === 'ascend' ? 'asc' : 'desc') : null);
+    const newSortField = field || null;
+    const newSortOrder = order as SortOrder; // Ép kiểu trực tiếp thành SortOrder
+    setSortField(newSortField);
+    setSortOrder(newSortOrder);
     setCurrentPage(0);
-    fetchPosts(form.getFieldsValue(), 0, pagination.pageSize);
+    fetchPosts(
+      form.getFieldsValue(),
+      0,
+      pagination.pageSize,
+      newSortField && newSortOrder ? `${newSortField},${newSortOrder === 'ascend' ? 'asc' : 'desc'}` : null
+    );
   };
 
   const columns = [
@@ -151,15 +180,15 @@ const BlogApproval = () => {
       width: 200,
       ellipsis: true,
       sorter: true,
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortField === 'title' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : null,
+      sortDirections: ['ascend', 'descend'] as ('ascend' | 'descend')[],
+      sortOrder: sortField === 'title' ? sortOrder : undefined,
     },
     {
       title: 'Chuyên mục',
       dataIndex: 'category',
       key: 'category',
       width: 120,
-      render: (category: any) => category?.name || category || 'Chưa xác định', // Xử lý category là object hoặc string
+      render: (category: string) => category || 'Chưa xác định',
     },
     {
       title: 'Tác giả',
@@ -175,8 +204,8 @@ const BlogApproval = () => {
       width: 150,
       render: (createdAt: string) => moment(createdAt).format('DD/MM/YYYY HH:mm'),
       sorter: true,
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortField === 'createdAt' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : null,
+      sortDirections: ['ascend', 'descend'] as ('ascend' | 'descend')[],
+      sortOrder: sortField === 'createdAt' ? sortOrder : undefined,
     },
     {
       title: 'Cập nhật gần nhất',
@@ -186,8 +215,8 @@ const BlogApproval = () => {
       render: (updatedAt: string | null) =>
         updatedAt ? moment(updatedAt).format('DD/MM/YYYY HH:mm') : 'Chưa cập nhật',
       sorter: true,
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortField === 'updatedAt' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : null,
+      sortDirections: ['ascend', 'descend'] as ('ascend' | 'descend')[],
+      sortOrder: sortField === 'updatedAt' ? sortOrder : undefined,
     },
     {
       title: 'Trạng thái',
@@ -199,7 +228,7 @@ const BlogApproval = () => {
           checked={isActive}
           onChange={(checked) => handleToggleActive(record.id, checked)}
           disabled={record.isDelete}
-          aria-label={`Bật/tắt trạng thái cho bài đăng ${record.title}`} // Cải thiện accessibility
+          aria-label={`Bật/tắt trạng thái cho bài đăng ${record.title}`}
         />
       ),
     },
@@ -233,7 +262,14 @@ const BlogApproval = () => {
       <Form
         form={form}
         layout="inline"
-        onFinish={(values) => fetchPosts(values, 0, pageSize)}
+        onFinish={(values) =>
+          fetchPosts(
+            values,
+            0,
+            pageSize,
+            sortField && sortOrder ? `${sortField},${sortOrder === 'ascend' ? 'asc' : 'desc'}` : null
+          )
+        }
         style={{ marginBottom: 16 }}
         className="search-form"
       >
@@ -243,7 +279,7 @@ const BlogApproval = () => {
         <Form.Item name="categoryPost" label="Chuyên mục">
           <Select placeholder="Chọn chuyên mục" allowClear>
             {categories.map(category => (
-              <Option key={category.id} value={category.id}>
+              <Option key={category.id} value={category.name}>
                 {category.name}
               </Option>
             ))}
@@ -258,11 +294,11 @@ const BlogApproval = () => {
               Tìm kiếm
             </Button>
           </Form.Item>
-          {/* <Form.Item>
-            <Button onClick={() => { form.resetFields(); fetchPosts({}, 0, pageSize); }}>
+          <Form.Item>
+            <Button onClick={() => { form.resetFields(); setSortField(null); setSortOrder(undefined); fetchPosts({}, 0, pageSize, null); }}>
               Xóa bộ lọc
             </Button>
-          </Form.Item> */}
+          </Form.Item>
         </div>
       </Form>
       <Table

@@ -1,5 +1,5 @@
 import api from '../../lib/axios';
-import type { PostData, PostResponse, UploadResponse, AllPostsRequest, AllPostsResponse, UpdateStatusRequest, UpdateStatusResponse } from '../../types/blog';
+import type { PostData, PostResponse, UploadResponse, AllPostsRequest, AllPostsResponse, UpdateStatusRequest, UpdateStatusResponse, CategoryResponse } from '../../types/blog';
 
 export const createPost = async (data: PostData): Promise<PostResponse> => {
   const response = await api.post('/api/v1/post/create', data);
@@ -27,5 +27,10 @@ export const getAllPosts = async (data: AllPostsRequest): Promise<AllPostsRespon
 
 export const updatePostStatus = async (data: UpdateStatusRequest): Promise<UpdateStatusResponse> => {
   const response = await api.post('/api/v1/post/update-status', data);
+  return response.data;
+};
+
+export const getCategories = async (): Promise<CategoryResponse> => {
+  const response = await api.get('/api/v1/category/post');
   return response.data;
 };

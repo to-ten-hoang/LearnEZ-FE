@@ -1,6 +1,6 @@
 import { message } from 'antd';
-import { createPost, uploadImage, getAllPosts, updatePostStatus } from '../api/blog/blogApi';
-import type { PostData, PostResponse, UploadResponse, AllPostsRequest, AllPostsResponse, UpdateStatusRequest, UpdateStatusResponse } from '../types/blog';
+import { createPost, uploadImage, getAllPosts, updatePostStatus, getCategories } from '../api/blog/blogApi';
+import type { PostData, PostResponse, UploadResponse, AllPostsRequest, AllPostsResponse, UpdateStatusRequest, UpdateStatusResponse, CategoryResponse } from '../types/blog';
 
 export const createPostService = async (data: PostData): Promise<PostResponse> => {
   try {
@@ -56,6 +56,19 @@ export const updatePostStatusService = async (data: UpdateStatusRequest): Promis
     throw new Error(response.message || 'Cập nhật trạng thái bài đăng thất bại.');
   } catch (error: any) {
     message.error(error.response?.data?.message || 'Lỗi khi cập nhật trạng thái bài đăng.');
+    throw error;
+  }
+};
+
+export const getCategoriesService = async (): Promise<CategoryResponse> => {
+  try {
+    const response = await getCategories();
+    if (response.code === 200) {
+      return response;
+    }
+    throw new Error(response.message || 'Lấy danh sách danh mục thất bại.');
+  } catch (error: any) {
+    message.error(error.response?.data?.message || 'Lỗi khi lấy danh sách danh mục.');
     throw error;
   }
 };
