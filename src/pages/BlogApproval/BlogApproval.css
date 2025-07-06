@@ -63,11 +63,14 @@
   font-size: 14px;
 }
 
-/* Thêm container cho các nút hành động */
+.deleted-post {
+  text-decoration: line-through;
+}
+
 .form-actions {
   display: flex;
   gap: 8px;
-  flex-wrap: nowrap; /* Giữ các nút trên cùng một hàng */
+  flex-wrap: nowrap;
   align-items: center;
 }
 
@@ -88,12 +91,12 @@
   }
 
   .form-actions {
-    flex-direction: column; /* Xếp dọc trên màn hình nhỏ */
+    flex-direction: column;
     gap: 12px;
     width: 100%;
   }
 
   .form-actions .ant-btn {
-    width: 100%; /* Nút chiếm toàn bộ chiều rộng */
+    width: 100%;
   }
 }

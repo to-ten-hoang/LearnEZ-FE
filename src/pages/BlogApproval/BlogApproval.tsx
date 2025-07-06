@@ -4,7 +4,7 @@ import { getAllPostsService, updatePostStatusService, getCategoriesService } fro
 import moment from 'moment';
 import './BlogApproval.css';
 import type { AllPostsRequest, Post, Category } from '../../types/blog';
-import type { SortOrder } from 'antd/es/table/interface'; // Nhập kiểu SortOrder từ Ant Design
+import type { SortOrder } from 'antd/es/table/interface';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -18,7 +18,7 @@ const BlogApproval = () => {
   const [pageSize, setPageSize] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [sortField, setSortField] = useState<string | null>(null);
-  const [sortOrder, setSortOrder] = useState<SortOrder | undefined>(undefined); // Sử dụng kiểu SortOrder
+  const [sortOrder, setSortOrder] = useState<SortOrder | undefined>(undefined);
   const [modalLoading, setModalLoading] = useState(false);
   const [modalState, setModalState] = useState({
     activeOpen: false,
@@ -28,7 +28,6 @@ const BlogApproval = () => {
     postId: null as number | null,
   });
 
-  // Lấy danh sách danh mục
   const fetchCategories = useCallback(async () => {
     try {
       const response = await getCategoriesService();
@@ -40,9 +39,8 @@ const BlogApproval = () => {
     }
   }, []);
 
-  // Lấy danh sách bài đăng
   const fetchPosts = useCallback(
-    async (values: any = {}, page: number = 0, size: number = 10, sort: string | null = null) => {
+    async (values: any = {}, page: number = 0, size: number = 5, sort: string | null = null) => {
       setLoading(true);
       try {
         const { title, dateRange, categoryPost } = values;
@@ -59,8 +57,7 @@ const BlogApproval = () => {
         setPosts(response.data.content);
         setTotalPages(response.data.totalPages);
         setCurrentPage(response.data.pageable.pageNumber);
-        // setPageSize(response.data.pageable.pageSize);
-        setPageSize(5);
+        // setPageSize(5);
       } catch (error) {
         message.error('Lỗi khi lấy danh sách bài đăng.');
       } finally {
@@ -70,11 +67,10 @@ const BlogApproval = () => {
     []
   );
 
-  // Tải dữ liệu ban đầu
   useEffect(() => {
     fetchCategories();
     fetchPosts();
-  }, [fetchCategories, fetchPosts]);
+  }, []);
 
   const handleToggleActive = useCallback((postId: number, checked: boolean) => {
     setModalState({
@@ -146,27 +142,29 @@ const BlogApproval = () => {
     setModalState({ ...modalState, deleteOpen: false, postId: null });
   };
 
-  const handlePageChange = (page: number, pageSize: number) => {
-    setCurrentPage(page - 1);
-    setPageSize(pageSize);
-    fetchPosts(
-      form.getFieldsValue(),
-      page - 1,
-      pageSize,
-      sortField && sortOrder ? `${sortField},${sortOrder === 'ascend' ? 'asc' : 'desc'}` : null
-    );
-  };
+  // const handlePageChange = (page: number, pageSize: number) => {
+  //   setCurrentPage(page - 1);
+  //   setPageSize(pageSize);
+  //   fetchPosts(
+  //     form.getFieldsValue(),
+  //     page - 1,
+  //     pageSize,
+  //     sortField && sortOrder ? `${sortField},${sortOrder === 'ascend' ? 'asc' : 'desc'}` : null
+  //   );
+  // };
 
   const handleTableChange = (pagination: any, _filters: any, sorter: any) => {
     const { field, order } = sorter;
     const newSortField = field || null;
-    const newSortOrder = order as SortOrder; // Ép kiểu trực tiếp thành SortOrder
+    const newSortOrder = order as SortOrder;
     setSortField(newSortField);
     setSortOrder(newSortOrder);
-    setCurrentPage(0);
+    setCurrentPage(pagination.current - 1); // Update current page
+    setPageSize(pagination.pageSize); // Update page size
+    
     fetchPosts(
       form.getFieldsValue(),
-      0,
+      pagination.current - 1,
       pagination.pageSize,
       newSortField && newSortOrder ? `${newSortField},${newSortOrder === 'ascend' ? 'asc' : 'desc'}` : null
     );
@@ -290,13 +288,13 @@ const BlogApproval = () => {
         </Form.Item>
         <div className="form-actions">
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" onClick={() => {setCurrentPage(0);}}>
               Tìm kiếm
             </Button>
           </Form.Item>
           <Form.Item>
             <Button onClick={() => { form.resetFields(); setSortField(null); setSortOrder(undefined); fetchPosts({}, 0, pageSize, null); }}>
-              Xóa bộ lọc
+              Xóa bộ lọc  
             </Button>
           </Form.Item>
         </div>
@@ -309,9 +307,9 @@ const BlogApproval = () => {
           current: currentPage + 1,
           pageSize: pageSize,
           total: totalPages * pageSize,
-          onChange: handlePageChange,
+          // onChange: handlePageChange,
           showSizeChanger: true,
-          pageSizeOptions: ['5', '10', '20', '50'],
+          pageSizeOptions: ['5','10', '20', '50'],
         }}
         onChange={handleTableChange}
       />
