@@ -118,7 +118,7 @@ const BlogApproval = () => {
       const response = await updatePostStatusService({
         id: modalState.postId,
         isDelete: modalState.isDelete,
-        isActive: modalState.isDelete ? false : undefined,
+        isActive:false,
       });
       if (response.code === 200) {
         message.success(modalState.isDelete ? 'Xóa bài đăng thành công!' : 'Khôi phục bài đăng thành công!');
@@ -283,7 +283,7 @@ const BlogApproval = () => {
             ))}
           </Select>
         </Form.Item>
-        <Form.Item name="dateRange" label="Khoảng thời gian">
+        <Form.Item name="dateRange" label="Ngày tạo blog">
           <RangePicker format="DD/MM/YYYY" />
         </Form.Item>
         <div className="form-actions">

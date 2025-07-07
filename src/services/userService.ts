@@ -1,0 +1,45 @@
+import { message } from 'antd';
+import { filterUsers, disableUser, deleteUser } from '../api/user/userApi';
+import type { FilterRequest, FilterResponse, DisableUserRequest, DisableUserResponse, DeleteUserRequest, DeleteUserResponse } from '../types/user';
+
+export const filterUsersService = async (data: FilterRequest): Promise<FilterResponse> => {
+  try {
+    const response = await filterUsers(data);
+    if (response.code === 200) {
+      message.success('Lấy danh sách người dùng thành công!');
+      return response;
+    }
+    throw new Error(response.message || 'Lấy danh sách người dùng thất bại.');
+  } catch (error: any) {
+    message.error(error.response?.data?.message || 'Lỗi khi lấy danh sách người dùng.');
+    throw error;
+  }
+};
+
+export const disableUserService = async (data: DisableUserRequest): Promise<DisableUserResponse> => {
+  try {
+    const response = await disableUser(data);
+    if (response.code === 200) {
+      message.success('Cập nhật trạng thái người dùng thành công!');
+      return response;
+    }
+    throw new Error(response.message || 'Cập nhật trạng thái người dùng thất bại.');
+  } catch (error: any) {
+    message.error(error.response?.data?.message || 'Lỗi khi cập nhật trạng thái người dùng.');
+    throw error;
+  }
+};
+
+export const deleteUserService = async (data: DeleteUserRequest): Promise<DeleteUserResponse> => {
+  try {
+    const response = await deleteUser(data);
+    if (response.code === 200) {
+      message.success('Cập nhật trạng thái xóa người dùng thành công!');
+      return response;
+    }
+    throw new Error(response.message || 'Cập nhật trạng thái xóa người dùng thất bại.');
+  } catch (error: any) {
+    message.error(error.response?.data?.message || 'Lỗi khi cập nhật trạng thái xóa người dùng.');
+    throw error;
+  }
+};
