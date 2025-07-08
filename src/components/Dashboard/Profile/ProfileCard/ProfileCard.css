@@ -1,7 +1,6 @@
 .profile-details {
   width: 100%;
   /* margin-left: 270px; */
-  padding: 20px;
   background: #f5f7fa;
   min-height: calc(100vh - 64px);
   display: flex;
@@ -11,7 +10,7 @@
 
 .student-card {
   width: 80%;
-  max-width: 800px;
+  max-width: 700px;
   background: #fff;
   border: 1px solid #e8e8e8;
   border-radius: 8px;

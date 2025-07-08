@@ -16,6 +16,8 @@ export interface User {
     education: string;
     major: string;
   };
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface FilterRequest {
@@ -86,6 +88,50 @@ export interface DeleteUserRequest {
 }
 
 export interface DeleteUserResponse {
+  code: number;
+  message: string;
+  data: User;
+}
+
+export interface UserProfileResponse {
+  code: number;
+  message: string;
+  data: {
+    firstName: string;
+    lastName: string;
+    phone: string | null;
+    address: string | null;
+    dob: string | null;
+    gender: string | null;
+    avatarUrl: string | null;
+    isActive: boolean | null;
+    isDelete: boolean | null;
+    education: string | null;
+    major: string | null;
+    student: any | null;
+  };
+}
+
+export interface UpdateUserInfoRequest {
+  // id: number;
+  // email?: string;
+  // password?: string;
+  // oldPassword?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  address?: string;
+  dob?: string;
+  gender?: string;
+  avatarUrl?: string;
+  education?: string;
+  major?: string;
+  isActive?: boolean;
+  isDelete?: boolean;
+  token?: string;
+}
+
+export interface UpdateUserInfoResponse {
   code: number;
   message: string;
   data: User;

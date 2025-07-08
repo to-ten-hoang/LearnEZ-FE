@@ -1,7 +1,9 @@
 import { message } from 'antd';
-import { login, register, logout, refreshToken, getUserProfile, updatePassword } from '../api/auth/authApi';
+import { login, register, logout, refreshToken, updatePassword } from '../api/auth/authApi';
 import useAuthStore from '../store/authStore';
-import type { RegisterRequest, LoginRequest, AuthResponse, LogoutResponse, UserProfileResponse, UpdatePasswordRequest } from '../types/auth';
+import type { RegisterRequest, LoginRequest, AuthResponse, LogoutResponse, UpdatePasswordRequest } from '../types/auth';
+import type { UserProfileResponse } from 'types/user';
+import { getUserProfile } from '../api/user/userApi';
 
 const roleMapping: { [key: number]: 'student' | 'teacher' | 'manager' | 'consultant' } = {
   1: 'manager',
@@ -76,20 +78,6 @@ export const refreshTokenService = async (): Promise<AuthResponse> => {
     throw new Error(response.message || 'Không thể làm mới token.');
   } catch (error: any) {
     message.error(error.message || 'Đã có lỗi xảy ra khi làm mới token.');
-    throw error;
-  }
-};
-
-export const getUserProfileService = async (): Promise<UserProfileResponse> => {
-  try {
-    const response = await getUserProfile();
-    if (response.code === 200 && response.data) {
-      message.success('Lấy thông tin cá nhân thành công');
-      return response;
-    }
-    throw new Error(response.message || 'Lấy thông tin cá nhân thất bại.');
-  } catch (error: any) {
-    message.error(error.message || 'Đã có lỗi xảy ra khi lấy thông tin cá nhân.');
     throw error;
   }
 };

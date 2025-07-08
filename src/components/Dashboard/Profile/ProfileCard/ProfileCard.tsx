@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Form, Input, DatePicker, Select, Button, message } from 'antd';
-import { getUserProfileService, updatePasswordService} from '../../../../services/authService';
+import { updatePasswordService} from '../../../../services/authService';
 import './ProfileCard.css';
 import type { UpdatePasswordRequest } from 'types/auth';
+import moment from 'moment';
+import { getUserProfileService, updateUserInfoService } from '../../../../services/userService';
+import type { UpdateUserInfoRequest } from 'types/user';
 
 const { Option } = Select;
 
@@ -30,12 +33,15 @@ const ProfileCard = () => {
           lastName: data.lastName || '',
           phone: data.phone || '',
           address: data.address || '',
-          dob: data.dob ? new Date(data.dob) : null,
-          gender: data.gender || EGender.MALE,
+          dob: data.dob ? moment(data.dob) : null,
+          // gender: data.gender || EGender.OTHER,
+          gender:
+            data.gender === 'MALE'
+              ? EGender.MALE
+              : data.gender === 'FEMALE'
+                ? EGender.FEMALE
+                : EGender.OTHER,
           customerId: 'CUS' + Math.floor(100000000 + Math.random() * 900000000).toString(),
-          oldPassword: '',
-          newPassword: '',
-          confirmPassword: '',
         });
       } catch (error) {
         console.error('Failed to fetch user profile:', error);
@@ -66,12 +72,36 @@ const ProfileCard = () => {
           message.success('Đổi mật khẩu thành công');
         }
       } else{
-        
+        const updateUserData: UpdateUserInfoRequest = {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          dob: values.dob,
+          gender: values.gender,
+          phone: values.phone,
+          address: values.address,
+        }
+        const response  = await updateUserInfoService(updateUserData);
+        const data = response.data;
+        form.setFieldsValue({
+          firstName: data.firstName || '',
+          lastName: data.lastName || '',
+          phone: data.phone || '',
+          address: data.address || '',
+          dob: data.dob ? moment(data.dob) : null,
+          gender:
+            data.gender === 'MALE'
+              ? EGender.MALE
+              : data.gender === 'FEMALE'
+                ? EGender.FEMALE
+                : EGender.OTHER,
+          });
       }
     } catch(error){
       console.error('Lỗi khi lưu:', error);
     }finally{
       setLoading(false);
+      setIsEditing(false);
+      setMode('profile');
     }
 
 
@@ -115,9 +145,9 @@ const ProfileCard = () => {
                   </Form.Item>
                   <Form.Item label="Giới tính" name="gender">
                     <Select disabled={!isEditing}>
-                      <Option value={EGender.MALE}>{EGender.MALE}</Option>
-                      <Option value={EGender.FEMALE}>{EGender.FEMALE}</Option>
-                      <Option value={EGender.OTHER}>{EGender.OTHER}</Option>
+                      <Option value={'1'}>{EGender.MALE}</Option>
+                      <Option value={'2'}>{EGender.FEMALE}</Option>
+                      <Option value={'3'}>{EGender.OTHER}</Option>
                     </Select>
                   </Form.Item>
                 </div>

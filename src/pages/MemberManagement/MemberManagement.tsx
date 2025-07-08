@@ -294,7 +294,7 @@ const MemberManagement = () => {
           pageSize: pageSize,
           total: totalPages * pageSize,
           showSizeChanger: true,
-          pageSizeOptions: ['2', '3','10', '20', '50'],
+          pageSizeOptions: ['5','10', '20', '50'],
         }}
         onChange={handleTableChange}
       />

@@ -5,7 +5,8 @@ import './Profile.css'
 const Profile = () => {
   return (
     <div className="profile">
-        <ProfileCard/>
+      <h2>Thông tin cá nhân</h2>
+      <ProfileCard/>
     </div>
   )
 }

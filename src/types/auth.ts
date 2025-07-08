@@ -27,24 +27,6 @@ export interface LogoutResponse {
   data: null;
 }
 
-export interface UserProfileResponse {
-  code: number;
-  message: string;
-  data: {
-    firstName: string;
-    lastName: string;
-    phone: string | null;
-    address: string | null;
-    dob: string | null;
-    gender: string | null;
-    avatarUrl: string | null;
-    isActive: boolean | null;
-    isDelete: boolean | null;
-    education: string | null;
-    major: string | null;
-    student: any | null;
-  };
-}
 
 export interface UpdatePasswordRequest {
   password: string;
