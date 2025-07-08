@@ -9,12 +9,6 @@ import type { UpdateUserInfoRequest } from 'types/user';
 
 const { Option } = Select;
 
-const EGender = {
-  MALE: 'Nam',
-  FEMALE: 'Nữ',
-  OTHER: 'Khác',
-} as const;
-
 // type EGenderType = typeof EGender[keyof typeof EGender];
 
 const ProfileCard = () => {
@@ -34,13 +28,7 @@ const ProfileCard = () => {
           phone: data.phone || '',
           address: data.address || '',
           dob: data.dob ? moment(data.dob) : null,
-          // gender: data.gender || EGender.OTHER,
-          gender:
-            data.gender === 'MALE'
-              ? EGender.MALE
-              : data.gender === 'FEMALE'
-                ? EGender.FEMALE
-                : EGender.OTHER,
+          gender: data.gender,
           customerId: 'CUS' + Math.floor(100000000 + Math.random() * 900000000).toString(),
         });
       } catch (error) {
@@ -76,7 +64,13 @@ const ProfileCard = () => {
           firstName: values.firstName,
           lastName: values.lastName,
           dob: values.dob,
-          gender: values.gender,
+          gender: 
+            values.gender === 'MALE'
+              ? '1'
+              : values.gender === 'FEMALE'
+                ? '2'
+                : '3'
+          ,
           phone: values.phone,
           address: values.address,
         }
@@ -88,13 +82,8 @@ const ProfileCard = () => {
           phone: data.phone || '',
           address: data.address || '',
           dob: data.dob ? moment(data.dob) : null,
-          gender:
-            data.gender === 'MALE'
-              ? EGender.MALE
-              : data.gender === 'FEMALE'
-                ? EGender.FEMALE
-                : EGender.OTHER,
-          });
+          gender: data.gender 
+        });
       }
     } catch(error){
       console.error('Lỗi khi lưu:', error);
@@ -103,8 +92,6 @@ const ProfileCard = () => {
       setIsEditing(false);
       setMode('profile');
     }
-
-
   };
 
   const handleChangePassword = () => {
@@ -145,9 +132,9 @@ const ProfileCard = () => {
                   </Form.Item>
                   <Form.Item label="Giới tính" name="gender">
                     <Select disabled={!isEditing}>
-                      <Option value={'1'}>{EGender.MALE}</Option>
-                      <Option value={'2'}>{EGender.FEMALE}</Option>
-                      <Option value={'3'}>{EGender.OTHER}</Option>
+                      <Option value={'MALE'}>Nam</Option>
+                      <Option value={'FEMALE'}>Nữ</Option>
+                      <Option value={'OTHER'}>Khác</Option>
                     </Select>
                   </Form.Item>
                 </div>
