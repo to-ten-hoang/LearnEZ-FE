@@ -1,5 +1,15 @@
+// api/course/courseApi.ts - Cải thiện
 import api from '../../lib/axios';
-import type { AllCoursesRequest, CourseResponse, CourseDetailResponse, CourseCreateRequest, CourseUpdateRequest, UploadResponse, CategoryResponse } from '../../types/course';
+import type { 
+  AllCoursesRequest, 
+  CourseResponse, 
+  CourseDetailResponse, 
+  CourseCreateRequest, 
+  CourseUpdateRequest, 
+  CourseStatusUpdateRequest, // ✅ Thêm type mới
+  UploadResponse, 
+  CategoryResponse 
+} from '../../types/course';
 
 export const getAllCourses = async (data: AllCoursesRequest): Promise<CourseResponse> => {
   const response = await api.post('/api/v1/course/all-courses', data, {
@@ -12,8 +22,11 @@ export const getAllCourses = async (data: AllCoursesRequest): Promise<CourseResp
   return response.data;
 };
 
+// ✅ Sửa getCourseById để dùng GET với query parameter
 export const getCourseById = async (id: number): Promise<CourseDetailResponse> => {
-  const response = await api.post('/api/v1/course/get-courses', { id });
+  const response = await api.get('/api/v1/course', {
+    params: { id }
+  });
   return response.data;
 };
 
@@ -27,8 +40,9 @@ export const updateCourseInfo = async (data: CourseUpdateRequest): Promise<Cours
   return response.data;
 };
 
-export const updateCourseStatus = async (data: CourseUpdateRequest): Promise<CourseDetailResponse> => {
-  const response = await api.post('/api/v1/course/update-info', data);
+// ✅ Tách riêng endpoint cho update status
+export const updateCourseStatus = async (data: CourseStatusUpdateRequest): Promise<CourseDetailResponse> => {
+  const response = await api.post('/api/v1/course/update-status', data);
   return response.data;
 };
 
@@ -39,7 +53,8 @@ export const uploadImage = async (formData: FormData): Promise<UploadResponse> =
   return response.data;
 };
 
+// ✅ Sửa endpoint cho course categories
 export const getCategories = async (): Promise<CategoryResponse> => {
-  const response = await api.get('/api/v1/category/post');
+  const response = await api.get('/api/v1/category/course'); // ✅ Đổi từ /post sang /course
   return response.data;
 };

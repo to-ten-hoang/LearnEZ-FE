@@ -1,3 +1,4 @@
+// pages/CourseManagement/CourseManagement.tsx - Cải thiện
 import { Button, message, Table, Input, Select, DatePicker, Form, Switch, Modal } from 'antd';
 import { useEffect, useState, useCallback } from 'react';
 import { getAllCoursesService, updateCourseStatusService, getCategoriesService } from '../../services/courseManagementService';
@@ -17,7 +18,7 @@ const CourseManagement = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
-  const [totalPages, setTotalPages] = useState(0);
+  // const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
   const [sortField, setSortField] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder | undefined>(undefined);
@@ -39,7 +40,7 @@ const CourseManagement = () => {
         setCategories(response.data);
       }
     } catch (error) {
-      message.error('Lỗi khi lấy danh sách danh mục.');
+      console.error('Lỗi khi lấy danh sách danh mục:', error);
     }
   }, []);
 
@@ -59,11 +60,11 @@ const CourseManagement = () => {
         };
         const response = await getAllCoursesService(dataBody);
         setCourses(response.data.content);
-        setTotalPages(response.data.totalPages);
+        // setTotalPages(response.data.totalPages);
         setTotalElements(response.data.totalElements);
         setCurrentPage(response.data.pageable.pageNumber);
       } catch (error) {
-        message.error('Lỗi khi lấy danh sách khóa học.');
+        console.error('Lỗi khi lấy danh sách khóa học:', error);
       } finally {
         setLoading(false);
       }
@@ -77,52 +78,53 @@ const CourseManagement = () => {
   }, [fetchCategories, fetchCourses]);
 
   const handleToggleActive = useCallback((courseId: number, checked: boolean) => {
-    setModalState({
-      ...modalState,
+    setModalState(prev => ({
+      ...prev,
       activeOpen: true,
       activeChecked: checked,
       courseId,
-    });
-  }, [modalState]);
+    }));
+  }, []);
 
+  // ✅ Cải thiện handleModalActiveOk
   const handleModalActiveOk = async () => {
     if (modalState.courseId === null) return;
     setModalLoading(true);
     try {
       const response = await updateCourseStatusService({
-        id: modalState.courseId, isActive: modalState.activeChecked,
-        title: '',
-        description: '',
-        price: 0,
-        categoryId: 0,
-        thumbnailUrl: '',
-        isDelete: false
+        id: modalState.courseId,
+        isActive: modalState.activeChecked,
       });
       if (response.code === 200) {
         message.success(modalState.activeChecked ? 'Duyệt khóa học thành công!' : 'Hủy duyệt khóa học thành công!');
-        setCourses(courses.map(course => (course.id === modalState.courseId ? { ...course, isActive: modalState.activeChecked } : course)));
+        setCourses(courses.map(course => 
+          course.id === modalState.courseId 
+            ? { ...course, isActive: modalState.activeChecked } 
+            : course
+        ));
       }
     } catch (error) {
-      message.error('Lỗi khi cập nhật trạng thái khóa học.');
+      console.error('Lỗi khi cập nhật trạng thái khóa học:', error);
     } finally {
       setModalLoading(false);
-      setModalState({ ...modalState, activeOpen: false, courseId: null });
+      setModalState(prev => ({ ...prev, activeOpen: false, courseId: null }));
     }
   };
 
   const handleModalActiveCancel = () => {
-    setModalState({ ...modalState, activeOpen: false, courseId: null });
+    setModalState(prev => ({ ...prev, activeOpen: false, courseId: null }));
   };
 
   const handleDeleteOrRestore = useCallback((courseId: number, isDelete: boolean) => {
-    setModalState({
-      ...modalState,
+    setModalState(prev => ({
+      ...prev,
       deleteOpen: true,
       isDelete,
       courseId,
-    });
-  }, [modalState]);
+    }));
+  }, []);
 
+  // ✅ Cải thiện handleModalDeleteOk
   const handleModalDeleteOk = async () => {
     if (modalState.courseId === null) return;
     setModalLoading(true);
@@ -130,33 +132,30 @@ const CourseManagement = () => {
       const response = await updateCourseStatusService({
         id: modalState.courseId,
         isDelete: modalState.isDelete,
-        isActive: false,
-        title: '',
-        description: '',
-        price: 0,
-        categoryId: 0,
-        thumbnailUrl: ''
+        ...(modalState.isDelete && { isActive: false }), // ✅ Chỉ set isActive = false khi xóa
       });
       if (response.code === 200) {
         message.success(modalState.isDelete ? 'Xóa khóa học thành công!' : 'Khôi phục khóa học thành công!');
-        setCourses(
-          courses.map(course =>
-            course.id === modalState.courseId
-              ? { ...course, isDelete: modalState.isDelete, isActive: modalState.isDelete ? false : course.isActive }
-              : course
-          )
-        );
+        setCourses(courses.map(course =>
+          course.id === modalState.courseId
+            ? { 
+                ...course, 
+                isDelete: modalState.isDelete, 
+                isActive: modalState.isDelete ? false : course.isActive 
+              }
+            : course
+        ));
       }
     } catch (error) {
-      message.error(modalState.isDelete ? 'Lỗi khi xóa khóa học.' : 'Lỗi khi khôi phục khóa học.');
+      console.error(modalState.isDelete ? 'Lỗi khi xóa khóa học:' : 'Lỗi khi khôi phục khóa học:', error);
     } finally {
       setModalLoading(false);
-      setModalState({ ...modalState, deleteOpen: false, courseId: null });
+      setModalState(prev => ({ ...prev, deleteOpen: false, courseId: null }));
     }
   };
 
   const handleModalDeleteCancel = () => {
-    setModalState({ ...modalState, deleteOpen: false, courseId: null });
+    setModalState(prev => ({ ...prev, deleteOpen: false, courseId: null }));
   };
 
   const handleTableChange = (pagination: any, _filters: any, sorter: any) => {
@@ -202,11 +201,13 @@ const CourseManagement = () => {
       sortOrder: sortField === 'title' ? sortOrder : undefined,
     },
     {
-      title: 'Giá',
+      title: 'Giá (VND)',
       dataIndex: 'price',
       key: 'price',
       width: 120,
-      render: (price: number) => price.toFixed(2),
+      sorter: true,
+      sortDirections: ['ascend', 'descend'] as ('ascend' | 'descend')[],
+      sortOrder: sortField === 'price' ? sortOrder : undefined,
     },
     {
       title: 'Chủ đề',
@@ -214,6 +215,13 @@ const CourseManagement = () => {
       key: 'categoryName',
       width: 150,
       render: (categoryName: string) => categoryName || 'Chưa xác định',
+    },
+    {
+      title: 'Tác giả',
+      dataIndex: 'authorName',
+      key: 'authorName',
+      width: 150,
+      render: (authorName: string) => authorName || 'Chưa xác định',
     },
     {
       title: 'Ngày tạo',
@@ -236,6 +244,7 @@ const CourseManagement = () => {
           onChange={(checked) => handleToggleActive(record.id, checked)}
           disabled={record.isDelete}
           aria-label={`Bật/tắt trạng thái cho khóa học ${record.title}`}
+          onClick={(_checked, e) => e.stopPropagation()} // ✅ Ngăn event bubbling
         />
       ),
     },
@@ -244,16 +253,25 @@ const CourseManagement = () => {
       key: 'action',
       width: 150,
       render: (_: any, record: Course) => (
-        <div className="action-buttons">
+        <div className="action-buttons" onClick={(e) => e.stopPropagation()}> {/* ✅ Ngăn event bubbling */}
           {record.isDelete ? (
-            <Button size="small" onClick={() => handleDeleteOrRestore(record.id, false)}>
+            <Button 
+              size="small" 
+              onClick={(e) => {
+                e.stopPropagation(); // ✅ Ngăn event bubbling
+                handleDeleteOrRestore(record.id, false);
+              }}
+            >
               Khôi phục
             </Button>
           ) : (
             <Button
               danger
               size="small"
-              onClick={() => handleDeleteOrRestore(record.id, true)}
+              onClick={(e) => {
+                e.stopPropagation(); // ✅ Ngăn event bubbling
+                handleDeleteOrRestore(record.id, true);
+              }}
             >
               Xóa
             </Button>
@@ -302,7 +320,12 @@ const CourseManagement = () => {
             </Button>
           </Form.Item>
           <Form.Item>
-            <Button onClick={() => { form.resetFields(); setSortField(null); setSortOrder(undefined); fetchCourses({}, 0, pageSize, null); }}>
+            <Button onClick={() => { 
+              form.resetFields(); 
+              setSortField(null); 
+              setSortOrder(undefined); 
+              fetchCourses({}, 0, pageSize, null); 
+            }}>
               Xóa bộ lọc
             </Button>
           </Form.Item>
@@ -317,17 +340,20 @@ const CourseManagement = () => {
         columns={columns}
         dataSource={courses}
         loading={loading}
+        rowKey="id" // ✅ Thêm rowKey
         pagination={{
           current: currentPage + 1,
           pageSize: pageSize,
           total: totalElements,
           showSizeChanger: true,
           pageSizeOptions: ['5', '10', '20', '50'],
+          showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} khóa học`, // ✅ Hiển thị tổng số
         }}
         onChange={handleTableChange}
-        rowClassName="course-row"
+        rowClassName={(record) => record.isDelete ? 'deleted-row' : ''} // ✅ Class cho row bị xóa
         onRow={(record) => ({
           onClick: () => handleRowClick(record),
+          style: { cursor: 'pointer' },
         })}
       />
       <Modal

@@ -1,18 +1,58 @@
+// services/courseManagementService.ts - Cải thiện
 import { message } from 'antd';
-import { getAllCourses, getCourseById, createCourse, updateCourseInfo, updateCourseStatus, uploadImage, getCategories } from '../api/course/courseApi';
-import type { AllCoursesRequest, CourseResponse, CourseDetailResponse, CourseCreateRequest, CourseUpdateRequest, UploadResponse, CategoryResponse } from '../types/course';
+import { 
+  getAllCourses, 
+  getCourseById, 
+  createCourse, 
+  updateCourseInfo, 
+  updateCourseStatus, 
+  uploadImage, 
+  getCategories 
+} from '../api/course/courseApi';
+import type { 
+  AllCoursesRequest, 
+  CourseResponse, 
+  CourseDetailResponse, 
+  CourseCreateRequest, 
+  CourseUpdateRequest, 
+  CourseStatusUpdateRequest, // ✅ Thêm type mới
+  UploadResponse, 
+  CategoryResponse 
+} from '../types/course';
 
 export const getAllCoursesService = async (data: AllCoursesRequest): Promise<CourseResponse> => {
   try {
     const response = await getAllCourses(data);
     if (response.code === 200) {
-      message.success('Lấy danh sách khóa học thành công!');
       return response;
     }
     throw new Error(response.message || 'Lấy danh sách khóa học thất bại.');
   } catch (error: any) {
     message.error(error.response?.data?.message || 'Lỗi khi lấy danh sách khóa học.');
     throw error;
+  }
+};
+
+// ✅ Thêm service để lấy danh sách giáo viên
+export const getTeachersService = async () => {
+  try {
+    // Sử dụng API filter user để lấy danh sách giáo viên
+    const { filterUsersService } = await import('./userService');
+    const response = await filterUsersService({
+      userRoles: ['TEACHER'],
+      isActive: true,
+      isDelete: false,
+      page: 0,
+      size: 100,
+    });
+    
+    if (response.code === 200) {
+      return response.data.content;
+    }
+    return [];
+  } catch (error: any) {
+    console.error('Lỗi khi lấy danh sách giáo viên:', error);
+    return [];
   }
 };
 
@@ -57,7 +97,8 @@ export const updateCourseInfoService = async (data: CourseUpdateRequest): Promis
   }
 };
 
-export const updateCourseStatusService = async (data: CourseUpdateRequest): Promise<CourseDetailResponse> => {
+// ✅ Tách riêng service cho update status
+export const updateCourseStatusService = async (data: CourseStatusUpdateRequest): Promise<CourseDetailResponse> => {
   try {
     const response = await updateCourseStatus(data);
     if (response.code === 200) {
