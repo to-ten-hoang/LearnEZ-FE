@@ -4,6 +4,10 @@
 
 Dự án này là hệ thống quản lý giáo dục trực tuyến, phát triển bằng ReactJS và TypeScript. Hệ thống hướng đến việc cung cấp giải pháp toàn diện cho quản lý khóa học, lớp học, bài kiểm tra, ngân hàng đề, tin tức và tương tác giữa học viên, giáo viên, trung tâm. Dự án thể hiện năng lực về UI/UX, tổ chức mã nguồn, quản lý dữ liệu và phát triển các tính năng thực tế phục vụ học tập và giảng dạy.
 
+https://fe-q0rg.onrender.com/
+
+Tài khoản manager: manager@gmail.com 
+Mật khẩu: abcd@1234
 ---
 
 ## Công nghệ sử dụng
