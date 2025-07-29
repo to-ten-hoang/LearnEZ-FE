@@ -35,7 +35,7 @@ export const loginService = async (data: LoginRequest): Promise<AuthResponse> =>
       const userProfile = await getUserProfile();
       const userRole = roleMapping[role] || 'student';
       useAuthStore.getState().login({
-        id: '',
+        id: userProfile.data.id || '',
         firstName: userProfile.data.firstName || '',
         lastName: userProfile.data.lastName || '',
         email: data.email,
