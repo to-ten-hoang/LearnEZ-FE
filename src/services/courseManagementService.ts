@@ -8,7 +8,7 @@ import {
   updateCourseStatus, 
   uploadImage, 
   getCategories 
-} from '../api/course/courseApi';
+} from '../api/courseApi';
 import type { 
   AllCoursesRequest, 
   CourseResponse, 

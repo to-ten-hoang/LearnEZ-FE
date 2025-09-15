@@ -1,0 +1,108 @@
+/* components/common/CartBadge/CartBadge.css */
+/* ✅ Đồng bộ với UserMenu và Notification styles */
+
+.cart-badge-container {
+  display: flex;
+  align-items: center;
+}
+
+/* ✅ Icon chính - đồng bộ với .user-icon và .notification-icon */
+.cart-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cart-icon:hover {
+  color: #40a9ff;
+}
+
+/* ✅ Button wrapper - giữ nguyên functionality nhưng style đồng bộ */
+.cart-button {
+  color: inherit;
+  font-size: 20px;
+  height: auto;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.cart-button:hover,
+.cart-button:focus {
+  background: transparent !important;
+  color: #40a9ff !important;
+  box-shadow: none !important;
+}
+
+/* ✅ Badge count - đồng bộ với notification badge */
+.cart-badge .ant-badge-count {
+  background: #52c41a;
+  color: #fff;
+  font-size: 12px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #fff;
+  font-weight: 600;
+  padding: 0 6px;
+}
+
+/* ✅ Text variation - cho trường hợp showText=true */
+.cart-text {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cart-count {
+  font-weight: 600;
+  color: #52c41a;
+}
+
+/* ✅ Size variations - đơn giản hóa */
+.cart-badge-container.size-small .cart-icon,
+.cart-badge-container.size-small .cart-button {
+  font-size: 16px;
+}
+
+.cart-badge-container.size-large .cart-icon,
+.cart-badge-container.size-large .cart-button {
+  font-size: 24px;
+}
+
+/* ✅ Mobile responsive - đồng bộ với các component khác */
+@media (max-width: 768px) {
+  .cart-icon,
+  .cart-button {
+    font-size: 18px;
+  }
+  
+  .cart-text {
+    display: none;
+  }
+}
+
+/* ✅ Animation cho badge count */
+.cart-badge .ant-badge-count {
+  animation: badgePopIn 0.3s ease-out;
+}
+
+@keyframes badgePopIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

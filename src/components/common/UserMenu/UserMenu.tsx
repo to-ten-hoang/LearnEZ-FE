@@ -4,9 +4,11 @@ import { Dropdown, type MenuProps } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../../store/authStore';
 import './UserMenu.css';
+import useCartStore from 'store/cartStore';
 
 const UserMenu = () => {
   const { user, logout } = useAuthStore();
+  const {clearCart } = useCartStore();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +30,7 @@ const UserMenu = () => {
       onClick: () => {
         logout();
         navigate('/');
+        clearCart();
       },
     },
   ];

@@ -1,22 +1,26 @@
+// routes/index.ts - Updated with Cart & Orders & Payment Callback
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import Home from '../pages/Home/Home';
+import Home from '../pages/public-page/Home/Home';
 import MainLayout from '../layouts/MainLayout/MainLayout';
-import Courses from '../pages/Courses/Course';
-import Blog from '../pages/Blog/Blog';
-import Test from '../pages/Test/Test';
-import VideoCourses from '../pages/VideoCourses/VideoCourses';
-import OfflineClasses from '../pages/OfflineClasses/OfflineClasses';
-import ClassManagement from '../pages/ClassManagement/ClassManagement';
-import Dashboard from '../pages/Dashboard/Dashboard';
-import Profile from '../pages/Profile/Profile';
-import QuestionBank from '../pages/QuestionBank/QuestionBank';
-import Statistics from '../pages/Statistics/Statistics';
-import MemberManagement from '../pages/MemberManagement/MemberManagement';
-import CourseManagement from '../pages/CourseManagement/CourseManagement';
-import BlogApproval from '../pages/BlogApproval/BlogApproval';
-import Business from '../pages/Business/Business';
-import WriteBlog from '../pages/WriteBlog/WriteBlog';
+import Courses from '../pages/public-page/Courses/Course';
+import Blog from '../pages/public-page/Blog/Blog';
+import Test from '../pages/public-page/Test/Test';
+import VideoCourses from '../pages/student/VideoCourses/VideoCourses';
+import OfflineClasses from '../pages/teacher/OfflineClasses/OfflineClasses';
+import ClassManagement from '../pages/manage/ClassManagement/ClassManagement';
+import Dashboard from '../pages/common/Dashboard/Dashboard';
+import Profile from '../pages/common/Profile/Profile';
+import QuestionBank from '../pages/manage/QuestionBank/QuestionBank';
+import Statistics from '../pages/manage/Statistics/Statistics';
+import MemberManagement from '../pages/manage/MemberManagement/MemberManagement';
+import CourseManagement from '../pages/manage/CourseManagement/CourseManagement';
+import BlogApproval from '../pages/manage/BlogApproval/BlogApproval';
+import Business from '../pages/manage/Business/Business';
+import WriteBlog from '../pages/manage/WriteBlog/WriteBlog';
+import Cart from '../pages/student/Cart/Cart';              // ✅ Phase 1
+import Orders from '../pages/student/Orders/Orders';        // ✅ Phase 2 - NEW
+import OrderStatus from '../pages/student/OrderStatus/OrderStatus'; // ✅ Phase 3 - Payment Callback
 import ProtectedRoute from '../components/common/ProtectedRoute/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -24,19 +28,28 @@ const router = createBrowserRouter([
     path: '/',
     element: React.createElement(MainLayout),
     children: [
+      // ✅ PUBLIC ROUTES
       { path: '/', element: React.createElement(Home) },
       { path: '/courses', element: React.createElement(Courses) },
       { path: '/blog', element: React.createElement(Blog) },
       { path: '/test', element: React.createElement(Test) },
+      
+      // ✅ PAYMENT CALLBACK ROUTE - Public nhưng cần auth
+      { path: '/order-status', element: React.createElement(OrderStatus) },
+      
+      // ✅ DASHBOARD ROUTES
       {
         path: '/dashboard',
         element: React.createElement(Dashboard),
         children: [
+          // Profile (tất cả roles)
           {
             path: 'profile',
             element: React.createElement(ProtectedRoute, { allowedTab: 'profile' }),
             children: [{ path: '', element: React.createElement(Profile) }],
           },
+          
+          // ===== STUDENT ROUTES =====
           {
             path: 'video-courses',
             element: React.createElement(ProtectedRoute, { allowedTab: 'video-courses' }),
@@ -47,6 +60,20 @@ const router = createBrowserRouter([
             element: React.createElement(ProtectedRoute, { allowedTab: 'offline-classes' }),
             children: [{ path: '', element: React.createElement(OfflineClasses) }],
           },
+          // ✅ PHASE 1: Cart page for students
+          {
+            path: 'cart',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'cart' }),
+            children: [{ path: '', element: React.createElement(Cart) }],
+          },
+          // ✅ PHASE 2: Orders page for students - NEW
+          {
+            path: 'orders',
+            element: React.createElement(ProtectedRoute, { allowedTab: 'orders' }),
+            children: [{ path: '', element: React.createElement(Orders) }],
+          },
+          
+          // ===== TEACHER ROUTES =====
           {
             path: 'class-management',
             element: React.createElement(ProtectedRoute, { allowedTab: 'class-management' }),
@@ -57,6 +84,8 @@ const router = createBrowserRouter([
             element: React.createElement(ProtectedRoute, { allowedTab: 'question-bank' }),
             children: [{ path: '', element: React.createElement(QuestionBank) }],
           },
+          
+          // ===== MANAGER ROUTES =====
           {
             path: 'statistics',
             element: React.createElement(ProtectedRoute, { allowedTab: 'statistics' }),
@@ -82,6 +111,8 @@ const router = createBrowserRouter([
             element: React.createElement(ProtectedRoute, { allowedTab: 'business' }),
             children: [{ path: '', element: React.createElement(Business) }],
           },
+          
+          // ===== CONSULTANT ROUTES =====
           {
             path: 'write-blog',
             element: React.createElement(ProtectedRoute, { allowedTab: 'write-blog' }),

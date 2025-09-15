@@ -1,35 +1,386 @@
 .tiptap-editor {
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  padding: 10px;
-  background: #fff;
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease;
 }
 
+.tiptap-editor:focus-within {
+  border-color: #1890ff;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+}
+
+/* Toolbar Styles */
 .tiptap-toolbar {
   display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-  padding: 8px;
-  border-bottom: 1px solid #e8e8e8;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafbfc;
+  border-radius: 12px 12px 0 0;
 }
 
-.tiptap-toolbar .ant-btn {
-  font-size: 14px;
+.toolbar-group {
+  display: flex;
+  gap: 2px;
+  align-items: center;
 }
 
-.tiptap-toolbar .ant-btn.is-active {
-  background-color: #1890ff;
-  color: #fff;
+.toolbar-separator {
+  width: 1px;
+  height: 24px;
+  background: #e1e5e9;
+  margin: 0 8px;
+}
+
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #4a5568;
+  white-space: nowrap;
+  min-width: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.toolbar-btn:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e0;
+  color: #2d3748;
+  transform: translateY(-1px);
+}
+
+.toolbar-btn:active {
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+}
+
+.toolbar-btn.is-active {
+  background: #1890ff;
   border-color: #1890ff;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(24, 144, 255, 0.3);
 }
 
+.toolbar-btn.is-active:hover {
+  background: #096dd9;
+  border-color: #096dd9;
+  transform: translateY(-1px);
+}
+
+.toolbar-btn.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+}
+
+/* Editor Content Styles */
 .tiptap-content {
-  min-height: 300px;
-  padding: 10px;
+  min-height: 400px;
+  padding: 20px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #2d3748;
 }
 
-.tiptap-content img {
+.tiptap-content .ProseMirror {
+  outline: none;
+  min-height: 360px;
+}
+
+/* Typography */
+.tiptap-content .ProseMirror h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem 0;
+  color: #1a202c;
+  line-height: 1.2;
+}
+
+.tiptap-content .ProseMirror h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.8rem 0;
+  color: #2d3748;
+  line-height: 1.3;
+}
+
+.tiptap-content .ProseMirror h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.6rem 0;
+  color: #4a5568;
+  line-height: 1.4;
+}
+
+.tiptap-content .ProseMirror p {
+  margin: 1rem 0;
+  line-height: 1.7;
+}
+
+.tiptap-content .ProseMirror p.is-editor-empty:first-child::before {
+  color: #a0aec0;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Lists */
+.tiptap-content .ProseMirror ul,
+.tiptap-content .ProseMirror ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.tiptap-content .ProseMirror li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.tiptap-content .ProseMirror ul li {
+  list-style-type: disc;
+}
+
+.tiptap-content .ProseMirror ol li {
+  list-style-type: decimal;
+}
+
+/* Blockquote */
+.tiptap-content .ProseMirror blockquote {
+  border-left: 4px solid #1890ff;
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #4a5568;
+  background: #f7fafc;
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Images */
+.tiptap-content .ProseMirror img.editor-image {
   max-width: 100%;
   height: auto;
-  margin: 10px 0;
+  border-radius: 8px;
+  margin: 1.5rem auto;
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.tiptap-content .ProseMirror img.editor-image:hover {
+  transform: scale(1.02);
+}
+
+/* Links */
+.tiptap-content .ProseMirror a.editor-link {
+  color: #1890ff;
+  text-decoration: none;
+  border-bottom: 1px solid #1890ff;
+  transition: all 0.2s ease;
+}
+
+.tiptap-content .ProseMirror a.editor-link:hover {
+  color: #096dd9;
+  border-bottom-color: #096dd9;
+  background: rgba(24, 144, 255, 0.1);
+}
+
+/* Code */
+.tiptap-content .ProseMirror code {
+  background: #f1f5f9;
+  color: #e53e3e;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+}
+
+.tiptap-content .ProseMirror pre {
+  background: #2d3748;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.tiptap-content .ProseMirror pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* Preview Mode */
+.tiptap-preview {
+  min-height: 400px;
+  padding: 20px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.preview-content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #2d3748;
+  max-width: none;
+}
+
+.preview-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem 0;
+  color: #1a202c;
+  line-height: 1.2;
+}
+
+.preview-content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.8rem 0;
+  color: #2d3748;
+  line-height: 1.3;
+}
+
+.preview-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.6rem 0;
+  color: #4a5568;
+  line-height: 1.4;
+}
+
+.preview-content p {
+  margin: 1rem 0;
+  line-height: 1.7;
+}
+
+.preview-content ul,
+.preview-content ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.preview-content li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.preview-content blockquote {
+  border-left: 4px solid #1890ff;
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #4a5568;
+  background: #f7fafc;
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.preview-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem auto;
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.preview-content a {
+  color: #1890ff;
+  text-decoration: none;
+  border-bottom: 1px solid #1890ff;
+  transition: all 0.2s ease;
+}
+
+.preview-content a:hover {
+  color: #096dd9;
+  border-bottom-color: #096dd9;
+  background: rgba(24, 144, 255, 0.1);
+}
+
+/* Footer */
+.editor-footer {
+  padding: 8px 16px;
+  border-top: 1px solid #f0f0f0;
+  background: #fafbfc;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.word-count {
+  font-size: 12px;
+  color: #718096;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tiptap-toolbar {
+    padding: 8px 12px;
+    gap: 2px;
+  }
+  
+  .toolbar-btn {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+  
+  .toolbar-separator {
+    margin: 0 4px;
+  }
+  
+  .tiptap-content {
+    padding: 16px 20px;
+  }
+  
+  .tiptap-content .ProseMirror h1 {
+    font-size: 2rem;
+  }
+  
+  .tiptap-content .ProseMirror h2 {
+    font-size: 1.5rem;
+  }
+  
+  .tiptap-content .ProseMirror h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Focus states for accessibility */
+.toolbar-btn:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+.tiptap-content .ProseMirror:focus {
+  outline: none;
+}
+
+/* Selection styles */
+.tiptap-content .ProseMirror ::selection {
+  background: rgba(24, 144, 255, 0.2);
+}
+
+/* Drag and drop styles */
+.tiptap-content .ProseMirror .ProseMirror-selectednode {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
 }

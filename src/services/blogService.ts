@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { createPost, uploadImage, getAllPosts, updatePostStatus, getCategories } from '../api/blog/blogApi';
+import { createPost, uploadImage, getAllPosts, updatePostStatus, getCategories } from '../api/blogApi';
 import type { PostData, PostResponse, UploadResponse, AllPostsRequest, AllPostsResponse, UpdateStatusRequest, UpdateStatusResponse, CategoryResponse } from '../types/blog';
 
 export const createPostService = async (data: PostData): Promise<PostResponse> => {

@@ -5,7 +5,7 @@ import './Notification.css';
 const Notification = () => {
   return (
     <div>
-      <Badge count={5}>
+      <Badge count={5} className='noti-badge'>
         <BellOutlined className="notification-icon" />
       </Badge>
     </div>

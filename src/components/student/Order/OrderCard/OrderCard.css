@@ -1,0 +1,232 @@
+/* components/Order/OrderCard/OrderCard.css */
+
+.order-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.order-card-small {
+  font-size: 12px;
+}
+
+/* ✅ Order Header */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-info h4 {
+  color: #1890ff;
+  margin-bottom: 4px;
+}
+
+.order-status {
+  flex-shrink: 0;
+}
+
+/* ✅ Order Content */
+.order-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+/* ✅ Course Info Section */
+.course-info {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  min-width: 0; /* Allow text truncation */
+}
+
+.course-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.course-details h5 {
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+/* ✅ Payment Info Section */
+.payment-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  margin-left: 12px;
+  text-align: right;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.transaction-code,
+.total-amount {
+  margin-top: 2px;
+}
+
+/* ✅ Order Actions */
+.order-actions {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.order-actions .ant-btn {
+  border: none;
+  padding: 4px 8px;
+  height: auto;
+  font-size: 12px;
+}
+
+.order-actions .ant-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* ✅ Status-based styling */
+.order-card .ant-tag {
+  font-weight: 600;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* ✅ Different order statuses */
+.order-card[data-status="PENDING"] {
+  border-left: 4px solid #faad14;
+}
+
+.order-card[data-status="COMPLETED"] {
+  border-left: 4px solid #52c41a;
+}
+
+.order-card[data-status="CANCELLED"],
+.order-card[data-status="FAILED"] {
+  border-left: 4px solid #ff4d4f;
+  opacity: 0.8;
+}
+
+/* ✅ Hover effects for actions */
+.order-actions .ant-btn-text:hover {
+  background: #f0f0f0;
+}
+
+.order-actions .ant-btn-primary:hover {
+  background: #40a9ff;
+}
+
+.order-actions .ant-btn-dangerous:hover {
+  color: #ff7875;
+  background: #fff2f0;
+}
+
+/* ✅ Small size variant */
+.order-card-small .order-header {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+
+.order-card-small .order-content {
+  margin-bottom: 12px;
+}
+
+.order-card-small .course-info {
+  gap: 8px;
+}
+
+.order-card-small .payment-info {
+  margin-left: 8px;
+}
+
+.order-card-small .order-actions {
+  padding-top: 8px;
+}
+
+.order-card-small .ant-tag {
+  font-size: 10px;
+  padding: 1px 6px;
+}
+
+/* ✅ Mobile responsive */
+@media (max-width: 768px) {
+  .order-card {
+    margin-bottom: 12px;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .order-status {
+    align-self: flex-end;
+  }
+  
+  .order-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .payment-info {
+    align-items: flex-start;
+    margin-left: 0;
+    text-align: left;
+  }
+  
+  .course-info {
+    align-items: flex-start;
+  }
+  
+  .order-actions {
+    justify-content: center;
+  }
+  
+  .order-actions .ant-space {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .course-info {
+    gap: 8px;
+  }
+  
+  .course-info .ant-image {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .course-details h5 {
+    font-size: 14px;
+  }
+  
+  .order-actions .ant-btn {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+  
+  .payment-info .ant-typography {
+    font-size: 10px;
+  }
+}

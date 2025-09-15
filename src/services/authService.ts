@@ -1,9 +1,9 @@
 import { message } from 'antd';
-import { login, register, logout, refreshToken, updatePassword } from '../api/auth/authApi';
+import { login, register, logout, refreshToken, updatePassword } from '../api/authApi';
 import useAuthStore from '../store/authStore';
 import type { RegisterRequest, LoginRequest, AuthResponse, LogoutResponse, UpdatePasswordRequest } from '../types/auth';
 import type { UserProfileResponse } from 'types/user';
-import { getUserProfile } from '../api/user/userApi';
+import { getUserProfile } from '../api/userApi';
 
 const roleMapping: { [key: number]: 'student' | 'teacher' | 'manager' | 'consultant' } = {
   1: 'manager',

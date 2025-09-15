@@ -1,0 +1,204 @@
+/* pages/OrderStatus/OrderStatus.css */
+
+.order-status-page {
+  min-height: calc(100vh - 64px);
+  background: #f5f7fa;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ Main Status Card */
+.status-card {
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* ✅ Loading Container */
+.loading-container {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ Result Component Customization */
+.status-card .ant-result {
+  padding: 40px 20px 20px;
+}
+
+.status-card .ant-result-title {
+  color: #262626;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.status-card .ant-result-subtitle {
+  color: #595959;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ✅ Success State */
+.status-card .ant-result-success .ant-result-icon {
+  color: #52c41a;
+}
+
+.status-card .ant-result-success .ant-result-title {
+  color: #52c41a;
+}
+
+/* ✅ Error State */
+.status-card .ant-result-error .ant-result-icon {
+  color: #ff4d4f;
+}
+
+.status-card .ant-result-error .ant-result-title {
+  color: #ff4d4f;
+}
+
+/* ✅ Action Buttons */
+.status-card .ant-result-extra {
+  margin-top: 24px;
+}
+
+.status-card .ant-result-extra .ant-btn {
+  margin: 4px 8px;
+  height: 40px;
+  padding: 0 20px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.status-card .ant-result-extra .ant-btn-primary {
+  background: #1890ff;
+  border-color: #1890ff;
+}
+
+.status-card .ant-result-extra .ant-btn-primary:hover {
+  background: #40a9ff;
+  border-color: #40a9ff;
+}
+
+/* ✅ Payment Details Card */
+.status-card .ant-card {
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+}
+
+.status-card .ant-card-head {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.status-card .ant-card-head-title {
+  color: #262626;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ✅ Descriptions Styling */
+.status-card .ant-descriptions-item-label {
+  color: #8c8c8c;
+  font-weight: 500;
+  width: 140px;
+}
+
+.status-card .ant-descriptions-item-content {
+  color: #262626;
+}
+
+/* ✅ Code Text */
+.status-card .ant-typography code {
+  background: #f6f8fa;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+}
+
+/* ✅ Mobile Responsive */
+@media (max-width: 768px) {
+  .order-status-page {
+    padding: 16px;
+  }
+  
+  .status-card {
+    max-width: 100%;
+  }
+  
+  .status-card .ant-result {
+    padding: 24px 16px 16px;
+  }
+  
+  .status-card .ant-result-title {
+    font-size: 20px;
+  }
+  
+  .status-card .ant-result-subtitle {
+    font-size: 13px;
+  }
+  
+  .status-card .ant-result-extra .ant-btn {
+    margin: 4px 4px;
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+  }
+  
+  .status-card .ant-descriptions-item-label {
+    width: 120px;
+    font-size: 13px;
+  }
+  
+  .status-card .ant-descriptions-item-content {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  .order-status-page {
+    padding: 12px;
+  }
+  
+  .status-card .ant-result-extra {
+    margin-top: 16px;
+  }
+  
+  .status-card .ant-result-extra .ant-btn {
+    width: 100%;
+    margin: 4px 0;
+  }
+  
+  .status-card .ant-descriptions-item-label {
+    width: 100px;
+    font-size: 12px;
+  }
+  
+  .status-card .ant-descriptions-item-content {
+    font-size: 12px;
+  }
+}
+
+/* ✅ Animation for success state */
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.status-card .ant-result-success .ant-result-icon {
+  animation: successPulse 2s ease-in-out;
+}

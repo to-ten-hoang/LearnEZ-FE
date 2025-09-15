@@ -1,3 +1,4 @@
+// layouts/MainLayout/MainLayout.tsx - Updated with Cart Integration
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Menu, Button, Layout } from 'antd';
@@ -7,12 +8,13 @@ import LoginModal from '../../components/common/Auth/LoginModal/LoginModal';
 import RegisterModal from '../../components/common/Auth/RegisterModal/RegisterModal';
 import Notification from '../../components/common/Notification/Notification';
 import UserMenu from '../../components/common/UserMenu/UserMenu';
+import CartBadge from '../../components/common/CartBadge/CartBadge'; 
 import './MainLayout.css';
 
 const { Header } = Layout;
 
 const MainLayout = () => {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore(); // ✅ Thêm user để check role
   const [isLoginVisible, setIsLoginVisible] = useState(false);
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
 
@@ -48,6 +50,7 @@ const MainLayout = () => {
               <img src={logo} alt="Logo" className="logo-img" />
             </Link>
           </div>
+          
           <div className="menu-container">
             <Menu
               mode="horizontal"
@@ -55,9 +58,20 @@ const MainLayout = () => {
               className="main-menu"
               theme="light"
             />
+            
             <div className="auth-buttons">
               {isAuthenticated ? (
                 <>
+                  {/* ✅ CART BADGE - Chỉ hiển thị cho student */}
+                  {user?.role === 'student' && (
+                    <div className="header-cart">
+                      <CartBadge 
+                        showText={false}  // Không hiển thị text ở header
+                        size="middle"     // Kích thước vừa phải
+                      />
+                    </div>
+                  )}
+                  
                   <Notification />
                   <UserMenu />
                 </>
@@ -75,6 +89,7 @@ const MainLayout = () => {
           </div>
         </div>
       </Header>
+      
       <main>
         <Outlet />
         <LoginModal visible={isLoginVisible} onClose={handleCloseLogin} />

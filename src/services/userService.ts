@@ -1,12 +1,12 @@
 import { message } from 'antd';
-import { filterUsers, disableUser, deleteUser, updateUserInfo, getUserProfile } from '../api/user/userApi';
+import { filterUsers, disableUser, deleteUser, updateUserInfo, getUserProfile } from '../api/userApi';
 import type { FilterRequest, FilterResponse, DisableUserRequest, DisableUserResponse, DeleteUserRequest, DeleteUserResponse, UpdateUserInfoRequest, UpdateUserInfoResponse, UserProfileResponse } from '../types/user';
 
 export const filterUsersService = async (data: FilterRequest): Promise<FilterResponse> => {
   try {
     const response = await filterUsers(data);
     if (response.code === 200) {
-      message.success('Lấy danh sách người dùng thành công!');
+      // message.success('Lấy danh sách người dùng thành công!');
       return response;
     }
     throw new Error(response.message || 'Lấy danh sách người dùng thất bại.');

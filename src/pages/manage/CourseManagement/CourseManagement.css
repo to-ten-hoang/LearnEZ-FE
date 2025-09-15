@@ -1,0 +1,85 @@
+.course-management h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1890ff;
+}
+
+.course-management .ant-form {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-management .ant-form-item {
+  margin-bottom: 0;
+}
+
+.course-management .ant-input,
+.course-management .ant-select,
+.course-management .ant-picker {
+  width: 180px;
+}
+
+.course-management .ant-table {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-management .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons .ant-btn {
+  height: 32px;
+  font-size: 14px;
+}
+
+.action-buttons .action-button-fixed {
+  width: 90px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .course-management {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .course-management .ant-form {
+    flex-direction: column;
+  }
+
+  .course-management .ant-input,
+  .course-management .ant-select,
+  .course-management .ant-picker {
+    width: 100%;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .form-actions .ant-btn {
+    width: 100%;
+  }
+}
