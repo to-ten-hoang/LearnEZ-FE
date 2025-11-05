@@ -1,404 +1,404 @@
 .blog-approval h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1890ff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
 }
 
 .blog-approval .ant-form {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  background: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .blog-approval .ant-form-item {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .blog-approval .ant-input,
 .blog-approval .ant-select,
 .blog-approval .ant-picker {
-  width: 180px;
+    width: 180px;
 }
 
 .blog-approval .ant-table {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .blog-approval .ant-table-thead > tr > th {
-  background: #fafafa;
-  font-weight: 600;
+    background: #fafafa;
+    font-weight: 600;
 }
 
 .status-approved {
-  color: #52c41a;
-  font-weight: 500;
+    color: #52c41a;
+    font-weight: 500;
 }
 
 .status-pending {
-  color: #fa8c16;
-  font-weight: 500;
+    color: #fa8c16;
+    font-weight: 500;
 }
 
 .action-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .action-buttons .ant-btn {
-  height: 32px;
-  font-size: 14px;
+    height: 32px;
+    font-size: 14px;
 }
 
 .action-buttons .action-button-fixed {
-  width: 90px;
+    width: 90px;
 }
 
 .deleted-post {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .form-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
-  align-items: center;
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 /* Blog Preview Modal Styles */
 .blog-preview-modal .ant-modal-body {
-  padding: 0;
-  max-height: 70vh;
-  overflow-y: auto;
+    padding: 0;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .blog-preview-content {
-  padding: 24px;
+    padding: 24px;
 }
 
 .blog-preview-header {
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 16px;
-  margin-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .blog-preview-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 12px 0;
-  line-height: 1.3;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
 }
 
 .blog-preview-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-size: 14px;
-  color: #666;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: #666;
 }
 
 .blog-preview-meta span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .blog-preview-category {
-  background: #e6f7ff;
-  color: #1890ff;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: 500;
+    background: #e6f7ff;
+    color: #1890ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
 .blog-preview-date,
 .blog-preview-author {
-  background: #f6f6f6;
-  padding: 4px 8px;
-  border-radius: 4px;
+    background: #f6f6f6;
+    padding: 4px 8px;
+    border-radius: 4px;
 }
 
 .blog-preview-image {
-  margin: 20px 0;
-  text-align: center;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .blog-preview-body {
-  margin: 24px 0;
-  min-height: 200px;
+    margin: 24px 0;
+    min-height: 200px;
 }
 
 .blog-content {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333;
+    font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Typography for blog content */
 .blog-content h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin: 2rem 0 1rem 0;
-  color: #1a1a1a;
-  line-height: 1.2;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem 0;
+    color: #1a1a1a;
+    line-height: 1.2;
 }
 
 .blog-content h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin: 1.8rem 0 0.8rem 0;
-  color: #2d3748;
-  line-height: 1.3;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 1.8rem 0 0.8rem 0;
+    color: #2d3748;
+    line-height: 1.3;
 }
 
 .blog-content h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin: 1.5rem 0 0.6rem 0;
-  color: #4a5568;
-  line-height: 1.4;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.6rem 0;
+    color: #4a5568;
+    line-height: 1.4;
 }
 
 .blog-content p {
-  margin: 1rem 0;
-  line-height: 1.7;
+    margin: 1rem 0;
+    line-height: 1.7;
 }
 
 .blog-content ul,
 .blog-content ol {
-  padding-left: 1.5rem;
-  margin: 1rem 0;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
 }
 
 .blog-content li {
-  margin: 0.5rem 0;
-  line-height: 1.6;
+    margin: 0.5rem 0;
+    line-height: 1.6;
 }
 
 .blog-content blockquote {
-  border-left: 4px solid #1890ff;
-  padding-left: 1.5rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: #4a5568;
-  background: #f7fafc;
-  padding: 1rem 1.5rem;
-  border-radius: 0 8px 8px 0;
+    border-left: 4px solid #1890ff;
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #4a5568;
+    background: #f7fafc;
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
 }
 
 .blog-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 1.5rem auto;
-  display: block;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem auto;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .blog-content a {
-  color: #1890ff;
-  text-decoration: none;
-  border-bottom: 1px solid #1890ff;
-  transition: all 0.2s ease;
+    color: #1890ff;
+    text-decoration: none;
+    border-bottom: 1px solid #1890ff;
+    transition: all 0.2s ease;
 }
 
 .blog-content a:hover {
-  color: #096dd9;
-  border-bottom-color: #096dd9;
-  background: rgba(24, 144, 255, 0.1);
+    color: #096dd9;
+    border-bottom-color: #096dd9;
+    background: rgba(24, 144, 255, 0.1);
 }
 
 .blog-content code {
-  background: #f1f5f9;
-  color: #e53e3e;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-size: 0.9em;
-  font-family: "Fira Code", "Monaco", "Consolas", monospace;
+    background: #f1f5f9;
+    color: #e53e3e;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
 }
 
 .blog-content pre {
-  background: #2d3748;
-  color: #e2e8f0;
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin: 1.5rem 0;
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
 }
 
 .blog-content pre code {
-  background: transparent;
-  color: inherit;
-  padding: 0;
+    background: transparent;
+    color: inherit;
+    padding: 0;
 }
 
 .blog-preview-footer {
-  border-top: 1px solid #f0f0f0;
-  padding-top: 16px;
-  margin-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 16px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .blog-preview-status {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .status-badge {
-  padding: 4px 12px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .status-badge.active {
-  background: #f6ffed;
-  color: #52c41a;
-  border: 1px solid #b7eb8f;
+    background: #f6ffed;
+    color: #52c41a;
+    border: 1px solid #b7eb8f;
 }
 
 .status-badge.inactive {
-  background: #fff7e6;
-  color: #fa8c16;
-  border: 1px solid #ffd591;
+    background: #fff7e6;
+    color: #fa8c16;
+    border: 1px solid #ffd591;
 }
 
 .status-badge.deleted {
-  background: #fff2f0;
-  color: #ff4d4f;
-  border: 1px solid #ffccc7;
+    background: #fff2f0;
+    color: #ff4d4f;
+    border: 1px solid #ffccc7;
 }
 
 .blog-preview-updated {
-  font-style: italic;
-  color: #8c8c8c;
+    font-style: italic;
+    color: #8c8c8c;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .blog-approval {
-    margin-left: 0;
-    padding: 16px;
-  }
+    .blog-approval {
+        margin-left: 0;
+        padding: 16px;
+    }
 
-  .blog-approval .ant-form {
-    flex-direction: column;
-  }
+    .blog-approval .ant-form {
+        flex-direction: column;
+    }
 
-  .blog-approval .ant-input,
-  .blog-approval .ant-select,
-  .blog-approval .ant-picker {
-    width: 100%;
-  }
+    .blog-approval .ant-input,
+    .blog-approval .ant-select,
+    .blog-approval .ant-picker {
+        width: 100%;
+    }
 
-  .form-actions {
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
+    .form-actions {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
 
-  .form-actions .ant-btn {
-    width: 100%;
-  }
+    .form-actions .ant-btn {
+        width: 100%;
+    }
 
-  .action-buttons {
-    flex-direction: column;
-  }
+    .action-buttons {
+        flex-direction: column;
+    }
 
-  .action-buttons .ant-btn {
-    width: 100%;
-  }
+    .action-buttons .ant-btn {
+        width: 100%;
+    }
 
-  .blog-preview-modal .ant-modal {
-    margin: 0;
-    padding: 8px;
-    max-width: 100vw;
-  }
+    .blog-preview-modal .ant-modal {
+        margin: 0;
+        padding: 8px;
+        max-width: 100vw;
+    }
 
-  .blog-preview-content {
-    padding: 16px;
-  }
+    .blog-preview-content {
+        padding: 16px;
+    }
 
-  .blog-preview-title {
-    font-size: 24px;
-  }
+    .blog-preview-title {
+        font-size: 24px;
+    }
 
-  .blog-preview-meta {
-    flex-direction: column;
-    gap: 8px;
-  }
+    .blog-preview-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
 
-  .blog-preview-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+    .blog-preview-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
 
-  .blog-content h1 {
-    font-size: 1.8rem;
-  }
+    .blog-content h1 {
+        font-size: 1.8rem;
+    }
 
-  .blog-content h2 {
-    font-size: 1.5rem;
-  }
+    .blog-content h2 {
+        font-size: 1.5rem;
+    }
 
-  .blog-content h3 {
-    font-size: 1.3rem;
-  }
+    .blog-content h3 {
+        font-size: 1.3rem;
+    }
 }
 
 /* Animation for modal */
 .blog-preview-modal .ant-modal-content {
-  animation: modalSlideIn 0.3s ease-out;
+    animation: modalSlideIn 0.3s ease-out;
 }
 
 @keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Scroll bar styling for modal */
 .blog-preview-modal .ant-modal-body::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 
 .blog-preview-modal .ant-modal-body::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
+    background: #f1f1f1;
+    border-radius: 3px;
 }
 
 .blog-preview-modal .ant-modal-body::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
+    background: #c1c1c1;
+    border-radius: 3px;
 }
 
 .blog-preview-modal .ant-modal-body::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+    background: #a8a8a8;
 }

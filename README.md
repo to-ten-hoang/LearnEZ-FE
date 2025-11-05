@@ -5,11 +5,10 @@
 Dự án này là hệ thống quản lý giáo dục trực tuyến, phát triển bằng ReactJS và TypeScript. Hệ thống hướng đến việc cung cấp giải pháp toàn diện cho quản lý khóa học, lớp học, bài kiểm tra, ngân hàng đề, tin tức và tương tác giữa học viên, giáo viên, trung tâm. Dự án thể hiện năng lực về UI/UX, tổ chức mã nguồn, quản lý dữ liệu và phát triển các tính năng thực tế phục vụ học tập và giảng dạy.
 
 https://fe-q0rg.onrender.com/
-(dự phòng: https://fe-learnez.vercel.app/)
-(Lần đầu sử dụng sẽ mất 1 thời gian để server khởi động)
 
-Tài khoản manager: manager@gmail.com 
+Tài khoản manager: manager@gmail.com
 Mật khẩu: abcd@1234
+
 ---
 
 ## Công nghệ sử dụng
@@ -29,31 +28,31 @@ Mật khẩu: abcd@1234
 ## 5 Module chính
 
 1. **Đăng nhập, đăng ký, phân quyền**
-   - Quản lý tài khoản, phân quyền học viên/giáo viên/trung tâm.
-   - Xác thực, bảo mật, quản lý trạng thái tài khoản.
+    - Quản lý tài khoản, phân quyền học viên/giáo viên/trung tâm.
+    - Xác thực, bảo mật, quản lý trạng thái tài khoản.
 
 2. **Tin tức**
-   - Đọc tin tức, thông báo mới nhất từ trung tâm.
-   - CRUD bài/tin tức, comment, thông báo tới học viên/giáo viên.
+    - Đọc tin tức, thông báo mới nhất từ trung tâm.
+    - CRUD bài/tin tức, comment, thông báo tới học viên/giáo viên.
 
 3. **Quản lý lớp học**
-   - CRUD lớp học, tham gia lớp học, xem thông tin lớp.
-   - Quản lý ca làm việc, thời gian học, điểm danh.
-   - Xuất điểm lớp ra file Excel.
-   - Thống kê lớp học, doanh thu, quản lý lịch học.
-   - Nhắn tin trực tiếp trong lớp, thông báo qua mail/noti khi có lịch học.
+    - CRUD lớp học, tham gia lớp học, xem thông tin lớp.
+    - Quản lý ca làm việc, thời gian học, điểm danh.
+    - Xuất điểm lớp ra file Excel.
+    - Thống kê lớp học, doanh thu, quản lý lịch học.
+    - Nhắn tin trực tiếp trong lớp, thông báo qua mail/noti khi có lịch học.
 
 4. **Ngân hàng đề**
-   - CRUD ngân hàng đề, bài tập/bài kiểm tra.
-   - Làm bài kiểm tra global hoặc theo lớp học.
-   - Quản lý điểm bài kiểm tra (test daily).
-   - Thông báo khi có bài kiểm tra mới.
+    - CRUD ngân hàng đề, bài tập/bài kiểm tra.
+    - Làm bài kiểm tra global hoặc theo lớp học.
+    - Quản lý điểm bài kiểm tra (test daily).
+    - Thông báo khi có bài kiểm tra mới.
 
 5. **Quản lý bài kiểm tra**
-   - CRUD bài kiểm tra, bài tập.
-   - Làm bài, nộp bài, xem điểm.
-   - Trả lời tin nhắn liên quan đến bài kiểm tra.
-   - Nhắn tin với trung tâm, comment dưới video khóa học.
+    - CRUD bài kiểm tra, bài tập.
+    - Làm bài, nộp bài, xem điểm.
+    - Trả lời tin nhắn liên quan đến bài kiểm tra.
+    - Nhắn tin với trung tâm, comment dưới video khóa học.
 
 ---
 
@@ -86,7 +85,6 @@ Mật khẩu: abcd@1234
 
 ---
 
-
 ## Hướng dẫn chạy dự án
 
 ```bash
@@ -95,6 +93,7 @@ cd FE
 npm install
 npm start
 ```
+
 Ứng dụng sẽ chạy tại `http://localhost:3000`.
 
 ---

@@ -1,17 +1,17 @@
 .user-icon {
-  font-size: 20px;
-  cursor: pointer;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .user-icon:hover {
-  color: #40a9ff;
+    color: #40a9ff;
 }
 
 .ant-dropdown-menu-item {
-  font-size: 16px;
-  padding: 8px 16px;
+    font-size: 16px;
+    padding: 8px 16px;
 }
 
 .ant-dropdown-menu-item:hover {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }

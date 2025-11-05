@@ -1,20 +1,20 @@
-import axios from "axios";
-import useAuthStore from "../store/authStore";
+import axios from 'axios';
+import useAuthStore from '../store/authStore';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8080",
-  headers: {
-    "Content-Type": "application/json",
-  },
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
+    headers: {
+        'Content-Type': 'application/json',
+    },
 });
 
 // Interceptor để thêm token vào header
 api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().token;
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
+    const token = useAuthStore.getState().token;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
 });
 
 // Interceptor để xử lý lỗi (ví dụ: token hết hạn)

@@ -1,69 +1,69 @@
 /* src/pages/public-page/Courses/Course.css */
 .courses-page-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
 }
 
 .page-title {
-  text-align: center;
-  margin-bottom: 24px !important;
+    text-align: center;
+    margin-bottom: 24px !important;
 }
 
 .filters-card {
-  margin-bottom: 24px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .filters-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
 }
 
 .filter-search {
-  flex: 1;
-  min-width: 250px;
-  max-width: 500px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 500px;
 }
 .filters-right {
-  display: flex;
-  gap: 16px;
-  margin-left: auto; /* Đẩy cụm này về phía bên phải */
-  flex-wrap: wrap;
+    display: flex;
+    gap: 16px;
+    margin-left: auto; /* Đẩy cụm này về phía bên phải */
+    flex-wrap: wrap;
 }
 .filter-select {
-  width: 250px; /* hoặc 250px, tuỳ ý */
-  min-width: unset; /* bỏ min-width nếu muốn */
-  max-width: 100%; /* đảm bảo không tràn */
-  flex: none;
+    width: 250px; /* hoặc 250px, tuỳ ý */
+    min-width: unset; /* bỏ min-width nếu muốn */
+    max-width: 100%; /* đảm bảo không tràn */
+    flex: none;
 }
 
 .filter-sort {
-  width: 180px;
+    width: 180px;
 }
 
 .courses-list-section {
-  min-height: 400px; /* To prevent layout shift during loading */
+    min-height: 400px; /* To prevent layout shift during loading */
 }
 
 .pagination-container {
-  margin-top: 24px;
-  text-align: center;
+    margin-top: 24px;
+    text-align: center;
 }
 
 .custom-pagination {
-  display: inline-block;
+    display: inline-block;
 }
 
 @media (max-width: 768px) {
-  .filters-wrapper {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .filter-sort {
-    width: 100%;
-  }
+    .filters-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-sort {
+        width: 100%;
+    }
 }

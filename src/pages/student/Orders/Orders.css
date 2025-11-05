@@ -1,252 +1,252 @@
 /* pages/Orders/Orders.css */
 
 /* ✅ Main Page Layout */
-.orders-page {
-}
+/* .orders-page {
+} */
 
 /* ✅ Page Header - Matching Cart style */
 .orders-header-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .orders-header-actions h1 {
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0;
-  color: #1890ff;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: #1890ff;
 }
 
 .header-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
 /* ✅ Order Statistics Section */
 .order-statistics {
-  margin-bottom: 24px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .order-statistics .ant-statistic {
-  text-align: center;
+    text-align: center;
 }
 
 /* ✅ Filters & Controls - New layout */
 .order-controls {
-  margin-bottom: 24px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .orders-controls-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .controls-left {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: wrap;
-  flex: 1;
-  min-width: 300px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 300px;
 }
 
 .controls-right {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .order-controls .ant-input,
 .order-controls .ant-select {
-  border-radius: 6px;
+    border-radius: 6px;
 }
 
 .order-controls .ant-btn {
-  height: 32px;
-  border-radius: 6px;
+    height: 32px;
+    border-radius: 6px;
 }
 
 /* ✅ Auto-refresh indicator animation */
 .auto-refresh-indicator {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #52c41a;
-  font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #52c41a;
+    font-size: 12px;
 }
 
 .auto-refresh-indicator-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #52c41a;
-  animation: pulse 2s infinite;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #52c41a;
+    animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* ✅ Orders Content */
 .orders-content {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 /* ✅ Order Tabs */
 .order-tabs .ant-tabs-tab {
-  font-weight: 500;
-  padding: 12px 16px;
-  border-radius: 6px 6px 0 0;
-  transition: all 0.2s ease;
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.2s ease;
 }
 
 .order-tabs .ant-tabs-tab:hover {
-  color: #40a9ff;
+    color: #40a9ff;
 }
 
 .order-tabs .ant-tabs-tab-active {
-  background: #e6f7ff;
-  color: #1890ff;
-  font-weight: 600;
+    background: #e6f7ff;
+    color: #1890ff;
+    font-weight: 600;
 }
 
 /* ✅ Order List */
 .order-list {
-  min-height: 300px;
-  padding: 16px 0;
+    min-height: 300px;
+    padding: 16px 0;
 }
 
 .order-list .ant-row {
-  margin-left: -8px;
-  margin-right: -8px;
+    margin-left: -8px;
+    margin-right: -8px;
 }
 
 .order-list .ant-col {
-  padding-left: 8px;
-  padding-right: 8px;
-  margin-bottom: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 16px;
 }
 
 /* ✅ Empty and Loading States */
 .empty-orders,
 .loading-container {
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .loading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #1890ff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #1890ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* ✅ Responsive Design */
 @media (max-width: 768px) {
-  .orders-page {
-    padding: 16px;
-  }
+    .orders-page {
+        padding: 16px;
+    }
 
-  .orders-header-actions {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-  }
+    .orders-header-actions {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
 
-  .header-actions {
-    width: 100%;
-    justify-content: center;
-  }
+    .header-actions {
+        width: 100%;
+        justify-content: center;
+    }
 
-  .orders-controls-flex {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
+    .orders-controls-flex {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
 
-  .controls-left,
-  .controls-right {
-    width: 100%;
-    justify-content: center;
-    flex: none;
-    gap: 12px;
-  }
+    .controls-left,
+    .controls-right {
+        width: 100%;
+        justify-content: center;
+        flex: none;
+        gap: 12px;
+    }
 
-  .order-controls .ant-input,
-  .order-controls .ant-select {
-    width: 100%;
-  }
+    .order-controls .ant-input,
+    .order-controls .ant-select {
+        width: 100%;
+    }
 
-  .order-list .ant-col {
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-bottom: 12px;
-  }
+    .order-list .ant-col {
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-bottom: 12px;
+    }
 }
 
 @media (max-width: 576px) {
-  .orders-page {
-    padding: 12px;
-  }
+    .orders-page {
+        padding: 12px;
+    }
 
-  .header-actions {
-    flex-direction: column;
-    gap: 8px;
-  }
+    .header-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
 
-  .header-actions .ant-btn {
-    width: 100%;
-  }
+    .header-actions .ant-btn {
+        width: 100%;
+    }
 
-  .order-list .ant-col {
-    padding: 0 4px;
-  }
+    .order-list .ant-col {
+        padding: 0 4px;
+    }
 }

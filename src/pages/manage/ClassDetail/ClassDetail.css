@@ -1,0 +1,20 @@
+/* Thêm CSS cho header mới */
+.page-header-container {
+    background-color: #fff;
+    padding: 16px 24px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.page-title-container {
+    margin-top: 12px;
+}
+
+/* CSS cho spinner toàn trang */
+.full-page-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
