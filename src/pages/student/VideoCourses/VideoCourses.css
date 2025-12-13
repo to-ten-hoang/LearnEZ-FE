@@ -1,40 +1,670 @@
-.video-courses h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1890ff;
+/* pages/student/VideoCourses/VideoCourses.css */
+
+/* =============================================
+   BASE STYLES
+   ============================================= */
+.video-courses-page {
+    min-height: calc(100vh - 64px);
+    background: #f5f7fa;
 }
 
-.course-card {
-  border: 1px solid #e8e8e8;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+/* =============================================
+   MY COURSES VIEW - Grid of purchased courses
+   ============================================= */
+.my-courses-container {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.course-card:hover {
-  transform: translateY(-5px);
+.my-courses-header {
+    margin-bottom: 20px;
 }
 
-.course-card .ant-card-cover img {
-  border-radius: 8px 8px 0 0;
-  object-fit: cover;
-  height: 300px;
+.my-courses-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1890ff;
 }
 
-.course-info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  color: #666;
+.my-courses-header .subtitle {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+    margin: 0;
 }
 
-.course-info span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+/* Loading state */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
 }
 
-.course-info span svg {
-  font-size: 16px;
+/* Course Card */
+.course-card-item {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.course-card-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.course-card-item .ant-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.course-card-item .ant-card-meta {
+    flex: 1;
+}
+
+.course-card-item .ant-card-meta-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 44px;
+}
+
+/* Course Thumbnail */
+.course-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.course-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.course-card-item:hover .course-thumbnail img {
+    transform: scale(1.08);
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.play-overlay .anticon {
+    font-size: 56px;
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.course-card-item:hover .play-overlay {
+    opacity: 1;
+}
+
+.purchased-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+/* Course Meta */
+.course-meta {
+    color: #666;
+    font-size: 13px;
+}
+
+.course-meta .author {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Start Learning Button */
+.start-learning-btn {
+    margin-top: 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    height: 40px;
+    background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+    border: none;
+    font-size: 14px;
+}
+
+.start-learning-btn:hover {
+    background: linear-gradient(135deg, #40a9ff 0%, #69c0ff 100%);
+}
+
+/* =============================================
+   COURSE PLAYER VIEW
+   ============================================= */
+.course-player-container {
+    min-height: calc(100vh - 64px);
+    background: #f5f7fa;
+}
+
+/* Player Header - Simple layout: back link on top, title below */
+.player-header {
+    padding: 16px 24px;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.player-header .back-link {
+    padding: 0;
+    height: auto;
+    color: #1890ff;
+    font-size: 14px;
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.player-header .back-link:hover {
+    color: #40a9ff;
+}
+
+.player-header .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.player-header .course-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a202c;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.player-header .toggle-sidebar-btn {
+    color: #666;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.player-header .toggle-sidebar-btn:hover {
+    color: #1890ff;
+}
+
+/* Player Content Area */
+.player-content {
+    display: flex;
+    min-height: calc(100vh - 64px - 100px);
+}
+
+/* Video Section */
+.video-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.video-section.full-width {
+    flex: 1;
+}
+
+/* Video Wrapper - 16:9 Aspect Ratio */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+}
+
+.video-wrapper iframe,
+.video-wrapper .video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #000;
+}
+
+.video-wrapper .video-player {
+    object-fit: contain;
+}
+
+.video-wrapper .no-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    gap: 16px;
+    background: #f0f2f5;
+}
+
+.video-wrapper .no-video .anticon {
+    font-size: 72px;
+    color: #bfbfbf;
+}
+
+.video-wrapper .no-video .ant-typography {
+    color: #8c8c8c;
+    font-size: 16px;
+}
+
+/* Lesson Info */
+.lesson-info {
+    padding: 24px;
+    background: #fff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.lesson-info h4 {
+    margin: 0 0 16px 0;
+    color: #1a202c;
+    font-size: 20px;
+}
+
+.lesson-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.lesson-content {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.lesson-content h5 {
+    margin: 0 0 12px 0;
+    color: #2d3748;
+    font-size: 16px;
+}
+
+.lesson-content .ant-typography {
+    color: #4a5568;
+    line-height: 1.7;
+}
+
+/* Attachments */
+.lesson-attachments {
+    margin-top: 24px;
+    padding: 20px;
+    background: #fafafa;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+}
+
+.lesson-attachments h5 {
+    margin: 0 0 16px 0;
+    color: #2d3748;
+}
+
+.lesson-attachments .ant-list-item {
+    padding: 12px 0;
+    border-bottom: 1px dashed #e8e8e8;
+}
+
+.lesson-attachments .ant-list-item:last-child {
+    border-bottom: none;
+}
+
+.lesson-attachments a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1890ff;
+    font-weight: 500;
+}
+
+.lesson-attachments a:hover {
+    color: #40a9ff;
+}
+
+/* =============================================
+   LESSON SIDEBAR - Light Theme
+   ============================================= */
+.lesson-sidebar {
+    width: 360px;
+    min-width: 360px;
+    background: #fff;
+    border-left: 1px solid #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.lesson-sidebar.collapsed {
+    width: 0;
+    min-width: 0;
+    border-left: none;
+}
+
+.sidebar-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+}
+
+.sidebar-header h5 {
+    margin: 0;
+    color: #1a202c;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sidebar-header .ant-tag {
+    font-weight: 600;
+}
+
+.sidebar-loading {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+/* Lesson List */
+.lesson-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.lesson-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid #f5f5f5;
+    align-items: flex-start;
+}
+
+.lesson-item:hover {
+    background: #f5f7fa;
+}
+
+.lesson-item.active {
+    background: #e6f7ff;
+    border-left-color: #1890ff;
+}
+
+.lesson-number {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+}
+
+.lesson-item.active .lesson-number {
+    background: #1890ff;
+    color: #fff;
+}
+
+.lesson-number .playing-icon {
+    font-size: 16px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.lesson-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.lesson-details .lesson-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.lesson-item.active .lesson-details .lesson-title {
+    color: #1890ff;
+    font-weight: 600;
+}
+
+.lesson-details .lesson-duration {
+    font-size: 12px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lesson-item.active .lesson-details .lesson-duration {
+    color: #1890ff;
+}
+
+/* Mobile sidebar overlay */
+.sidebar-overlay {
+    display: none;
+}
+
+/* =============================================
+   RESPONSIVE STYLES
+   ============================================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+    .my-courses-container {
+        padding: 20px;
+    }
+
+    .lesson-sidebar {
+        width: 320px;
+        min-width: 320px;
+    }
+
+    .course-thumbnail {
+        height: 160px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .my-courses-container {
+        padding: 16px;
+    }
+
+    .my-courses-header h2 {
+        font-size: 22px;
+    }
+
+    .course-thumbnail {
+        height: 180px;
+    }
+
+    .course-card-item .ant-card-meta-title {
+        font-size: 15px;
+        min-height: 42px;
+    }
+
+    /* Player Header mobile */
+    .player-header {
+        padding: 12px 16px;
+    }
+
+    .player-header .course-title {
+        font-size: 18px;
+    }
+
+    .player-content {
+        flex-direction: column;
+        position: relative;
+    }
+
+    .video-section {
+        flex: none;
+    }
+
+    .lesson-info {
+        padding: 16px;
+    }
+
+    .lesson-info h4 {
+        font-size: 18px;
+    }
+
+    /* Sidebar - slide from right */
+    .lesson-sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 85%;
+        max-width: 320px;
+        min-width: auto;
+        z-index: 1001;
+        transform: translateX(100%);
+        box-shadow: none;
+    }
+
+    .lesson-sidebar:not(.collapsed) {
+        transform: translateX(0);
+        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+    }
+
+    .lesson-item {
+        padding: 14px 20px;
+    }
+
+    .lesson-number {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        font-size: 12px;
+    }
+
+    .lesson-details .lesson-title {
+        font-size: 13px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 576px) {
+    .my-courses-container {
+        padding: 12px;
+    }
+
+    .my-courses-header h2 {
+        font-size: 20px;
+    }
+
+    .my-courses-header {
+        margin-bottom: 20px;
+    }
+
+    .course-thumbnail {
+        height: 160px;
+    }
+
+    .course-card-item .ant-card-body {
+        padding: 12px;
+    }
+
+    .start-learning-btn {
+        height: 36px;
+        font-size: 13px;
+    }
+
+    .player-header {
+        padding: 10px 12px;
+    }
+
+    .player-header .course-title {
+        font-size: 16px;
+    }
+
+    .lesson-sidebar {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .sidebar-header {
+        padding: 16px 20px;
+    }
+
+    .lesson-item {
+        padding: 12px 16px;
+        gap: 12px;
+    }
 }

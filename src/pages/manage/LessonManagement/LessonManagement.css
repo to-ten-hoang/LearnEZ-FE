@@ -1,0 +1,46 @@
+.lesson-management {
+  width: 100%;
+}
+
+.lesson-management h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
+  }
+  
+  .deleted-row {
+    background: #fff1f0 !important;
+    opacity: 0.75;
+  }
+  
+  .lesson-management .ant-form-item {
+    margin-bottom: 8px;
+  }
+
+/* Table responsive wrapper */
+.lesson-management .ant-table-wrapper {
+  overflow-x: auto;
+}
+
+/* Tablet responsive */
+@media (max-width: 992px) {
+  .lesson-management h2 {
+    font-size: 20px;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .lesson-management h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 576px) {
+  .lesson-management h2 {
+    font-size: 16px;
+  }
+}

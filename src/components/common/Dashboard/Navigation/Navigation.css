@@ -1,36 +1,263 @@
+/* Sidebar Navigation Styles */
 .profile-sidebar {
-  width: 250px;
-  background: #fff;
-  padding: 20px;
-  border-right: 1px solid #e8e8e8;
-  height: calc(100vh - 64px);
-  position: fixed;
-  top: 64px;
+    width: 250px;
+    min-width: 250px;
+    background: #fff;
+    padding: 16px 12px;
+    border-right: 1px solid #e8e8e8;
+    height: calc(100vh - 64px);
+    position: fixed;
+    top: 64px;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
 }
 
-.profile-sidebar .avatar-section {
-  text-align: center;
-  margin-bottom: 20px;
+/* Collapsed state */
+.profile-sidebar.collapsed {
+    width: 80px;
+    min-width: 80px;
+    padding: 12px 8px;
 }
 
-.profile-sidebar .avatar-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
+/* =============================================
+   TOGGLE ROW - Top right aligned
+   ============================================= */
+.toggle-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
 }
 
-.avatar-section h3 {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #1890ff;
+.profile-sidebar.collapsed .toggle-row {
+    justify-content: center;
+    margin-bottom: 8px;
 }
 
-.ant-menu-item {
-  margin: 8px 0;
-  font-size: 14px;
+.toggle-btn {
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+    color: #666;
 }
 
-.ant-menu-item-selected {
-  background-color: #e6f7ff;
+.toggle-btn:hover {
+    background: #f0f0f0;
+    color: #1890ff;
+}
+
+/* =============================================
+   AVATAR SECTION - Minimal, no margin
+   ============================================= */
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.avatar-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-sidebar.collapsed .avatar-img {
+    width: 36px;
+    height: 36px;
+}
+
+.profile-sidebar.collapsed .avatar-section {
+    padding: 4px 0;
+}
+
+/* User info text - compact */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.user-role {
+    font-size: 10px;
+    color: #1890ff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.user-name {
+    font-size: 13px;
+    color: #333;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+/* =============================================
+   MENU ITEMS
+   ============================================= */
+.profile-sidebar .ant-menu {
+    border-inline-end: none !important;
+    background: transparent;
+}
+
+.profile-sidebar .ant-menu-item {
+    margin: 4px 0;
+    font-size: 14px;
+    border-radius: 8px;
+    height: 44px;
+}
+
+.profile-sidebar .ant-menu-item-selected {
+    background-color: #e6f7ff !important;
+}
+
+/* Collapsed menu - centered icons */
+.profile-sidebar.collapsed .ant-menu-item {
+    padding-inline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0;
+}
+
+/* Hide label text when collapsed */
+.profile-sidebar.collapsed .ant-menu-item .ant-menu-title-content {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/* Collapsed icon link styling */
+.collapsed-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+}
+
+.collapsed-icon-link:hover {
+    color: #1890ff;
+}
+
+/* =============================================
+   MOBILE STYLES
+   ============================================= */
+.profile-sidebar.mobile {
+    position: fixed;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+}
+
+.profile-sidebar.mobile:not(.collapsed) {
+    transform: translateX(0);
+    width: 260px;
+    min-width: 260px;
+    padding: 20px;
+}
+
+/* Mobile collapsed - only show toggle button */
+.profile-sidebar.mobile.collapsed .toggle-row {
+    position: fixed;
+    left: 0;
+    top: 68px;
+    z-index: 101;
+    background: #fff;
+    padding: 8px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+
+.profile-sidebar.mobile.collapsed .avatar-section {
+    display: none;
+}
+
+/* =============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+    .profile-sidebar:not(.collapsed) {
+        width: 220px;
+        min-width: 220px;
+    }
+
+    .avatar-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-name {
+        font-size: 13px;
+        max-width: 180px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .profile-sidebar {
+        width: 260px;
+        min-width: 260px;
+        transform: translateX(-100%);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .profile-sidebar:not(.collapsed) {
+        transform: translateX(0);
+    }
+
+    .profile-sidebar.collapsed .toggle-row {
+        position: fixed;
+        left: 0;
+        top: 68px;
+        z-index: 101;
+        background: #fff;
+        padding: 8px;
+        border-radius: 0 8px 8px 0;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+        margin: 0;
+    }
+
+    .profile-sidebar.collapsed .avatar-section {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-sidebar {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .avatar-img {
+        width: 56px;
+        height: 56px;
+    }
+
+    .user-name {
+        font-size: 12px;
+    }
+
+    .profile-sidebar .ant-menu-item {
+        font-size: 13px;
+        height: 40px;
+    }
 }

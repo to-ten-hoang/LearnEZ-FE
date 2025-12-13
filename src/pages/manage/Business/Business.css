@@ -1,6 +1,32 @@
+.business {
+    width: 100%;
+}
+
 .business h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1890ff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
+}
+
+/* Tablet responsive */
+@media (max-width: 992px) {
+    .business h2 {
+        font-size: 22px;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .business h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 576px) {
+    .business h2 {
+        font-size: 18px;
+    }
 }

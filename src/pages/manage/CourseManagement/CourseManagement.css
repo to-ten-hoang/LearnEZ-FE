@@ -1,85 +1,246 @@
+/* Course Management Styles */
+.course-management {
+    overflow-x: hidden;
+}
+
 .course-management h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1890ff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
 }
 
 .course-management .ant-form {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  background: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .course-management .ant-form-item {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .course-management .ant-input,
 .course-management .ant-select,
 .course-management .ant-picker {
-  width: 180px;
+    width: 180px;
 }
 
 .course-management .ant-table {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.course-management .ant-table-thead > tr > th {
-  background: #fafafa;
-  font-weight: 600;
+.course-management .ant-table-thead>tr>th {
+    background: #fafafa;
+    font-weight: 600;
+}
+
+/* Table responsive wrapper */
+.course-management .ant-table-wrapper {
+    overflow-x: auto;
 }
 
 .action-buttons {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .action-buttons .ant-btn {
-  height: 32px;
-  font-size: 14px;
+    height: 32px;
+    font-size: 14px;
 }
 
 .action-buttons .action-button-fixed {
-  width: 90px;
+    width: 90px;
 }
 
 .form-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
-  align-items: center;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: auto;
 }
 
+/* Large tablet */
+@media (max-width: 992px) {
+
+    .course-management .ant-input,
+    .course-management .ant-select,
+    .course-management .ant-picker {
+        width: 160px;
+    }
+
+    .action-buttons .action-button-fixed {
+        width: 80px;
+    }
+}
+
+/* Tablet */
 @media (max-width: 768px) {
-  .course-management {
-    margin-left: 0;
-    padding: 16px;
-  }
+    .course-management {
+        padding: 12px;
+    }
 
-  .course-management .ant-form {
+    .course-management h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    .course-management .ant-form {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .course-management .ant-input,
+    .course-management .ant-select,
+    .course-management .ant-picker {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .form-actions .ant-btn {
+        width: 100%;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .action-buttons .ant-btn,
+    .action-buttons .action-button-fixed {
+        width: 100%;
+        font-size: 13px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .course-management {
+        padding: 8px;
+    }
+
+    .course-management h2 {
+        font-size: 18px;
+    }
+
+    .course-management .ant-form {
+        padding: 8px;
+    }
+}
+
+/* =============================================
+   COURSE TABLE CELL STYLES
+   ============================================= */
+
+/* Thumbnail cell */
+.course-thumbnail-cell {
+    width: 70px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #f5f5f5;
+}
+
+.course-thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.2s ease;
+}
+
+.course-thumbnail-img:hover {
+    transform: scale(1.05);
+}
+
+.course-thumbnail-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+    padding: 4px;
+}
+
+/* Title cell with description */
+.course-title-cell {
+    display: flex;
     flex-direction: column;
-  }
+    gap: 4px;
+}
 
-  .course-management .ant-input,
-  .course-management .ant-select,
-  .course-management .ant-picker {
-    width: 100%;
-  }
+.course-title {
+    font-weight: 500;
+    color: #333;
+    line-height: 1.4;
+}
 
-  .form-actions {
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
+.course-description {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-  .form-actions .ant-btn {
-    width: 100%;
-  }
+/* Price cell */
+.course-price {
+    font-weight: 600;
+    color: #1890ff;
+    white-space: nowrap;
+}
+
+/* Category cell */
+.course-category {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #f0f5ff;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #1890ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .course-thumbnail-cell {
+        width: 50px;
+        height: 35px;
+    }
+
+    .course-description {
+        display: none;
+    }
+
+    .course-price {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    .course-thumbnail-cell {
+        width: 40px;
+        height: 30px;
+    }
 }

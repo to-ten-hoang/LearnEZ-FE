@@ -1,0 +1,84 @@
+/* AttendanceTab.css */
+
+.attendance-tab-card {
+    border-radius: 12px;
+}
+
+.attendance-header {
+    margin-bottom: 16px;
+}
+
+.attendance-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f1f1f;
+}
+
+.schedule-title {
+    font-weight: 500;
+    color: #1890ff;
+}
+
+.time-range {
+    font-size: 12px;
+    color: #888;
+}
+
+.stat-tag {
+    min-width: 32px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Modal styles */
+.attendance-modal .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.attendance-modal .student-name {
+    font-weight: 500;
+}
+
+/* Radio button styles */
+.attendance-modal .status-btn.ant-radio-button-wrapper-checked.present {
+    background-color: #52c41a !important;
+    border-color: #52c41a !important;
+}
+
+.attendance-modal .status-btn.ant-radio-button-wrapper-checked.absent {
+    background-color: #ff4d4f !important;
+    border-color: #ff4d4f !important;
+}
+
+.attendance-modal .status-btn.ant-radio-button-wrapper-checked.late {
+    background-color: #faad14 !important;
+    border-color: #faad14 !important;
+}
+
+.attendance-modal .ant-radio-button-wrapper:hover {
+    color: #1890ff;
+}
+
+.attendance-modal .ant-table-tbody>tr:hover>td {
+    background-color: #fafafa;
+}
+
+.attendance-tab-card .ant-empty {
+    padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+    .attendance-modal {
+        max-width: 100% !important;
+    }
+
+    .attendance-modal .ant-radio-button-wrapper {
+        padding: 0 8px;
+        font-size: 12px;
+    }
+}

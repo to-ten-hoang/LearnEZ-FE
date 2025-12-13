@@ -1,6 +1,34 @@
+/* Profile Page Styles */
+.profile {
+    overflow-x: hidden;
+}
+
 .profile h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1890ff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .profile {
+        padding: 12px;
+    }
+
+    .profile h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .profile {
+        padding: 8px;
+    }
+
+    .profile h2 {
+        font-size: 18px;
+    }
 }

@@ -1,99 +1,161 @@
+/* Member Management Styles */
+.member-management {
+    overflow-x: hidden;
+}
+
 .member-management h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1890ff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
 }
 
 .member-management .ant-form {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  background: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .member-management .ant-form-item {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .member-management .ant-input,
 .member-management .ant-select,
 .member-management .ant-picker {
-  width: 180px;
+    width: 180px;
 }
 
 .member-management .ant-table {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Table responsive wrapper */
+.member-management .ant-table-wrapper {
+    overflow-x: auto;
 }
 
 .member-management .ant-table-thead > tr > th {
-  background: #fafafa;
-  font-weight: 600;
+    background: #fafafa;
+    font-weight: 600;
+}
+
+/* Table responsive wrapper */
+.member-management .ant-table-wrapper {
+    overflow-x: auto;
 }
 
 .status-active {
-  color: #52c41a;
-  font-weight: 500;
+    color: #52c41a;
+    font-weight: 500;
 }
 
 .status-inactive {
-  color: #fa8c16;
-  font-weight: 500;
+    color: #fa8c16;
+    font-weight: 500;
 }
 
 .action-buttons {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .action-buttons .ant-btn {
-  height: 32px;
-  font-size: 14px;
+    height: 32px;
+    font-size: 14px;
 }
 
 .action-buttons .action-button-fixed {
-  width: 90px;
+    width: 90px;
 }
 
 .deleted-user {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .form-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
-  align-items: center;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
+/* Large tablet */
+@media (max-width: 992px) {
+    .member-management .ant-input,
+    .member-management .ant-select,
+    .member-management .ant-picker {
+        width: 160px;
+    }
+
+    .action-buttons .action-button-fixed {
+        width: 80px;
+    }
+}
+
+/* Tablet */
 @media (max-width: 768px) {
-  .member-management {
-    margin-left: 0;
-    padding: 16px;
-  }
+    .member-management {
+        padding: 12px;
+    }
 
-  .member-management .ant-form {
-    flex-direction: column;
-  }
+    .member-management h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
 
-  .member-management .ant-input,
-  .member-management .ant-select,
-  .member-management .ant-picker {
-    width: 100%;
-  }
+    .member-management .ant-form {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+    }
 
-  .form-actions {
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
+    .member-management .ant-input,
+    .member-management .ant-select,
+    .member-management .ant-picker {
+        width: 100%;
+    }
 
-  .form-actions .ant-btn {
-    width: 100%;
-  }
+    .form-actions {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .form-actions .ant-btn {
+        width: 100%;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .action-buttons .ant-btn,
+    .action-buttons .action-button-fixed {
+        width: 100%;
+        font-size: 13px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .member-management {
+        padding: 8px;
+    }
+
+    .member-management h2 {
+        font-size: 18px;
+    }
+
+    .member-management .ant-form {
+        padding: 8px;
+    }
 }

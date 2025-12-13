@@ -1,0 +1,14 @@
+/* NEW FILE: CSS cơ bản cho trang CourseDetail nếu cần */
+.course-detail-page {
+  padding: 16px;
+}
+
+.course-detail-page h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.lesson-list-item-active {
+  background: #e6f7ff;
+}

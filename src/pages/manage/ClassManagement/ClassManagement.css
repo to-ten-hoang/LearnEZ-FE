@@ -1,0 +1,39 @@
+/* src/pages/manage/ClassManagement/ClassManagement.css */
+.class-management-container {
+    overflow-x: hidden;
+}
+
+.class-management-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
+}
+
+/* Table responsive wrapper */
+.class-management-container .ant-table-wrapper {
+    overflow-x: auto;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .class-management-container {
+        padding: 12px;
+    }
+
+    .class-management-container h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .class-management-container {
+        padding: 8px;
+    }
+
+    .class-management-container h2 {
+        font-size: 18px;
+    }
+}

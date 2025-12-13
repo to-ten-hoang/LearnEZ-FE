@@ -1,0 +1,124 @@
+/* ScheduleTab.css */
+
+.schedule-tab-card {
+    border-radius: 12px;
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.schedule-stats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Calendar cell styling */
+.schedule-cell {
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    margin-bottom: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    background: #f6ffed;
+    border: 1px solid #b7eb8f;
+    transition: all 0.2s;
+}
+
+.schedule-item:hover {
+    background: #d9f7be;
+    transform: translateX(2px);
+}
+
+.schedule-item.cancelled {
+    background: #fff2f0;
+    border-color: #ffccc7;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.schedule-item.cancelled:hover {
+    background: #ffccc7;
+}
+
+.schedule-time {
+    font-weight: 600;
+    color: #1890ff;
+    white-space: nowrap;
+}
+
+.schedule-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 80px;
+    color: #333;
+}
+
+.more-tag {
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+/* Calendar customization */
+.schedule-tab-card .ant-picker-calendar {
+    background: transparent;
+}
+
+.schedule-tab-card .ant-picker-calendar-date-content {
+    height: 85px !important;
+    overflow-y: auto;
+}
+
+.schedule-tab-card .ant-picker-calendar-date {
+    border-top: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.schedule-tab-card .ant-picker-calendar-date:hover {
+    border-top-color: #1890ff;
+}
+
+.schedule-tab-card .ant-picker-calendar-date-today {
+    border-top-color: #1890ff !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .schedule-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .schedule-stats {
+        justify-content: center;
+    }
+
+    .schedule-item {
+        font-size: 10px;
+    }
+
+    .schedule-title {
+        max-width: 50px;
+    }
+
+    .schedule-tab-card .ant-picker-calendar-date-content {
+        height: 60px !important;
+    }
+}

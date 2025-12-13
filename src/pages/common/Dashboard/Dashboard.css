@@ -1,22 +1,74 @@
+/* Dashboard Layout */
 .dashboard {
-  display: flex;
+    display: flex;
+    min-height: calc(100vh - 64px);
+    position: relative;
 }
 
+/* Sidebar placeholder - currently managed by Navigation component */
 .dashboard .sidebar {
-  width: 270px;
-  min-height: 100vh;
-  background: #001529;
-  color: #fff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow-y: auto;
+    width: 270px;
+    min-height: 100vh;
+    position: relative;
 }
 
+/* Dashboard content area */
 .dashboard-content {
-  margin-left: 270px;
-  padding: 20px;
-  min-height: calc(100vh - 64px);
-  background: #f5f7fa;
-  width: 100%;
+    margin-left: 250px;
+    padding: 20px;
+    min-height: calc(100vh - 64px);
+    background: #f5f7fa;
+    width: calc(100% - 250px);
+    transition: all 0.3s ease;
+}
+
+/* Collapsed sidebar state */
+.dashboard.sidebar-collapsed .dashboard-content {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
+
+/* Mobile overlay - starts below header */
+.sidebar-overlay {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 99;
+}
+
+/* Tablet responsive */
+@media (max-width: 992px) {
+    .dashboard-content {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+        padding: 16px;
+    }
+
+    .dashboard.sidebar-collapsed .dashboard-content {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .dashboard-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 16px;
+    }
+
+    .dashboard.sidebar-collapsed .dashboard-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-content {
+        padding: 12px;
+    }
 }

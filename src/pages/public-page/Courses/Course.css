@@ -1,69 +1,154 @@
 /* src/pages/public-page/Courses/Course.css */
 .courses-page-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+    width: 100%;
 }
 
 .page-title {
-  text-align: center;
-  margin-bottom: 24px !important;
+    text-align: center;
+    margin-bottom: 24px !important;
 }
 
 .filters-card {
-  margin-bottom: 24px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .filters-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
 }
 
 .filter-search {
-  flex: 1;
-  min-width: 250px;
-  max-width: 500px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 500px;
 }
+
 .filters-right {
-  display: flex;
-  gap: 16px;
-  margin-left: auto; /* Đẩy cụm này về phía bên phải */
-  flex-wrap: wrap;
+    display: flex;
+    gap: 16px;
+    margin-left: auto;
+    flex-wrap: wrap;
 }
+
 .filter-select {
-  width: 250px; /* hoặc 250px, tuỳ ý */
-  min-width: unset; /* bỏ min-width nếu muốn */
-  max-width: 100%; /* đảm bảo không tràn */
-  flex: none;
+    width: 220px;
+    min-width: unset;
+    max-width: 100%;
+    flex: none;
 }
 
 .filter-sort {
-  width: 180px;
+    width: 180px;
 }
 
 .courses-list-section {
-  min-height: 400px; /* To prevent layout shift during loading */
+    min-height: 400px;
 }
 
 .pagination-container {
-  margin-top: 24px;
-  text-align: center;
+    margin-top: 24px;
+    text-align: center;
 }
 
 .custom-pagination {
-  display: inline-block;
+    display: inline-block;
 }
 
+/* Large desktop */
+@media (max-width: 1200px) {
+    .courses-page-container {
+        padding: 20px;
+    }
+
+    .filter-select {
+        width: 200px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .courses-page-container {
+        padding: 16px;
+    }
+
+    .filters-wrapper {
+        gap: 12px;
+    }
+
+    .filter-search {
+        min-width: 180px;
+    }
+
+    .filter-select {
+        width: 180px;
+    }
+
+    .filter-sort {
+        width: 160px;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .filters-wrapper {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .filter-sort {
-    width: 100%;
-  }
+    .courses-page-container {
+        padding: 12px;
+    }
+
+    .filters-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-search {
+        max-width: 100%;
+        min-width: auto;
+    }
+
+    .filters-right {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .filter-select {
+        width: 100%;
+        flex: 1;
+    }
+
+    .filter-sort {
+        width: 100%;
+    }
+
+    .courses-list-section {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .courses-page-container {
+        padding: 8px;
+    }
+
+    .filters-card {
+        margin-bottom: 16px;
+    }
+
+    .filters-wrapper {
+        gap: 8px;
+    }
+
+    .filters-right {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .pagination-container {
+        margin-top: 16px;
+    }
 }

@@ -1,0 +1,2900 @@
+PS D:\Study\GraduationProject\fe_graduation_v2\src> tree /f
+Folder PATH listing for volume New Volume
+Volume serial number is 7C5B-6CE0
+D:.
+│   App.css
+│   App.tsx
+│   index.css
+│   main.tsx
+│   vite-env.d.ts
+│   
+├───api
+│       authApi.ts
+│       blogApi.ts
+│       cartApi.ts
+│       classApi.ts
+│       courseApi.ts
+│       orderApi.ts
+│       paymentApi.ts
+│       scheduleApi.ts
+│       userApi.ts
+│
+├───assets
+│       avt.jpg
+│       logo.svg
+│       react.svg
+│
+├───components
+│   ├───common
+│   │   ├───Auth
+│   │   │   ├───LoginModal
+│   │   │   │       LoginModal.css
+│   │   │   │       LoginModal.tsx
+│   │   │   │
+│   │   │   └───RegisterModal
+│   │   │           RegisterModal.css
+│   │   │           RegisterModal.tsx
+│   │   │
+│   │   ├───CartBadge
+│   │   │       CartBadge.css
+│   │   │       CartBadge.tsx
+│   │   │
+│   │   ├───Dashboard
+│   │   │   ├───Navigation
+│   │   │   │       Navigation.css
+│   │   │   │       Navigation.tsx
+│   │   │   │
+│   │   │   └───Profile
+│   │   │       └───ProfileCard
+│   │   │               ProfileCard.css
+│   │   │               ProfileCard.tsx
+│   │   │
+│   │   ├───Notification
+│   │   │       Notification.css
+│   │   │       Notification.tsx
+│   │   │
+│   │   ├───ProtectedRoute
+│   │   │       ProtectedRoute.css
+│   │   │       ProtectedRoute.tsx
+│   │   │
+│   │   ├───TipTapEditor
+│   │   │       TipTapEditor.css
+│   │   │       TipTapEditor.tsx
+│   │   │
+│   │   └───UserMenu
+│   │           UserMenu.css
+│   │           UserMenu.tsx
+│   │
+│   ├───manage
+│   │   ├───ClassDetail
+│   │   │       AddStudentsModal.css
+│   │   │       AddStudentsModal.tsx
+│   │   │       ClassInfoTab.tsx
+│   │   │       CreateRecurringScheduleModal.tsx
+│   │   │       CreateScheduleModal.tsx
+│   │   │       NotificationFormModal.tsx
+│   │   │       NotificationTab.css
+│   │   │       NotificationTab.tsx
+│   │   │       ScheduleDetailModal.tsx
+│   │   │       ScheduleTab.tsx
+│   │   │       StudentListTab.css
+│   │   │       StudentListTab.tsx
+│   │   │
+│   │   ├───ClassManagement
+│   │   │       CancelClassModal.tsx
+│   │   │       ClassFilter.tsx
+│   │   │       ClassFormModal.tsx
+│   │   │       ClassTable.tsx
+│   │   │
+│   │   └───CourseManagement
+│   │       └───CourseDetailDrawer
+│   │               CourseDetailDrawer.css
+│   │               CourseDetailDrawer.tsx
+│   │
+│   ├───public-page
+│   ├───student
+│   │   ├───Cart
+│   │   │       CartDrawer.css
+│   │   │       CartDrawer.tsx
+│   │   │
+│   │   ├───Course
+│   │   │   ├───CourseCard
+│   │   │   │       CourseCard.css
+│   │   │   │       CourseCard.tsx
+│   │   │   │
+│   │   │   └───CourseList
+│   │   │           CourseList.css
+│   │   │           CourseList.tsx
+│   │   │
+│   │   └───Order
+│   │       ├───OrderCard
+│   │       │       OrderCard.css
+│   │       │       OrderCard.tsx
+│   │       │
+│   │       └───PurchaseModal
+│   │               PurchaseModal.css
+│   │               PurchaseModal.tsx
+│   │
+│   └───teacher
+├───constants
+│       categories.ts
+│       permissions.ts
+│
+├───hooks
+├───layouts
+│   └───MainLayout
+│           MainLayout.css
+│           MainLayout.tsx
+│
+├───lib
+│       axios.ts
+│
+├───pages
+│   ├───common
+│   │   ├───Dashboard
+│   │   │       Dashboard.css
+│   │   │       Dashboard.tsx
+│   │   │
+│   │   └───Profile
+│   │           Profile.css
+│   │           Profile.tsx
+│   │
+│   ├───manage
+│   │   ├───BlogApproval
+│   │   │       BlogApproval.css
+│   │   │       BlogApproval.tsx
+│   │   │
+│   │   ├───Business
+│   │   │       Business.css
+│   │   │       Business.tsx
+│   │   │
+│   │   ├───ClassDetail
+│   │   │       ClassDetail.css
+│   │   │       ClassDetail.tsx
+│   │   │
+│   │   ├───ClassManagement
+│   │   │       ClassManagement.css
+│   │   │       ClassManagement.tsx
+│   │   │
+│   │   ├───CourseManagement
+│   │   │       CourseManagement.css
+│   │   │       CourseManagement.tsx
+│   │   │
+│   │   ├───MemberManagement
+│   │   │       MemberManagement.css
+│   │   │       MemberManagement.tsx
+│   │   │
+│   │   ├───QuestionBank
+│   │   │       QuestionBank.css
+│   │   │       QuestionBank.tsx
+│   │   │
+│   │   ├───Statistics
+│   │   │       Statistics.css
+│   │   │       Statistics.tsx
+│   │   │
+│   │   └───WriteBlog
+│   │           WriteBlog.css
+│   │           WriteBlog.tsx
+│   │
+│   ├───public-page
+│   │   ├───Blog
+│   │   │       Blog.tsx
+│   │   │
+│   │   ├───Courses
+│   │   │       Course.css
+│   │   │       Course.tsx
+│   │   │
+│   │   ├───Home
+│   │   │       Home.css
+│   │   │       Home.tsx
+│   │   │
+│   │   └───Test
+│   │           Test.tsx
+│   │
+│   ├───student
+│   │   ├───Cart
+│   │   │       Cart.css
+│   │   │       Cart.tsx
+│   │   │
+│   │   ├───Orders
+│   │   │       Orders.css
+│   │   │       Orders.tsx
+│   │   │
+│   │   ├───OrderStatus
+│   │   │       OrderStatus.css
+│   │   │       OrderStatus.tsx
+│   │   │
+│   │   └───VideoCourses
+│   │           VideoCourses.css
+│   │           VideoCourses.tsx
+│   │
+│   └───teacher
+│       └───OfflineClasses
+│               OfflineClasses.css
+│               OfflineClasses.tsx
+│
+├───routes
+│       index.ts
+│
+├───services
+│       authService.ts
+│       blogService.ts
+│       businessService.ts
+│       cartService.ts
+│       classManagementService.ts
+│       courseManagementService.ts
+│       courseStudentService.ts
+│       memberManagementService.ts
+│       orderService.ts
+│       paymentService.ts
+│       questionBankService.ts
+│       scheduleService.ts
+│       statisticsService.ts
+│       userService.ts
+│
+├───store
+│       authStore.ts
+│       cartStore.ts
+│       orderStore.ts
+│
+└───types
+        auth.ts
+        blog.ts
+        cart.ts
+        class.ts
+        course.ts
+        css.d.ts
+        order.ts
+        payment.ts
+        schedule.ts
+        svg.d.ts
+        user.ts
+import type { User } from './user';
+
+// Định nghĩa các trạng thái của lớp học để sử dụng nhất quán
+export const CLASS_STATUSES = ['PENDING', 'ACTIVE', 'FINISHED', 'CANCELED'] as const;
+export type ClassStatus = (typeof CLASS_STATUSES)[number];
+
+export interface Class {
+    id: number;
+    name: string;
+    description: string;
+    subject: string | null;
+    title: string;
+    teacher: User;
+    createdAt: string;
+    updatedAt: string | null;
+    createdByName: string | null;
+    updatedByName: string | null;
+    status: ClassStatus;
+    memberIds?: number[];
+}
+
+export interface FilterClassesRequest {
+    searchString?: string;
+    idTeacher?: number;
+    statusClass?: ClassStatus[];
+    fromDate?: string | null;
+    toDate?: string | null;
+    page?: number;
+    size?: number;
+}
+
+export interface CreateClassRequest {
+    name: string;
+    description: string;
+    title: string;
+    teacher: number;
+    memberIds?: number[];
+}
+
+export interface UpdateClassRequest extends Partial<Omit<CreateClassRequest, 'teacher'>> {
+    id: number;
+    teacher?: number;
+}
+
+// Response cho API lấy danh sách (đã phân trang)
+export interface ClassPagedResponse {
+    code: number;
+    message: string;
+    data: {
+        content: Class[];
+        totalPages: number;
+        totalElements: number;
+        pageable: {
+            pageNumber: number;
+            pageSize: number;
+        };
+    };
+}
+
+// Response cho API tạo/sửa/chi tiết
+export interface ClassDetailResponse {
+    code: number;
+    message: string;
+    data: Class;
+}
+
+export interface ClassMember {
+    // id người dùng trong hệ thống
+    id: number;
+    name: string;
+    joinDate: string;
+    email: string;
+    phone: string | null;
+    // memberId: id bản ghi quan hệ thành viên-trong-lớp (dùng cho API xóa)
+    memberId: number;
+    address: string | null;
+    status: 'ACTIVE' | 'INACTIVE';
+    roleInClass: 'STUDENT' | 'TEACHER';
+}
+
+// Request body để lấy danh sách thành viên
+export interface GetMembersRequest {
+    classId: number;
+    searchString?: string;
+    joinDate?: string | null;
+    status?: string[];
+    page?: number;
+    size?: number;
+}
+
+// Request body để thêm hoặc xóa thành viên
+export interface UpdateMembersRequest {
+    id: number; // classId
+    memberIds: number[];
+}
+
+// Response API cho danh sách thành viên (có phân trang)
+export interface MemberPagedResponse {
+    code: number;
+    message: string;
+    data: {
+        content: ClassMember[];
+        totalPages: number;
+        totalElements: number;
+        pageable: {
+            pageNumber: number;
+            pageSize: number;
+        }
+    };
+}
+
+/* ====== Class Notification types ====== */
+
+export type NotificationTypeNumber = 1 | 2; // 1: Thông báo thường, 2: Bài tập (có thời gian)
+export interface ClassNotification {
+    id: number;
+    description: string;
+    // Chuỗi mô tả kiểu từ backend, ví dụ: "Exercise"
+    typeNotification: string;
+    fromDate: string | null;
+    toDate: string | null;
+    isPin: boolean;
+    isActive: boolean;
+    isDelete: boolean;
+    createdAt: string;
+    updatedAt: string | null;
+    createdBy: User;
+    updatedBy: User | null;
+    // Backend trả về mảng object/file hoặc rỗng, không có schema cụ thể -> để any[]
+    attachDocumentClasses: any[];
+}
+
+export interface CreateClassNotificationRequest {
+    classId: number;
+    description: string;
+    isPin: boolean;
+    typeNotification: NotificationTypeNumber;
+    fromDate: string | null; // "YYYY-MM-DD HH:mm:ss" hoặc null
+    toDate: string | null;   // "YYYY-MM-DD HH:mm:ss" hoặc null
+    urlAttachment: string[]; // các URL cuối cùng
+}
+
+export interface UpdateClassNotificationRequest extends Omit<CreateClassNotificationRequest, 'classId'> {
+    classId: number;
+    classNotificationId: number;
+}
+
+export interface GetClassNotificationsRequest {
+    classId: number;
+    searchString?: string;
+    fromDate?: string | null;
+    toDate?: string | null;
+    page?: number;
+    size?: number;
+}
+
+export interface ClassNotificationPagedResponse {
+    code: number;
+    message: string;
+    data: {
+        content: ClassNotification[];
+        totalPages: number;
+        totalElements: number;
+        pageable: {
+            pageNumber: number;
+            pageSize: number;
+        };
+    };
+}
+
+export interface ToggleClassNotificationRequest {
+    classId: number;
+    classNotificationId: number;
+    isActive: boolean;
+    isDelete: boolean;
+}
+
+export interface ClassNotificationDetailResponse {
+    code: number;
+    message: string;
+    data: ClassNotification;
+}
+import { message } from 'antd';
+import {
+    filterClasses,
+    createClass,
+    updateClass,
+    getClassDetailById,
+    getMembersInClass,
+    addUserToClass,
+    removeUserFromClass,
+    // Notifications
+    createNotificationInClass,
+    getListNotificationInClass,
+    updateNotificationInClass,
+    disableOrDeleteNotificationInClass,
+    uploadToCloud,
+} from '../api/classApi';
+import type {
+    FilterClassesRequest,
+    CreateClassRequest,
+    UpdateClassRequest,
+    ClassPagedResponse,
+    ClassDetailResponse,
+    GetMembersRequest,
+    MemberPagedResponse,
+    UpdateMembersRequest,
+    // Notifications
+    CreateClassNotificationRequest,
+    UpdateClassNotificationRequest,
+    GetClassNotificationsRequest,
+    ClassNotificationPagedResponse,
+    ToggleClassNotificationRequest,
+    ClassNotificationDetailResponse,
+} from '../types/class';
+
+export const filterClassesService = async (
+    data: FilterClassesRequest
+): Promise<ClassPagedResponse> => {
+    try {
+        const response = await filterClasses(data);
+        if (response.code !== 200) {
+            throw new Error(response.message || 'Lấy danh sách lớp học thất bại.');
+        }
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy danh sách lớp học.');
+        throw error;
+    }
+};
+
+export const createClassService = async (data: CreateClassRequest): Promise<ClassDetailResponse> => {
+    try {
+        const response = await createClass(data);
+        if (response.code !== 200) {
+            throw new Error(response.message || 'Tạo lớp học thất bại.');
+        }
+        message.success('Tạo lớp học thành công!');
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi tạo lớp học.');
+        throw error;
+    }
+};
+
+export const updateClassService = async (data: UpdateClassRequest): Promise<ClassDetailResponse> => {
+    try {
+        const response = await updateClass(data);
+        if (response.code !== 200) {
+            throw new Error(response.message || 'Cập nhật lớp học thất bại.');
+        }
+        message.success('Cập nhật lớp học thành công!');
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi cập nhật.');
+        throw error;
+    }
+};
+
+export const cancelClassService = async (classId: number): Promise<ClassDetailResponse> => {
+    try {
+        const data: UpdateClassRequest = { id: classId };
+        const response = await updateClass(data);
+        if (response.code !== 200) {
+            throw new Error(response.message || 'Hủy lớp học thất bại.');
+        }
+        message.success('Hủy lớp học thành công!');
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi hủy lớp học.');
+        throw error;
+    }
+};
+
+export const getClassByIdService = async (classId: number): Promise<ClassDetailResponse> => {
+    try {
+        const response = await getClassDetailById(classId);
+        if (response.code !== 200) {
+            throw new Error(response.message || 'Lấy thông tin lớp học thất bại.');
+        }
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy thông tin lớp học.');
+        throw error;
+    }
+};
+
+// Members
+export const getMembersInClassService = async (data: GetMembersRequest): Promise<MemberPagedResponse> => {
+    try {
+        const response = await getMembersInClass(data);
+        if (response.code !== 200) throw new Error(response.message || 'Lấy danh sách học viên thất bại.');
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy danh sách học viên.');
+        throw error;
+    }
+};
+
+export const addUsersToClassService = async (data: UpdateMembersRequest): Promise<ClassDetailResponse> => {
+    try {
+        const response = await addUserToClass(data);
+        if (response.code !== 200) throw new Error(response.message || 'Thêm học viên thất bại.');
+        message.success('Đã thêm học viên vào lớp.');
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi thêm học viên.');
+        throw error;
+    }
+};
+
+export const removeUsersFromClassService = async (data: UpdateMembersRequest): Promise<ClassDetailResponse> => {
+    try {
+        const response = await removeUserFromClass(data);
+        if (response.code !== 200) throw new Error(response.message || 'Xóa học viên thất bại.');
+        message.success('Đã xóa học viên khỏi lớp.');
+        return response;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi xóa học viên.');
+        throw error;
+    }
+};
+
+// Notifications
+export const createClassNotificationService = async (
+    data: CreateClassNotificationRequest
+): Promise<ClassNotificationDetailResponse> => {
+    try {
+        const res = await createNotificationInClass(data);
+        if (res.code !== 200) throw new Error(res.message || 'Tạo thông báo thất bại.');
+        message.success('Đã tạo thông báo.');
+        return res;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Lỗi khi tạo thông báo.');
+        throw error;
+    }
+};
+
+export const getClassNotificationsService = async (
+    data: GetClassNotificationsRequest
+): Promise<ClassNotificationPagedResponse> => {
+    try {
+        const res = await getListNotificationInClass(data);
+        if (res.code !== 200) throw new Error(res.message || 'Lấy danh sách thông báo thất bại.');
+        return res;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Lỗi khi lấy danh sách thông báo.');
+        throw error;
+    }
+};
+
+export const updateClassNotificationService = async (
+    data: UpdateClassNotificationRequest
+): Promise<ClassNotificationDetailResponse> => {
+    try {
+        const res = await updateNotificationInClass(data);
+        if (res.code !== 200) throw new Error(res.message || 'Cập nhật thông báo thất bại.');
+        message.success('Đã cập nhật thông báo.');
+        return res;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Lỗi khi cập nhật thông báo.');
+        throw error;
+    }
+};
+
+export const toggleActiveOrDeleteClassNotificationService = async (
+    data: ToggleClassNotificationRequest
+): Promise<ClassNotificationDetailResponse> => {
+    try {
+        const res = await disableOrDeleteNotificationInClass(data);
+        if (res.code !== 200) throw new Error(res.message || 'Thao tác thất bại.');
+        message.success('Đã cập nhật trạng thái thông báo.');
+        return res;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Lỗi khi cập nhật trạng thái thông báo.');
+        throw error;
+    }
+};
+
+// Cloud upload
+export const uploadFileToCloudService = async (file: File): Promise<string> => {
+    try {
+        const res = await uploadToCloud(file);
+        if (res.code !== 200) throw new Error(res.message || 'Upload thất bại.');
+        return res.data;
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Lỗi khi upload tệp.');
+        throw error;
+    }
+};// src/pages/manage/ClassManagement/ClassManagement.tsx
+import { useState, useEffect, useCallback } from 'react';
+import { Card } from 'antd';
+import { filterClassesService } from '../../../services/classManagementService';
+import { getTeachersService } from '../../../services/courseManagementService';
+import type { Class, FilterClassesRequest } from '../../../types/class';
+import type { User } from '../../../types/user';
+import ClassFilter from '../../../components/manage/ClassManagement/ClassFilter';
+import ClassTable from '../../../components/manage/ClassManagement/ClassTable';
+import ClassFormModal from '../../../components/manage/ClassManagement/ClassFormModal';
+import CancelClassModal from '../../../components/manage/ClassManagement/CancelClassModal';
+import './ClassManagement.css';
+
+const ClassManagementPage = () => {
+    const [classes, setClasses] = useState<Class[]>([]);
+    const [teachers, setTeachers] = useState<User[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [filters, setFilters] = useState<FilterClassesRequest>({});
+    const [pagination, setPagination] = useState({
+        current: 1,
+        pageSize: 10,
+        total: 0,
+    });
+
+    const [isFormModalVisible, setIsFormModalVisible] = useState(false);
+    const [isCancelModalVisible, setIsCancelModalVisible] = useState(false);
+    const [selectedClass, setSelectedClass] = useState<Class | null>(null);
+
+    const fetchClasses = useCallback(
+        async (currentFilters: FilterClassesRequest, page: number, size: number) => {
+            setLoading(true);
+            try {
+                const response = await filterClassesService({
+                    ...currentFilters,
+                    page: page - 1,
+                    size: size,
+                });
+                setClasses(response.data.content);
+                // setClasses(response.data);
+                setPagination((prev) => ({
+                    ...prev,
+                    total: response.data.totalElements,
+                    current: page,
+                    pageSize: size,
+                }));
+            } catch (error) {
+                console.error('Failed to fetch classes:', error);
+            } finally {
+                setLoading(false);
+            }
+        },
+        []
+    );
+
+    const fetchInitialData = useCallback(async () => {
+        try {
+            // Lấy danh sách giáo viên để đưa vào bộ lọc và form
+            const teacherList = await getTeachersService();
+            setTeachers(teacherList);
+        } catch (error) {
+            console.error('Failed to fetch teachers:', error);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchInitialData();
+    }, [fetchInitialData]);
+
+    useEffect(() => {
+        fetchClasses(filters, pagination.current, pagination.pageSize);
+    }, [filters, fetchClasses]);
+
+    const handleFilter = (newFilters: Partial<FilterClassesRequest>) => {
+        setFilters(newFilters);
+        // Khi lọc, quay về trang 1
+        setPagination((prev) => ({ ...prev, current: 1 }));
+        fetchClasses(newFilters, 1, pagination.pageSize);
+    };
+
+    const handleTableChange = (newPagination: any) => {
+        fetchClasses(filters, newPagination.current, newPagination.pageSize);
+    };
+
+    const handleOpenFormModal = (cls: Class | null) => {
+        setSelectedClass(cls);
+        setIsFormModalVisible(true);
+    };
+
+    const handleCloseFormModal = (shouldRefresh: boolean) => {
+        setIsFormModalVisible(false);
+        if (shouldRefresh) {
+            fetchClasses(filters, pagination.current, pagination.pageSize);
+        }
+    };
+
+    const handleOpenCancelModal = (cls: Class) => {
+        setSelectedClass(cls);
+        setIsCancelModalVisible(true);
+    };
+
+    const handleCloseCancelModal = (shouldRefresh: boolean) => {
+        setIsCancelModalVisible(false);
+        if (shouldRefresh) {
+            fetchClasses(filters, pagination.current, pagination.pageSize);
+        }
+    };
+
+    return (
+        <div className="class-management-container">
+            <h2>Quản Lý Lớp Học</h2>
+            <Card style={{ marginBottom: 5 }}>
+                <ClassFilter
+                    onFilter={handleFilter}
+                    teachers={teachers}
+                    loading={loading}
+                    createClassService={() => handleOpenFormModal(null)}
+                />
+            </Card>
+
+            <Card>
+
+                <ClassTable
+                    data={classes}
+                    loading={loading}
+                    pagination={pagination}
+                    onTableChange={handleTableChange}
+                    onEdit={handleOpenFormModal}
+                    onCancel={handleOpenCancelModal}
+                />
+            </Card>
+
+            <ClassFormModal
+                visible={isFormModalVisible}
+                initialData={selectedClass}
+                onClose={handleCloseFormModal}
+                teachers={teachers}
+            />
+
+            <CancelClassModal
+                visible={isCancelModalVisible}
+                classData={selectedClass}
+                onClose={handleCloseCancelModal}
+            />
+        </div>
+    );
+};
+
+export default ClassManagementPage;/* src/pages/manage/ClassManagement/ClassManagement.css */
+.class-management-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1890ff;
+}
+import { useEffect, useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Spin, message, Tabs, Breadcrumb, Typography, Button, Space } from 'antd';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import type { Class } from '../../../types/class';
+import { getClassByIdService } from '../../../services/classManagementService';
+import './ClassDetail.css';
+
+// Import các component tab
+import ClassInfoTab from '../../../components/manage/ClassDetail/ClassInfoTab';
+import StudentListTab from '../../../components/manage/ClassDetail/StudentListTab';
+import ScheduleTab from '../../../components/manage/ClassDetail/ScheduleTab';
+import NotificationTab from '../../../components/manage/ClassDetail/NotificationTab';
+
+const { TabPane } = Tabs;
+const { Title } = Typography;
+
+const ClassDetail = () => {
+    const { classId } = useParams<{ classId: string }>();
+    const navigate = useNavigate();
+    const [classData, setClassData] = useState<Class | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (classId) {
+            const fetchClassDetails = async () => {
+                setLoading(true);
+                try {
+                    const response = await getClassByIdService(Number(classId));
+                    setClassData(response.data);
+                } catch (error) {
+                    message.error('Không thể tải dữ liệu lớp học.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchClassDetails();
+        }
+    }, [classId]);
+
+    if (loading) {
+        return <Spin size="large" className="full-page-spinner" />;
+    }
+
+    if (!classData) {
+        return <div className="class-detail-container">Không tìm thấy thông tin lớp học.</div>;
+    }
+
+    return (
+        <div className="class-detail-container">
+            <div className="page-header-container">
+                <Breadcrumb>
+                    <Breadcrumb.Item>
+                        <Link to="/dashboard/class-management">Quản lý lớp học</Link>
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item>{classData.name}</Breadcrumb.Item>
+                </Breadcrumb>
+
+                <Space wrap align="center" className="page-title-container">
+                    <Button
+                        type="text"
+                        icon={<ArrowLeftOutlined />}
+                        onClick={() => navigate('/dashboard/class-management')}
+                    />
+                    <Title level={2} style={{ marginBottom: 0 }}>
+                        {classData.name}
+                    </Title>
+                </Space>
+            </div>
+
+            <Tabs defaultActiveKey="1" type="card">
+                <TabPane tab="Thông tin chung" key="1">
+                    <ClassInfoTab classData={classData} />
+                </TabPane>
+                <TabPane tab="Danh sách Học viên" key="2">
+                    <StudentListTab classData={classData} />
+                </TabPane>
+                <TabPane tab="Lịch học" key="3">
+                    <ScheduleTab classData={classData} />
+                </TabPane>
+                <TabPane tab="Thông báo" key="4">
+                    <NotificationTab classData={classData} />
+                </TabPane>
+            </Tabs>
+        </div>
+    );
+};
+
+export default ClassDetail;/* Thêm CSS cho header mới */
+.page-header-container {
+    background-color: #fff;
+    padding: 16px 24px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.page-title-container {
+    margin-top: 12px;
+}
+
+/* CSS cho spinner toàn trang */
+.full-page-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+// src/components/manage/ClassManagement/CancelClassModal/CancelClassModal.tsx
+import { Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { cancelClassService } from '../../../services/classManagementService';
+import type { Class } from '../../../types/class';
+
+interface CancelClassModalProps {
+    visible: boolean;
+    onClose: (shouldRefresh: boolean) => void;
+    classData: Class | null;
+}
+
+const CancelClassModal = ({ visible, onClose, classData }: CancelClassModalProps) => {
+    if (!classData) return null;
+
+    const handleConfirm = async () => {
+        try {
+            await cancelClassService(classData.id);
+            onClose(true);
+        } catch (error) {
+            console.error('Failed to cancel class:', error);
+            onClose(false);
+        }
+    };
+
+    return (
+        <Modal
+            title={
+                <>
+                    <ExclamationCircleOutlined style={{ color: 'red', marginRight: 8 }} />
+                    Xác nhận hủy lớp học
+                </>
+            }
+            open={visible}
+            onOk={handleConfirm}
+            onCancel={() => onClose(false)}
+            okText="Xác nhận"
+            cancelText="Hủy"
+            okType="danger"
+        >
+            <p>
+                Bạn có chắc chắn muốn hủy lớp học <strong>"{classData.name}"</strong> không? Hành
+                động này sẽ chuyển trạng thái của lớp học sang CANCELED.
+            </p>
+        </Modal>
+    );
+};
+
+export default CancelClassModal;
+// src/components/manage/ClassManagement/ClassFilter/ClassFilter.tsx
+import { Form, Input, Select, DatePicker, Button, Row, Col } from 'antd';
+import type { User } from '../../../types/user';
+import { PlusOutlined } from '@ant-design/icons';
+
+const { RangePicker } = DatePicker;
+const { Option } = Select;
+
+interface ClassFilterProps {
+    onFilter: (values: any) => void;
+    createClassService: (data: any) => void;
+    teachers: User[];
+    loading: boolean;
+}
+
+const ClassFilter = ({ onFilter, teachers, loading, createClassService }: ClassFilterProps) => {
+    const [form] = Form.useForm();
+
+    const handleFinish = (values: any) => {
+        const filters = {
+            ...values,
+            fromDate: values.dateRange?.[0]?.format('YYYY-MM-DD'),
+            toDate: values.dateRange?.[1]?.format('YYYY-MM-DD'),
+            dateRange: undefined,
+        };
+        onFilter(filters);
+    };
+
+    const handleReset = () => {
+        form.resetFields();
+        onFilter({});
+    };
+
+    return (
+        <Form form={form} layout="inline" onFinish={handleFinish} className="class-filter-form">
+            <Row gutter={16}>
+                <Col span={8}>
+                    <Form.Item name="searchString" label="Tìm kiếm">
+                        <Input placeholder="Nhập tên, tiêu đề lớp học..." allowClear />
+                    </Form.Item>
+                </Col>
+                <Col span={8}>
+                    <Form.Item name="idTeacher" label="Giáo viên">
+                        <Select placeholder="Chọn giáo viên" allowClear>
+                            {teachers.map((teacher) => (
+                                <Option key={teacher.id} value={teacher.id}>
+                                    {`${teacher.firstName} ${teacher.lastName}`}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </Col>
+                {/* <Col span={8}>
+                    <Form.Item name="statusClass" label="Trạng thái">
+                        <Select mode="multiple" placeholder="Chọn trạng thái" allowClear>
+                            {CLASS_STATUSES.map((status) => (
+                                <Option key={status} value={status}>
+                                    {status}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </Col> */}
+                <Col span={8}>
+                    <Form.Item name="dateRange" label="Ngày tạo">
+                        <RangePicker style={{ width: '100%' }} />
+                    </Form.Item>
+                </Col>
+                <Col
+                    span={16}
+                    style={{
+                        textAlign: 'right',
+                        alignSelf: 'flex-end',
+                        marginLeft: 'auto',
+                        marginTop: 16,
+                    }}
+                >
+                    <Button
+                        type="primary"
+                        icon={<PlusOutlined />}
+                        onClick={createClassService}
+                        style={{ marginRight: 8 }}
+                    >
+                        Thêm lớp học mới
+                    </Button>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={loading}
+                        style={{ marginRight: 8 }}
+                    >
+                        Tìm kiếm
+                    </Button>
+                    <Button onClick={handleReset} disabled={loading}>
+                        Xóa bộ lọc
+                    </Button>
+                </Col>
+            </Row>
+        </Form>
+    );
+};
+
+export default ClassFilter;
+// src/components/manage/ClassManagement/ClassFormModal/ClassFormModal.tsx
+import { useEffect } from 'react';
+import { Modal, Form, Input, Select } from 'antd';
+import type { Class, CreateClassRequest, UpdateClassRequest } from '../../../types/class';
+import {
+    createClassService,
+    updateClassService,
+} from '../../../services/classManagementService';
+import type { User } from '../../../types/user';
+
+const { Option } = Select;
+const { TextArea } = Input;
+
+interface ClassFormModalProps {
+    visible: boolean;
+    onClose: (shouldRefresh: boolean) => void;
+    initialData: Class | null;
+    teachers: User[];
+}
+
+const ClassFormModal = ({ visible, onClose, initialData, teachers }: ClassFormModalProps) => {
+    const [form] = Form.useForm();
+    const isEditMode = !!initialData;
+
+    useEffect(() => {
+        if (visible) {
+            if (isEditMode) {
+                form.setFieldsValue({
+                    ...initialData,
+                    teacher: initialData.teacher?.id,
+                });
+            } else {
+                form.resetFields();
+            }
+        }
+    }, [visible, initialData, form, isEditMode]);
+
+    const handleOk = async () => {
+        try {
+            const values = await form.validateFields();
+            if (isEditMode) {
+                const payload: UpdateClassRequest = {
+                    id: initialData.id,
+                    ...values,
+                };
+                await updateClassService(payload);
+            } else {
+                const payload: CreateClassRequest = {
+                    ...values,
+                };
+                await createClassService(payload);
+            }
+            onClose(true);
+        } catch (error) {
+            console.error('Failed to save class:', error);
+        }
+    };
+
+    return (
+        <Modal
+            title={isEditMode ? 'Chỉnh sửa Lớp học' : 'Tạo Lớp học mới'}
+            open={visible}
+            onOk={handleOk}
+            onCancel={() => onClose(false)}
+            okText="Lưu"
+            cancelText="Hủy"
+            destroyOnClose
+        >
+            <Form form={form} layout="vertical" name="classForm">
+                <Form.Item
+                    name="name"
+                    label="Tên lớp học"
+                    rules={[{ required: true, message: 'Vui lòng nhập tên lớp học!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="title"
+                    label="Tiêu đề"
+                    rules={[{ required: true, message: 'Vui lòng nhập tiêu đề!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item name="description" label="Mô tả">
+                    <TextArea rows={4} />
+                </Form.Item>
+                <Form.Item
+                    name="teacher"
+                    label="Giáo viên"
+                    rules={[{ required: true, message: 'Vui lòng chọn giáo viên!' }]}
+                >
+                    <Select placeholder="Chọn giáo viên" allowClear>
+                        {teachers.map((teacher) => (
+                            <Option key={teacher.id} value={teacher.id}>
+                                {`${teacher.firstName} ${teacher.lastName}`}
+                            </Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
+};
+
+export default ClassFormModal;
+// src/components/manage/ClassManagement/ClassTable/ClassTable.tsx
+import { Table, Button, Space, Tag } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import moment from 'moment';
+import { EditOutlined, StopOutlined } from '@ant-design/icons';
+import type { Class, ClassStatus } from '../../../types/class';
+import { Link } from 'react-router-dom';
+
+interface ClassTableProps {
+    data: Class[];
+    loading: boolean;
+    pagination: any;
+    onTableChange: (pagination: any) => void;
+    onEdit: (cls: Class) => void;
+    onCancel: (cls: Class) => void;
+}
+
+const statusColors: Record<ClassStatus, string> = {
+    PENDING: 'gold',
+    ACTIVE: 'green',
+    FINISHED: 'blue',
+    CANCELED: 'red',
+};
+
+const ClassTable = ({
+    data,
+    loading,
+    pagination,
+    onTableChange,
+    onEdit,
+    onCancel,
+}: ClassTableProps) => {
+    const columns: ColumnsType<Class> = [
+        {
+            title: 'Tên lớp học',
+            dataIndex: 'name',
+            key: 'name',
+            width: 200,
+            render(text, record) {
+                return <Link to={`/dashboard/class-management/${record.id}`}>{text}</Link>;
+            },
+        },
+        { title: 'Tiêu đề', dataIndex: 'title', key: 'title', width: 200, ellipsis: true },
+        {
+            title: 'Giáo viên',
+            dataIndex: ['teacher', 'lastName'],
+            key: 'teacher',
+            render: (_, record) => `${record.teacher.firstName} ${record.teacher.lastName}`,
+        },
+        {
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            render: (text) => moment(text).format('DD/MM/YYYY'),
+        },
+        {
+            title: 'Trạng thái',
+            dataIndex: 'status',
+            key: 'status',
+            render: (status: ClassStatus) => (
+                <Tag color={statusColors[status] || 'default'}>{status}</Tag>
+            ),
+        },
+        {
+            title: 'Hành động',
+            key: 'action',
+            align: 'center',
+            render: (_, record) => (
+                <Space size="middle">
+                    <Button type="link" icon={<EditOutlined />} onClick={() => onEdit(record)}>
+                        Sửa
+                    </Button>
+                    <Button
+                        danger
+                        type="link"
+                        icon={<StopOutlined />}
+                        onClick={() => onCancel(record)}
+                        disabled={record.status === 'CANCELED' || record.status === 'FINISHED'}
+                    >
+                        Hủy
+                    </Button>
+                </Space>
+            ),
+        },
+    ];
+
+    return (
+        <Table
+            columns={columns}
+            dataSource={data}
+            loading={loading}
+            rowKey="id"
+            pagination={pagination}
+            onChange={onTableChange}
+        />
+    );
+};
+
+export default ClassTable;
+import { useEffect, useMemo, useState } from 'react';
+import { Modal, Table, Input, Space, Tag } from 'antd';
+import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
+import { filterUsersService } from '../../../services/userService';
+import type { User } from '../../../types/user';
+import { addUsersToClassService } from '../../../services/classManagementService';
+import './AddStudentsModal.css';
+
+const { Search } = Input;
+
+interface Props {
+  visible: boolean;
+  classId: number;
+  existingUserIds: number[]; // user.id đã ở trong lớp
+  onClose: (changed: boolean) => void;
+}
+
+const fullName = (u: User) => [u.firstName, u.lastName].filter(Boolean).join(' ').trim();
+
+const AddStudentsModal = ({ visible, classId, existingUserIds, onClose }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+  const [pagination, setPagination] = useState<TablePaginationConfig>({
+    current: 1,
+    pageSize: 10,
+    total: 0,
+  });
+  const [searchString, setSearchString] = useState<string>('');
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const columns: ColumnsType<User> = useMemo(
+    () => [
+      {
+        title: 'Họ và tên',
+        key: 'name',
+        render: (_, record) => fullName(record) || '-',
+      },
+      {
+        title: 'SĐT',
+        dataIndex: 'phone',
+        key: 'phone',
+        render: (val) => val || '-',
+      },
+      {
+        title: 'Địa chỉ',
+        dataIndex: 'address',
+        key: 'address',
+        render: (val) => val || '-',
+      },
+      {
+        title: 'Vai trò',
+        dataIndex: 'role',
+        key: 'role',
+        render: (role?: string) => (role ? <Tag>{role}</Tag> : <Tag>-</Tag>),
+      },
+      {
+        title: 'Trạng thái',
+        dataIndex: 'isActive',
+        key: 'isActive',
+        render: (isActive?: boolean) => <Tag color={isActive ? 'green' : 'default'}>{isActive ? 'ACTIVE' : 'INACTIVE'}</Tag>,
+      },
+    ],
+    []
+  );
+
+  const fetchUsers = async (page = 1, size = 10) => {
+    setLoading(true);
+    try {
+      const res = await filterUsersService({
+        searchString: searchString?.trim() || undefined,
+        userRoles: ['STUDENT'],
+        isDelete: false,
+        page: page - 1,
+        size,
+      });
+      const data = res.data;
+      const items: User[] = data.content || [];
+      // Lọc loại bỏ user đã trong lớp
+      const filtered = items.filter((u) => !existingUserIds.includes(u.id));
+      setUsers(filtered);
+      setPagination({
+        current: (data.pageable?.pageNumber ?? 0) + 1,
+        pageSize: data.pageable?.pageSize ?? size,
+        total: (data.totalElements ?? 0) - existingUserIds.length, // ước lượng hiển thị
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (visible) {
+      setSelectedRowKeys([]);
+      fetchUsers(1, pagination.pageSize || 10);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible, searchString]);
+
+  const handleOk = async () => {
+    if (selectedRowKeys.length === 0) {
+      onClose(false);
+      return;
+    }
+    setConfirmLoading(true);
+    try {
+      await addUsersToClassService({
+        id: classId,
+        memberIds: selectedRowKeys as number[],
+      });
+      onClose(true);
+    } catch {
+      setConfirmLoading(false);
+    }
+  };
+
+  const handleCancel = () => onClose(false);
+
+  const handleTableChange = (p: TablePaginationConfig) => {
+    fetchUsers(p.current || 1, p.pageSize || 10);
+  };
+
+  return (
+    <Modal
+      open={visible}
+      title="Thêm học viên vào lớp"
+      okText="Thêm"
+      cancelText="Hủy"
+      onOk={handleOk}
+      onCancel={handleCancel}
+      confirmLoading={confirmLoading}
+      width={800}
+      destroyOnClose
+    >
+      <div className="add-students-modal">
+        <Space style={{ marginBottom: 12 }}>
+          <Search
+            allowClear
+            placeholder="Tìm theo tên, SĐT..."
+            onSearch={(v) => setSearchString(v)}
+            onChange={(e) => !e.target.value && setSearchString('')}
+            style={{ width: 280 }}
+          />
+        </Space>
+
+        <Table<User>
+          rowKey="id"
+          loading={loading}
+          columns={columns}
+          dataSource={users}
+          pagination={pagination}
+          onChange={handleTableChange}
+          rowSelection={{
+            selectedRowKeys,
+            onChange: setSelectedRowKeys,
+          }}
+        />
+      </div>
+    </Modal>
+  );
+};
+
+export default AddStudentsModal;.add-students-modal {
+  margin-top: 8px;
+}// src/components/manage/ClassDetail/ClassInfoTab.tsx
+import { Card, Descriptions } from 'antd';
+import moment from 'moment';
+import type { Class } from '../../../types/class';
+
+interface ClassInfoTabProps {
+    classData: Class;
+}
+
+const ClassInfoTab = ({ classData }: ClassInfoTabProps) => {
+    return (
+        <Card>
+            <Descriptions bordered column={1}>
+                <Descriptions.Item label="Tên lớp học">{classData.name}</Descriptions.Item>
+                <Descriptions.Item label="Tiêu đề">{classData.title}</Descriptions.Item>
+                <Descriptions.Item label="Giáo viên">{`${classData.teacher.firstName} ${classData.teacher.lastName}`}</Descriptions.Item>
+                {/* <Descriptions.Item label="Trạng thái">{classData.status}</Descriptions.Item> */}
+                <Descriptions.Item label="Ngày tạo">
+                    {moment(classData.createdAt).format('DD/MM/YYYY HH:mm')}
+                </Descriptions.Item>
+                <Descriptions.Item label="Mô tả">
+                    {classData.description || 'Không có mô tả'}
+                </Descriptions.Item>
+            </Descriptions>
+        </Card>
+    );
+};
+
+export default ClassInfoTab;
+"use client"
+
+// src/components/manage/ClassDetail/CreateRecurringScheduleModal.tsx
+import { useEffect } from "react"
+import { Modal, Form, Input, DatePicker, InputNumber, Select } from "antd"
+import dayjs from "dayjs"
+import type { CreateScheduleRequest } from "../../../types/schedule"
+
+const { RangePicker } = DatePicker
+const { Option } = Select
+
+interface CreateRecurringScheduleModalProps {
+  visible: boolean
+  onClose: () => void
+  onSubmit: (data: CreateScheduleRequest[]) => Promise<void>
+  classId: number
+}
+
+const WEEKDAYS = [
+  { value: 1, label: "Thứ 2" },
+  { value: 2, label: "Thứ 3" },
+  { value: 3, label: "Thứ 4" },
+  { value: 4, label: "Thứ 5" },
+  { value: 5, label: "Thứ 6" },
+  { value: 6, label: "Thứ 7" },
+  { value: 0, label: "Chủ nhật" },
+]
+
+const CreateRecurringScheduleModal = ({ visible, onClose, onSubmit, classId }: CreateRecurringScheduleModalProps) => {
+  const [form] = Form.useForm()
+
+  useEffect(() => {
+    if (visible) {
+      form.resetFields()
+    }
+  }, [visible, form])
+
+  const handleOk = async () => {
+    try {
+      const values = await form.validateFields()
+      const [startDate, endDate] = values.dateRange
+      const weekdays: number[] = values.weekdays
+
+      const schedules: CreateScheduleRequest[] = []
+      const currentDate = dayjs(startDate)
+      let sessionNumber = 1
+
+      while (currentDate.isBefore(endDate, "day") || currentDate.isSame(endDate, "day")) {
+        const dayOfWeek = currentDate.day()
+        if (weekdays.includes(dayOfWeek)) {
+          const startAt = dayjs(currentDate)
+            .hour(values.startTime.hour())
+            .minute(values.startTime.minute())
+            .format("YYYY-MM-DD HH:mm:ss")
+          const endAt = dayjs(currentDate)
+            .hour(values.endTime.hour())
+            .minute(values.endTime.minute())
+            .format("YYYY-MM-DD HH:mm:ss")
+
+          schedules.push({
+            title: `${values.titlePrefix} ${sessionNumber}`,
+            startAt,
+            endAt,
+            roomId: values.roomId,
+            classId,
+          })
+          sessionNumber++
+        }
+        currentDate.add(1, "day")
+      }
+
+      if (schedules.length === 0) {
+        Modal.warning({
+          title: "Không có buổi học nào được tạo",
+          content: "Vui lòng kiểm tra lại khoảng thời gian và các ngày trong tuần đã chọn.",
+        })
+        return
+      }
+
+      await onSubmit(schedules)
+      form.resetFields()
+      onClose()
+    } catch (error) {
+      console.error("Failed to create recurring schedules:", error)
+    }
+  }
+
+  return (
+    <Modal
+      title="Tạo lịch học hàng tuần"
+      open={visible}
+      onOk={handleOk}
+      onCancel={onClose}
+      okText="Tạo"
+      cancelText="Hủy"
+      destroyOnClose
+      width={600}
+    >
+      <Form form={form} layout="vertical" name="createRecurringScheduleForm">
+        <Form.Item
+          name="titlePrefix"
+          label="Tiền tố tiêu đề"
+          rules={[{ required: true, message: "Vui lòng nhập tiền tố tiêu đề!" }]}
+          tooltip="Ví dụ: 'Buổi học số' sẽ tạo ra 'Buổi học số 1', 'Buổi học số 2', ..."
+        >
+          <Input placeholder="Ví dụ: Buổi học số" />
+        </Form.Item>
+
+        <Form.Item
+          name="dateRange"
+          label="Khoảng thời gian"
+          rules={[{ required: true, message: "Vui lòng chọn khoảng thời gian!" }]}
+        >
+          <RangePicker style={{ width: "100%" }} format="DD/MM/YYYY" />
+        </Form.Item>
+
+        <Form.Item
+          name="weekdays"
+          label="Các ngày trong tuần"
+          rules={[{ required: true, message: "Vui lòng chọn ít nhất một ngày trong tuần!" }]}
+        >
+          <Select mode="multiple" placeholder="Chọn các ngày học trong tuần">
+            {WEEKDAYS.map((day) => (
+              <Option key={day.value} value={day.value}>
+                {day.label}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          name="startTime"
+          label="Giờ bắt đầu"
+          rules={[{ required: true, message: "Vui lòng chọn giờ bắt đầu!" }]}
+        >
+          <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
+        </Form.Item>
+
+        <Form.Item
+          name="endTime"
+          label="Giờ kết thúc"
+          rules={[{ required: true, message: "Vui lòng chọn giờ kết thúc!" }]}
+        >
+          <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
+        </Form.Item>
+
+        <Form.Item name="roomId" label="Phòng học" rules={[{ required: true, message: "Vui lòng nhập phòng học!" }]}>
+          <InputNumber style={{ width: "100%" }} placeholder="Nhập ID phòng học" />
+        </Form.Item>
+      </Form>
+    </Modal>
+  )
+}
+
+export default CreateRecurringScheduleModal
+"use client"
+
+// src/components/manage/ClassDetail/CreateScheduleModal.tsx
+import { useEffect } from "react"
+import { Modal, Form, Input, DatePicker, InputNumber } from "antd"
+import dayjs from "dayjs"
+import type { CreateScheduleRequest } from "../../../types/schedule"
+
+interface CreateScheduleModalProps {
+  visible: boolean
+  onClose: () => void
+  onSubmit: (data: CreateScheduleRequest) => Promise<void>
+  classId: number
+  initialDate?: dayjs.Dayjs
+}
+
+const CreateScheduleModal = ({ visible, onClose, onSubmit, classId, initialDate }: CreateScheduleModalProps) => {
+  const [form] = Form.useForm()
+
+  useEffect(() => {
+    if (visible) {
+      if (initialDate) {
+        form.setFieldsValue({
+          date: initialDate,
+        })
+      } else {
+        form.resetFields()
+      }
+    }
+  }, [visible, initialDate, form])
+
+  const handleOk = async () => {
+    try {
+      const values = await form.validateFields()
+      const startAt = dayjs(values.date)
+        .hour(values.startTime.hour())
+        .minute(values.startTime.minute())
+        .format("YYYY-MM-DD HH:mm:ss")
+      const endAt = dayjs(values.date)
+        .hour(values.endTime.hour())
+        .minute(values.endTime.minute())
+        .format("YYYY-MM-DD HH:mm:ss")
+
+      const payload: CreateScheduleRequest = {
+        title: values.title,
+        startAt,
+        endAt,
+        roomId: values.roomId,
+        classId,
+      }
+
+      await onSubmit(payload)
+      form.resetFields()
+      onClose()
+    } catch (error) {
+      console.error("Failed to create schedule:", error)
+    }
+  }
+
+  return (
+    <Modal
+      title="Tạo lịch học mới"
+      open={visible}
+      onOk={handleOk}
+      onCancel={onClose}
+      okText="Tạo"
+      cancelText="Hủy"
+      destroyOnClose
+    >
+      <Form form={form} layout="vertical" name="createScheduleForm">
+        <Form.Item
+          name="title"
+          label="Tiêu đề buổi học"
+          rules={[{ required: true, message: "Vui lòng nhập tiêu đề!" }]}
+        >
+          <Input placeholder="Ví dụ: Buổi học số 1" />
+        </Form.Item>
+
+        <Form.Item name="date" label="Ngày học" rules={[{ required: true, message: "Vui lòng chọn ngày học!" }]}>
+          <DatePicker style={{ width: "100%" }} format="DD/MM/YYYY" />
+        </Form.Item>
+
+        <Form.Item
+          name="startTime"
+          label="Giờ bắt đầu"
+          rules={[{ required: true, message: "Vui lòng chọn giờ bắt đầu!" }]}
+        >
+          <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
+        </Form.Item>
+
+        <Form.Item
+          name="endTime"
+          label="Giờ kết thúc"
+          rules={[{ required: true, message: "Vui lòng chọn giờ kết thúc!" }]}
+        >
+          <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
+        </Form.Item>
+
+        <Form.Item name="roomId" label="Phòng học" rules={[{ required: true, message: "Vui lòng nhập phòng học!" }]}>
+          <InputNumber style={{ width: "100%" }} placeholder="Nhập ID phòng học" />
+        </Form.Item>
+      </Form>
+    </Modal>
+  )
+}
+
+export default CreateScheduleModal
+import { useEffect, useMemo, useState } from 'react';
+import { Modal, Form, Input, Select, Switch, DatePicker, Upload, Button, Space, Tag, Typography } from 'antd';
+import { UploadOutlined} from '@ant-design/icons';
+import dayjs, { Dayjs } from 'dayjs';
+import type { Class, ClassNotification, CreateClassNotificationRequest, UpdateClassNotificationRequest, NotificationTypeNumber } from '../../../types/class';
+import { createClassNotificationService, updateClassNotificationService, uploadFileToCloudService } from '../../../services/classManagementService';
+
+const { TextArea } = Input;
+const { RangePicker } = DatePicker;
+const { Text } = Typography;
+
+interface Props {
+  open: boolean;
+  classData: Class;
+  initialData?: ClassNotification | null;
+  onClose: (changed: boolean) => void;
+}
+
+const TYPE_OPTIONS: { label: string; value: NotificationTypeNumber }[] = [
+  { label: 'Thông báo', value: 1 },
+  { label: 'Bài tập (có hạn nộp)', value: 2 },
+];
+
+const formatToApi = (d: Dayjs | null) => (d ? d.format('YYYY-MM-DD HH:mm:ss') : null);
+
+const NotificationFormModal = ({ open, classData, initialData, onClose }: Props) => {
+  const [form] = Form.useForm();
+  const [uploading, setUploading] = useState(false);
+  const [attachments, setAttachments] = useState<string[]>([]);
+
+  const isEdit = !!initialData;
+
+  const existingAttachmentUrls = useMemo(() => {
+    // Backend có thể trả object hoặc string -> chuyển về string[]
+    if (!initialData?.attachDocumentClasses) return [];
+    try {
+      return initialData.attachDocumentClasses.map((a: any) => a?.url ?? a).filter(Boolean);
+    } catch {
+      return [];
+    }
+  }, [initialData]);
+
+  useEffect(() => {
+    if (open) {
+      if (isEdit && initialData) {
+        // Không suy luận type number từ chuỗi backend -> để user chọn lại (đã set mặc định 1)
+        form.setFieldsValue({
+          description: initialData.description,
+          isPin: initialData.isPin,
+          typeNotification: 1 as NotificationTypeNumber,
+          dateRange:
+            initialData.fromDate && initialData.toDate
+              ? [dayjs(initialData.fromDate), dayjs(initialData.toDate)]
+              : undefined,
+        });
+        setAttachments(existingAttachmentUrls);
+      } else {
+        form.resetFields();
+        setAttachments([]);
+      }
+    }
+  }, [open, isEdit, initialData, existingAttachmentUrls, form]);
+
+  const handleUpload = async (file: File) => {
+    setUploading(true);
+    try {
+      const url = await uploadFileToCloudService(file);
+      setAttachments((prev) => [...prev, url]);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const customRequest = async (options: any) => {
+    const { file, onSuccess, onError } = options;
+    try {
+      await handleUpload(file as File);
+      onSuccess?.({}, file);
+    } catch (e) {
+      onError?.(e);
+    }
+  };
+
+  const onOk = async () => {
+    const values = await form.validateFields();
+    const type: NotificationTypeNumber = values.typeNotification;
+    const range: [Dayjs, Dayjs] | undefined = values.dateRange;
+
+    const payloadBase = {
+      classId: classData.id,
+      description: values.description,
+      isPin: values.isPin ?? false,
+      typeNotification: type,
+      fromDate: type === 2 ? formatToApi(range?.[0] ?? null) : null,
+      toDate: type === 2 ? formatToApi(range?.[1] ?? null) : null,
+      urlAttachment: attachments,
+    };
+
+    try {
+      if (isEdit && initialData) {
+        const req: UpdateClassNotificationRequest = {
+          ...payloadBase,
+          classNotificationId: initialData.id,
+        };
+        await updateClassNotificationService(req);
+      } else {
+        const req: CreateClassNotificationRequest = payloadBase;
+        await createClassNotificationService(req);
+      }
+      onClose(true);
+    } catch {
+      // message đã hiển thị trong service
+    }
+  };
+
+  return (
+    <Modal
+      open={open}
+      title={isEdit ? 'Chỉnh sửa thông báo' : 'Tạo thông báo'}
+      onOk={onOk}
+      onCancel={() => onClose(false)}
+      okText={isEdit ? 'Cập nhật' : 'Tạo mới'}
+      destroyOnClose
+      width={720}
+    >
+      <Form form={form} layout="vertical" initialValues={{ isPin: false, typeNotification: 1 }}>
+        <Form.Item
+          label="Nội dung"
+          name="description"
+          rules={[{ required: true, message: 'Vui lòng nhập nội dung thông báo' }]}
+        >
+          <TextArea rows={4} placeholder="Nhập nội dung thông báo..." />
+        </Form.Item>
+
+        <Form.Item label="Loại thông báo" name="typeNotification" rules={[{ required: true }]}>
+          <Select options={TYPE_OPTIONS} />
+        </Form.Item>
+
+        <Form.Item shouldUpdate noStyle>
+          {({ getFieldValue }) => {
+            const t = getFieldValue('typeNotification') as NotificationTypeNumber;
+            return t === 2 ? (
+              <Form.Item
+                label="Thời gian (từ - đến)"
+                name="dateRange"
+                rules={[{ required: true, message: 'Vui lòng chọn thời gian' }]}
+              >
+                <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" style={{ width: '100%' }} />
+              </Form.Item>
+            ) : null;
+          }}
+        </Form.Item>
+
+        <Form.Item label="Ghim thông báo" name="isPin" valuePropName="checked">
+          <Switch />
+        </Form.Item>
+
+        <Form.Item label="Tài liệu đính kèm">
+          <Space direction="vertical" style={{ width: '100%' }}>
+            <Upload customRequest={customRequest} showUploadList={false} disabled={uploading}>
+              <Button icon={<UploadOutlined />} loading={uploading}>
+                Tải tệp lên
+              </Button>
+            </Upload>
+            {attachments.length > 0 ? (
+              <Space wrap>
+                {attachments.map((url) => (
+                  <Tag key={url} closable onClose={() => setAttachments((prev) => prev.filter((u) => u !== url))}>
+                    <a href={url} target="_blank" rel="noreferrer">{url}</a>
+                  </Tag>
+                ))}
+              </Space>
+            ) : (
+              <Text type="secondary">Chưa có tài liệu đính kèm</Text>
+            )}
+          </Space>
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
+};
+
+export default NotificationFormModal;.notification-tab {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+/* Toolbar */
+.notification-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+/* Description cell */
+.desc-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.pinned-star {
+  color: #faad14;
+  font-size: 14px;
+}
+
+.desc-link {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+/* Attachments chip */
+.file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 999px;
+}
+
+.file-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.file-download {
+  color: rgba(0, 0, 0, 0.45);
+}
+.file-download:hover {
+  color: rgba(0, 0, 0, 0.88);
+}
+
+/* Ưu tiên cột "Nội dung" trên màn nhỏ; các cột phụ ẩn bớt */
+@media (max-width: 992px) {
+  .notification-tab {
+    padding: 12px;
+  }
+}import { useEffect, useMemo, useState } from 'react';
+import {
+  Button,
+  DatePicker,
+  Input,
+  Modal,
+  Space,
+  Table,
+  Tag,
+  Typography,
+  Switch,
+  Tooltip,
+} from 'antd';
+import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
+import {
+  EditOutlined,
+  DeleteOutlined,
+  StarFilled,
+  EyeOutlined,
+  DownloadOutlined,
+} from '@ant-design/icons';
+import dayjs from 'dayjs';
+import type {
+  Class,
+  ClassNotification,
+  GetClassNotificationsRequest,
+} from '../../../types/class';
+import {
+  getClassNotificationsService,
+  toggleActiveOrDeleteClassNotificationService,
+} from '../../../services/classManagementService';
+import NotificationFormModal from './NotificationFormModal';
+import './NotificationTab.css';
+
+const { Search } = Input;
+const { RangePicker } = DatePicker;
+const { Link: TextLink } = Typography;
+
+interface Props {
+  classData: Class;
+}
+
+const getFileName = (url: string) => {
+  try {
+    const u = new URL(url);
+    return decodeURIComponent(u.pathname.split('/').pop() || 'Tệp');
+  } catch {
+    return url.split('/').pop() || 'Tệp';
+  }
+};
+
+const NotificationTab = ({ classData }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState<ClassNotification[]>([]);
+  const [pagination, setPagination] = useState<TablePaginationConfig>({
+    current: 1,
+    pageSize: 20,
+    total: 0,
+  });
+
+  const [searchString, setSearchString] = useState<string>('');
+  const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState<ClassNotification | null>(null);
+
+  const fetchList = async (page = 1, size = 20) => {
+    setLoading(true);
+    try {
+      const req: GetClassNotificationsRequest = {
+        classId: classData.id,
+        searchString: searchString?.trim() || undefined,
+        fromDate: dateRange?.[0] ? dateRange[0].format('YYYY-MM-DD HH:mm:ss') : null,
+        toDate: dateRange?.[1] ? dateRange[1].format('YYYY-MM-DD HH:mm:ss') : null,
+        page: page - 1,
+        size,
+      };
+      const res = await getClassNotificationsService(req);
+      const data = res.data;
+      const sorted = [...(data.content || [])].sort((a, b) => {
+        if (a.isPin !== b.isPin) return a.isPin ? -1 : 1;
+        return dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf();
+      });
+      setItems(sorted);
+      setPagination({
+        current: (data.pageable?.pageNumber ?? 0) + 1,
+        pageSize: data.pageable?.pageSize ?? size,
+        total: data.totalElements ?? sorted.length,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchList(1, pagination.pageSize || 20);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [classData.id, searchString, dateRange?.[0]?.valueOf(), dateRange?.[1]?.valueOf()]);
+
+  const columns: ColumnsType<ClassNotification> = useMemo(
+    () => [
+      // 1) Nội dung: để “flex”, không đặt width cứng; chỉ đặt minWidth + ellipsis
+      {
+        title: 'Nội dung',
+        dataIndex: 'description',
+        key: 'description',
+        ellipsis: { showTitle: false },
+        onCell: () => ({ style: { minWidth: 520 } }),
+        render: (text: string, record) => (
+          <div className="desc-cell" title={text}>
+            {record.isPin ? <StarFilled className="pinned-star" /> : null}
+            <TextLink
+              className="desc-link"
+              onClick={() => {
+                setEditing(record);
+                setModalOpen(true);
+              }}
+            >
+              {text}
+            </TextLink>
+          </div>
+        ),
+      },
+      // 2) Loại: width gọn
+      {
+        title: 'Loại',
+        dataIndex: 'typeNotification',
+        key: 'typeNotification',
+        width: 120,
+        render: (v: string) => <Tag color={v === 'Exercise' ? 'blue' : 'default'}>{v}</Tag>,
+      },
+      // 3) Thời gian: width cố định vừa đủ
+      {
+        title: 'Thời gian',
+        key: 'time',
+        width: 260,
+        render: (_, r) =>
+          r.fromDate && r.toDate ? (
+            <span>
+              {dayjs(r.fromDate).format('YYYY-MM-DD HH:mm')} -{' '}
+              {dayjs(r.toDate).format('YYYY-MM-DD HH:mm')}
+            </span>
+          ) : (
+            <span>-</span>
+          ),
+      },
+      // 4) Tệp đính kèm
+      {
+        title: 'Tệp đính kèm',
+        key: 'attachments',
+        width: 320,
+        render: (_, r) => {
+          const urls = Array.isArray(r.attachDocumentClasses)
+            ? r.attachDocumentClasses.map((a: any) => a?.url ?? a).filter(Boolean)
+            : [];
+          return urls.length ? (
+            <Space wrap size={[8, 8]}>
+              {urls.map((u: string) => (
+                <span key={u} className="file-chip" title={u}>
+                  <a href={u} target="_blank" rel="noreferrer" className="file-open">
+                    <EyeOutlined /> {getFileName(u)}
+                  </a>
+                  <a href={u} download className="file-download" title="Tải xuống">
+                    <DownloadOutlined />
+                  </a>
+                </span>
+              ))}
+            </Space>
+          ) : (
+            <span>-</span>
+          );
+        },
+        responsive: ['sm'],
+      },
+      // 5) Tạo bởi (ẩn trên màn nhỏ)
+      {
+        title: 'Tạo bởi',
+        key: 'createdBy',
+        width: 160,
+        render: (_, r) => {
+          const u = r.createdBy;
+          const name = [u?.firstName, u?.lastName].filter(Boolean).join(' ');
+          return name || '-';
+        },
+        responsive: ['lg'],
+      },
+      // 6) Tạo lúc (ẩn trên màn nhỏ)
+      {
+        title: 'Tạo lúc',
+        dataIndex: 'createdAt',
+        key: 'createdAt',
+        width: 170,
+        render: (v: string) => dayjs(v).format('YYYY-MM-DD HH:mm'),
+        sorter: (a, b) => dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
+        responsive: ['lg'],
+      },
+      // 7) Trạng thái: Switch ẩn/hiện (cố định phải)
+      {
+        title: 'Trạng thái',
+        dataIndex: 'isActive',
+        key: 'isActive',
+        width: 120,
+        fixed: 'right',
+        render: (_: any, record) => (
+          <Switch
+            checked={record.isActive}
+            onChange={(checked) => {
+              Modal.confirm({
+                title: checked ? 'Hiện thông báo?' : 'Ẩn thông báo?',
+                onOk: async () => {
+                  try {
+                    await toggleActiveOrDeleteClassNotificationService({
+                      classId: classData.id,
+                      classNotificationId: record.id,
+                      isActive: checked,
+                      isDelete: false,
+                    });
+                    fetchList(pagination.current || 1, pagination.pageSize || 20);
+                  } catch {}
+                },
+              });
+            }}
+          />
+        ),
+      },
+      // 8) Thao tác: 2 icon (cố định phải)
+      {
+        title: 'Thao tác',
+        key: 'action',
+        width: 96,
+        fixed: 'right',
+        render: (_, record) => (
+          <Space>
+            <Tooltip title="Chỉnh sửa">
+              <Button
+                type="text"
+                icon={<EditOutlined />}
+                onClick={() => {
+                  setEditing(record);
+                  setModalOpen(true);
+                }}
+              />
+            </Tooltip>
+            <Tooltip title="Xóa">
+              <Button
+                type="text"
+                danger
+                icon={<DeleteOutlined />}
+                onClick={() =>
+                  Modal.confirm({
+                    title: 'Xóa thông báo?',
+                    okButtonProps: { danger: true },
+                    onOk: async () => {
+                      try {
+                        await toggleActiveOrDeleteClassNotificationService({
+                          classId: classData.id,
+                          classNotificationId: record.id,
+                          isActive: record.isActive,
+                          isDelete: true,
+                        });
+                        fetchList(pagination.current || 1, pagination.pageSize || 20);
+                      } catch {}
+                    },
+                  })
+                }
+              />
+            </Tooltip>
+          </Space>
+        ),
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [classData.id, pagination.current, pagination.pageSize]
+  );
+
+  const handleTableChange = (p: TablePaginationConfig) => {
+    fetchList(p.current || 1, p.pageSize || 20);
+  };
+
+  return (
+    <div className="notification-tab">
+      <div className="notification-toolbar">
+        <Space wrap>
+          <Search
+            allowClear
+            placeholder="Tìm theo nội dung..."
+            onSearch={(v) => setSearchString(v)}
+            onChange={(e) => !e.target.value && setSearchString('')}
+            style={{ width: 280 }}
+          />
+          <RangePicker
+            showTime
+            format="YYYY-MM-DD HH:mm:ss"
+            onChange={(vals) => setDateRange(vals as any)}
+            allowClear
+          />
+        </Space>
+        <Button
+          type="primary"
+          onClick={() => {
+            setEditing(null);
+            setModalOpen(true);
+          }}
+        >
+          Tạo thông báo
+        </Button>
+      </div>
+
+      <Table<ClassNotification>
+        rowKey="id"
+        size="middle"
+        loading={loading}
+        columns={columns}
+        dataSource={items}
+        pagination={pagination}
+        onChange={handleTableChange}
+        // Quan trọng: cho phép cuộn ngang nếu tổng width > vùng nhìn
+        scroll={{ x: 1200 }}
+        sticky
+      />
+
+      <NotificationFormModal
+        open={modalOpen}
+        classData={classData}
+        initialData={editing || undefined}
+        onClose={(changed) => {
+          setModalOpen(false);
+          setEditing(null);
+          if (changed) fetchList(pagination.current || 1, pagination.pageSize || 20);
+        }}
+      />
+    </div>
+  );
+};
+
+export default NotificationTab;"use client"
+
+// src/components/manage/ClassDetail/ScheduleDetailModal.tsx
+import { useEffect, useState } from "react"
+import { Modal, Form, Input, DatePicker, InputNumber, Descriptions, Button, Space } from "antd"
+import dayjs from "dayjs"
+import type { Schedule, UpdateScheduleRequest } from "../../../types/schedule"
+
+interface ScheduleDetailModalProps {
+  visible: boolean
+  onClose: () => void
+  schedule: Schedule | null
+  onUpdate: (data: UpdateScheduleRequest) => Promise<void>
+  onCancel: (scheduleId: number) => Promise<void>
+}
+
+const ScheduleDetailModal = ({ visible, onClose, schedule, onUpdate, onCancel }: ScheduleDetailModalProps) => {
+  const [form] = Form.useForm()
+  const [isEditing, setIsEditing] = useState(false)
+
+  useEffect(() => {
+    if (visible && schedule) {
+      setIsEditing(false)
+      form.setFieldsValue({
+        title: schedule.title,
+        date: dayjs(schedule.startAt),
+        startTime: dayjs(schedule.startAt),
+        endTime: dayjs(schedule.endAt),
+        roomId: 1, // Giả sử roomId mặc định là 1, bạn cần lấy từ API nếu có
+      })
+    }
+  }, [visible, schedule, form])
+
+  const handleUpdate = async () => {
+    if (!schedule) return
+
+    try {
+      const values = await form.validateFields()
+      const startAt = dayjs(values.date)
+        .hour(values.startTime.hour())
+        .minute(values.startTime.minute())
+        .format("YYYY-MM-DD HH:mm:ss")
+      const endAt = dayjs(values.date)
+        .hour(values.endTime.hour())
+        .minute(values.endTime.minute())
+        .format("YYYY-MM-DD HH:mm:ss")
+
+      const payload: UpdateScheduleRequest = {
+        classScheduleId: schedule.id,
+        title: values.title,
+        startAt,
+        endAt,
+        status: 1,
+        isActive: true,
+        isDelete: false,
+        roomId: values.roomId,
+        classId: schedule.clazz.id,
+      }
+
+      await onUpdate(payload)
+      setIsEditing(false)
+      onClose()
+    } catch (error) {
+      console.error("Failed to update schedule:", error)
+    }
+  }
+
+  const handleCancelSchedule = async () => {
+    if (!schedule) return
+
+    Modal.confirm({
+      title: "Xác nhận hủy buổi học",
+      content: `Bạn có chắc chắn muốn hủy buổi học "${schedule.title}" không?`,
+      okText: "Xác nhận",
+      cancelText: "Hủy",
+      okType: "danger",
+      onOk: async () => {
+        await onCancel(schedule.id)
+        onClose()
+      },
+    })
+  }
+
+  if (!schedule) return null
+
+  return (
+    <Modal
+      title={isEditing ? "Chỉnh sửa lịch học" : "Chi tiết lịch học"}
+      open={visible}
+      onCancel={onClose}
+      footer={
+        isEditing ? (
+          <Space>
+            <Button onClick={() => setIsEditing(false)}>Hủy chỉnh sửa</Button>
+            <Button type="primary" onClick={handleUpdate}>
+              Lưu thay đổi
+            </Button>
+          </Space>
+        ) : (
+          <Space>
+            <Button danger onClick={handleCancelSchedule}>
+              Hủy buổi học
+            </Button>
+            <Button type="primary" onClick={() => setIsEditing(true)}>
+              Chỉnh sửa
+            </Button>
+            <Button onClick={onClose}>Đóng</Button>
+          </Space>
+        )
+      }
+      destroyOnClose
+      width={600}
+    >
+      {!isEditing ? (
+        <Descriptions bordered column={1}>
+          <Descriptions.Item label="Tiêu đề">{schedule.title}</Descriptions.Item>
+          <Descriptions.Item label="Ngày học">{dayjs(schedule.startAt).format("DD/MM/YYYY")}</Descriptions.Item>
+          <Descriptions.Item label="Giờ bắt đầu">{dayjs(schedule.startAt).format("HH:mm")}</Descriptions.Item>
+          <Descriptions.Item label="Giờ kết thúc">{dayjs(schedule.endAt).format("HH:mm")}</Descriptions.Item>
+          <Descriptions.Item label="Giáo viên">
+            {`${schedule.clazz.teacher.firstName} ${schedule.clazz.teacher.lastName}`}
+          </Descriptions.Item>
+          <Descriptions.Item label="Trạng thái">{schedule.status}</Descriptions.Item>
+          <Descriptions.Item label="Người tạo">
+            {`${schedule.createdBy.firstName} ${schedule.createdBy.lastName}`}
+          </Descriptions.Item>
+          <Descriptions.Item label="Ngày tạo">{dayjs(schedule.createdAt).format("DD/MM/YYYY HH:mm")}</Descriptions.Item>
+        </Descriptions>
+      ) : (
+        <Form form={form} layout="vertical" name="updateScheduleForm">
+          <Form.Item
+            name="title"
+            label="Tiêu đề buổi học"
+            rules={[{ required: true, message: "Vui lòng nhập tiêu đề!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item name="date" label="Ngày học" rules={[{ required: true, message: "Vui lòng chọn ngày học!" }]}>
+            <DatePicker style={{ width: "100%" }} format="DD/MM/YYYY" />
+          </Form.Item>
+
+          <Form.Item
+            name="startTime"
+            label="Giờ bắt đầu"
+            rules={[{ required: true, message: "Vui lòng chọn giờ bắt đầu!" }]}
+          >
+            <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
+          </Form.Item>
+
+          <Form.Item
+            name="endTime"
+            label="Giờ kết thúc"
+            rules={[{ required: true, message: "Vui lòng chọn giờ kết thúc!" }]}
+          >
+            <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
+          </Form.Item>
+
+          <Form.Item name="roomId" label="Phòng học" rules={[{ required: true, message: "Vui lòng nhập phòng học!" }]}>
+            <InputNumber style={{ width: "100%" }} />
+          </Form.Item>
+        </Form>
+      )}
+    </Modal>
+  )
+}
+
+export default ScheduleDetailModal
+"use client"
+
+// src/components/manage/ClassDetail/ScheduleTab.tsx
+import { useState, useEffect, useCallback } from "react"
+import { Card, Calendar, Badge, Button, Space, Spin } from "antd"
+import { PlusOutlined, CalendarOutlined } from "@ant-design/icons"
+import dayjs, { type Dayjs } from "dayjs"
+import type { Class } from "../../../types/class"
+import type { Schedule, CreateScheduleRequest, UpdateScheduleRequest } from "../../../types/schedule"
+import {
+  getSchedulesService,
+  createSchedulesService,
+  updateScheduleService,
+  cancelScheduleService,
+} from "../../../services/scheduleService"
+import CreateScheduleModal from "./CreateScheduleModal"
+import CreateRecurringScheduleModal from "./CreateRecurringScheduleModal"
+import ScheduleDetailModal from "./ScheduleDetailModal"
+
+interface ScheduleTabProps {
+  classData: Class
+}
+
+const ScheduleTab = ({ classData }: ScheduleTabProps) => {
+  const [schedules, setSchedules] = useState<Schedule[]>([])
+  const [loading, setLoading] = useState(false)
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null)
+
+  // Modal states
+  const [isCreateModalVisible, setIsCreateModalVisible] = useState(false)
+  const [isRecurringModalVisible, setIsRecurringModalVisible] = useState(false)
+  const [isDetailModalVisible, setIsDetailModalVisible] = useState(false)
+
+  const fetchSchedules = useCallback(async () => {
+    setLoading(true)
+    try {
+      const response = await getSchedulesService({
+        classId: [classData.id],
+        status: [],
+        teacherId: [],
+        fromDate: null,
+        toDate: null,
+      })
+      setSchedules(response.data.content)
+    } catch (error) {
+      console.error("Failed to fetch schedules:", error)
+    } finally {
+      setLoading(false)
+    }
+  }, [classData.id])
+
+  useEffect(() => {
+    fetchSchedules()
+  }, [fetchSchedules])
+
+  // Lấy danh sách lịch học theo ngày
+  const getSchedulesForDate = (date: Dayjs): Schedule[] => {
+    return schedules.filter((schedule) => dayjs(schedule.startAt).isSame(date, "day"))
+  }
+
+  // Render nội dung của mỗi ô ngày trong calendar
+  const dateCellRender = (value: Dayjs) => {
+    const daySchedules = getSchedulesForDate(value)
+    return (
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {daySchedules.map((schedule) => (
+          <li key={schedule.id} style={{ marginBottom: 4 }}>
+            <Badge
+              status={schedule.status === "ACTIVE" ? "success" : "default"}
+              text={
+                <span
+                  style={{
+                    cursor: "pointer",
+                    fontSize: "12px",
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleScheduleClick(schedule)
+                  }}
+                >
+                  {dayjs(schedule.startAt).format("HH:mm")} - {schedule.title}
+                </span>
+              }
+            />
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  // Xử lý khi click vào một ngày
+  const handleDateSelect = (date: Dayjs) => {
+    const daySchedules = getSchedulesForDate(date)
+    if (daySchedules.length === 0) {
+      // Nếu ngày chưa có lịch học, mở modal tạo mới
+      setSelectedDate(date)
+      setIsCreateModalVisible(true)
+    }
+  }
+
+  // Xử lý khi click vào một buổi học
+  const handleScheduleClick = (schedule: Schedule) => {
+    setSelectedSchedule(schedule)
+    setIsDetailModalVisible(true)
+  }
+
+  // Xử lý tạo lịch học đơn lẻ
+  const handleCreateSchedule = async (data: CreateScheduleRequest) => {
+    await createSchedulesService([data])
+    await fetchSchedules()
+  }
+
+  // Xử lý tạo lịch học hàng tuần
+  const handleCreateRecurringSchedules = async (data: CreateScheduleRequest[]) => {
+    await createSchedulesService(data)
+    await fetchSchedules()
+  }
+
+  // Xử lý cập nhật lịch học
+  const handleUpdateSchedule = async (data: UpdateScheduleRequest) => {
+    await updateScheduleService(data)
+    await fetchSchedules()
+  }
+
+  // Xử lý hủy lịch học
+  const handleCancelSchedule = async (scheduleId: number) => {
+    await cancelScheduleService([scheduleId])
+    await fetchSchedules()
+  }
+
+  return (
+    <Card>
+      <Space style={{ marginBottom: 16 }}>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => {
+            setSelectedDate(null)
+            setIsCreateModalVisible(true)
+          }}
+        >
+          Tạo lịch học
+        </Button>
+        <Button type="default" icon={<CalendarOutlined />} onClick={() => setIsRecurringModalVisible(true)}>
+          Tạo lịch học hàng tuần
+        </Button>
+      </Space>
+
+      <Spin spinning={loading}>
+        <Calendar dateCellRender={dateCellRender} onSelect={handleDateSelect} />
+      </Spin>
+
+      {/* Modal tạo lịch học đơn lẻ */}
+      <CreateScheduleModal
+        visible={isCreateModalVisible}
+        onClose={() => {
+          setIsCreateModalVisible(false)
+          setSelectedDate(null)
+        }}
+        onSubmit={handleCreateSchedule}
+        classId={classData.id}
+        initialDate={selectedDate || undefined}
+      />
+
+      {/* Modal tạo lịch học hàng tuần */}
+      <CreateRecurringScheduleModal
+        visible={isRecurringModalVisible}
+        onClose={() => setIsRecurringModalVisible(false)}
+        onSubmit={handleCreateRecurringSchedules}
+        classId={classData.id}
+      />
+
+      {/* Modal xem chi tiết và chỉnh sửa */}
+      <ScheduleDetailModal
+        visible={isDetailModalVisible}
+        onClose={() => {
+          setIsDetailModalVisible(false)
+          setSelectedSchedule(null)
+        }}
+        schedule={selectedSchedule}
+        onUpdate={handleUpdateSchedule}
+        onCancel={handleCancelSchedule}
+      />
+    </Card>
+  )
+}
+
+export default ScheduleTab
+.student-list-tab {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.student-list-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+}import { useEffect, useMemo, useState } from 'react';
+import { Button, DatePicker, Input, Modal, Select, Space, Table, Tag, Typography } from 'antd';
+import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
+import dayjs, { Dayjs } from 'dayjs';
+import type { Class, ClassMember, GetMembersRequest } from '../../../types/class';
+import { getMembersInClassService, removeUsersFromClassService } from '../../../services/classManagementService';
+import AddStudentsModal from './AddStudentsModal';
+import './StudentListTab.css';
+
+const { Search } = Input;
+const { Text } = Typography;
+
+interface Props {
+  classData: Class;
+}
+
+const STATUS_OPTIONS = [
+  { label: 'ACTIVE', value: 'ACTIVE' },
+  { label: 'INACTIVE', value: 'INACTIVE' },
+];
+
+const StudentListTab = ({ classData }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [members, setMembers] = useState<ClassMember[]>([]);
+  const [pagination, setPagination] = useState<TablePaginationConfig>({
+    current: 1,
+    pageSize: 10,
+    total: 0,
+  });
+
+  const [searchString, setSearchString] = useState<string>('');
+  const [status, setStatus] = useState<string[] | undefined>(undefined);
+  const [joinDate, setJoinDate] = useState<Dayjs | null>(null);
+
+  // CHANGED: lưu key theo memberId (id của quan hệ thành viên trong lớp)
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [addModalVisible, setAddModalVisible] = useState(false);
+
+  const fetchMembers = async (page = 1, size = 10) => {
+    setLoading(true);
+    try {
+      const req: GetMembersRequest = {
+        classId: classData.id,
+        searchString: searchString?.trim() || undefined,
+        joinDate: joinDate ? joinDate.toISOString() : null,
+        status,
+        page: page - 1, // backend 0-based
+        size,
+      };
+      const res = await getMembersInClassService(req);
+      const data = res.data;
+      setMembers(data.content || []);
+      setPagination({
+        current: (data.pageable?.pageNumber ?? 0) + 1,
+        pageSize: data.pageable?.pageSize ?? size,
+        total: data.totalElements ?? 0,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMembers(1, pagination.pageSize || 10);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [classData.id, searchString, joinDate, JSON.stringify(status)]);
+
+  const columns: ColumnsType<ClassMember> = useMemo(
+    () => [
+      {
+        title: 'Họ và tên',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text: string) => <Text strong>{text}</Text>,
+      },
+      {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+        render: (val) => val || '-',
+      },
+      {
+        title: 'SĐT',
+        dataIndex: 'phone',
+        key: 'phone',
+        render: (val) => val || '-',
+      },
+      {
+        title: 'Địa chỉ',
+        dataIndex: 'address',
+        key: 'address',
+        ellipsis: true,
+        render: (val) => val || '-',
+      },
+      {
+        title: 'Ngày tham gia',
+        dataIndex: 'joinDate',
+        key: 'joinDate',
+        render: (val: string) => (val ? dayjs(val).format('YYYY-MM-DD HH:mm') : '-'),
+      },
+      {
+        title: 'Trạng thái',
+        dataIndex: 'status',
+        key: 'status',
+        render: (val: ClassMember['status']) => (
+          <Tag color={val === 'ACTIVE' ? 'green' : 'default'}>{val}</Tag>
+        ),
+      },
+    //   {
+    //     title: 'Vai trò',
+    //     dataIndex: 'roleInClass',
+    //     key: 'roleInClass',
+    //     render: (v) => <Tag color="blue">{v}</Tag>,
+    //   },
+      {
+        title: 'Thao tác',
+        key: 'action',
+        render: (_, record) => (
+          <Space>
+            {/* CHANGED: dùng record.memberId để xóa */}
+            <Button danger type="link" onClick={() => handleRemove([record.memberId])}>
+              Xóa
+            </Button>
+          </Space>
+        ),
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  const handleTableChange = (p: TablePaginationConfig) => {
+    fetchMembers(p.current || 1, p.pageSize || 10);
+  };
+
+  // CHANGED: ids ở đây là danh sách memberId
+  const handleRemove = (ids: number[]) => {
+    Modal.confirm({
+      title: 'Xác nhận xóa',
+      content:
+        ids.length > 1
+          ? `Bạn có chắc muốn xóa ${ids.length} học viên khỏi lớp?`
+          : 'Bạn có chắc muốn xóa học viên này khỏi lớp?',
+      okText: 'Xóa',
+      okButtonProps: { danger: true },
+      cancelText: 'Hủy',
+      onOk: async () => {
+        try {
+          await removeUsersFromClassService({
+            id: classData.id,
+            memberIds: ids,
+          });
+          setSelectedRowKeys((prev) => prev.filter((k) => !ids.includes(Number(k))));
+          await fetchMembers(pagination.current || 1, pagination.pageSize || 10);
+        } catch {
+          // message đã hiển thị ở service
+        }
+      },
+    });
+  };
+
+  return (
+    <div className="student-list-tab">
+      <div className="student-list-toolbar">
+        <Space wrap>
+          <Search
+            allowClear
+            placeholder="Tìm theo tên, email, SĐT..."
+            onSearch={(v) => setSearchString(v)}
+            onChange={(e) => !e.target.value && setSearchString('')}
+            style={{ width: 280 }}
+          />
+          <Select
+            mode="multiple"
+            allowClear
+            placeholder="Trạng thái"
+            options={STATUS_OPTIONS}
+            value={status}
+            onChange={(vals) => setStatus(vals.length ? (vals as string[]) : undefined)}
+            style={{ minWidth: 180 }}
+          />
+          <DatePicker
+            allowClear
+            placeholder="Ngày tham gia"
+            value={joinDate}
+            onChange={(d) => setJoinDate(d)}
+          />
+        </Space>
+
+        <Space>
+          <Button
+            danger
+            disabled={selectedRowKeys.length === 0}
+            onClick={() => handleRemove(selectedRowKeys as number[])}
+          >
+            Xóa đã chọn
+          </Button>
+          <Button type="primary" onClick={() => setAddModalVisible(true)}>
+            Thêm học viên
+          </Button>
+        </Space>
+      </div>
+
+      <Table<ClassMember>
+        // CHANGED: rowKey là memberId để chọn/xóa đúng theo API
+        rowKey="memberId"
+        loading={loading}
+        columns={columns}
+        dataSource={members}
+        pagination={pagination}
+        onChange={handleTableChange}
+        rowSelection={{
+          selectedRowKeys,
+          onChange: setSelectedRowKeys,
+        }}
+      />
+
+      <AddStudentsModal
+        visible={addModalVisible}
+        classId={classData.id}
+        // GIỮ NGUYÊN: lọc trùng theo user.id (id trong list là user id)
+        existingUserIds={members.map((m) => m.id)}
+        onClose={async (changed) => {
+          setAddModalVisible(false);
+          if (changed) {
+            await fetchMembers(pagination.current || 1, pagination.pageSize || 10);
+          }
+        }}
+      />
+    </div>
+  );
+};
+
+export default StudentListTab;

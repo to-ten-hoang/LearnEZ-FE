@@ -1,0 +1,86 @@
+/* CourseDetailDrawer.css */
+.course-detail-drawer .ant-drawer-header {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.course-detail-drawer .ant-drawer-title {
+    font-weight: 600;
+    color: #1890ff;
+}
+
+.drawer-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Thumbnail */
+.drawer-thumbnail {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: #f0f0f0;
+}
+
+.drawer-thumbnail img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.drawer-thumbnail .category-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.drawer-thumbnail .bought-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+/* Title */
+.course-title {
+    margin-bottom: 8px !important;
+    line-height: 1.4;
+}
+
+/* Author */
+.course-author {
+    color: #666;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.course-author .anticon {
+    margin-right: 6px;
+}
+
+/* Price */
+.course-price {
+    margin-bottom: 8px;
+}
+
+/* Description */
+.course-description h5 {
+    margin-bottom: 8px;
+}
+
+.course-description .ant-typography {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Actions */
+.drawer-actions {
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+.drawer-actions .ant-btn {
+    height: 44px;
+    font-size: 15px;
+}
