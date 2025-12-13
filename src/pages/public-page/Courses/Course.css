@@ -3,10 +3,7 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 24px;
-<<<<<<< HEAD
     width: 100%;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .page-title {
@@ -29,35 +26,21 @@
 
 .filter-search {
     flex: 1;
-<<<<<<< HEAD
     min-width: 200px;
-=======
-    min-width: 250px;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     max-width: 500px;
 }
 
 .filters-right {
     display: flex;
     gap: 16px;
-<<<<<<< HEAD
     margin-left: auto;
-=======
-    margin-left: auto; /* Đẩy cụm này về phía bên phải */
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     flex-wrap: wrap;
 }
 
 .filter-select {
-<<<<<<< HEAD
     width: 220px;
     min-width: unset;
     max-width: 100%;
-=======
-    width: 250px; /* hoặc 250px, tuỳ ý */
-    min-width: unset; /* bỏ min-width nếu muốn */
-    max-width: 100%; /* đảm bảo không tràn */
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     flex: none;
 }
 
@@ -66,11 +49,7 @@
 }
 
 .courses-list-section {
-<<<<<<< HEAD
     min-height: 400px;
-=======
-    min-height: 400px; /* To prevent layout shift during loading */
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .pagination-container {
@@ -82,7 +61,6 @@
     display: inline-block;
 }
 
-<<<<<<< HEAD
 /* Large desktop */
 @media (max-width: 1200px) {
     .courses-page-container {
@@ -123,14 +101,10 @@
         padding: 12px;
     }
 
-=======
-@media (max-width: 768px) {
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     .filters-wrapper {
         flex-direction: column;
         align-items: stretch;
     }
-<<<<<<< HEAD
 
     .filter-search {
         max-width: 100%;
@@ -177,9 +151,4 @@
     .pagination-container {
         margin-top: 16px;
     }
-=======
-    .filter-sort {
-        width: 100%;
-    }
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }

@@ -2,13 +2,8 @@
 
 // src/components/manage/ClassDetail/ScheduleTab.tsx
 import { useState, useEffect, useCallback } from "react"
-<<<<<<< HEAD
 import { Card, Calendar, Badge, Button, Space, Spin, Tag, Tooltip, Empty } from "antd"
 import { PlusOutlined, CalendarOutlined, ReloadOutlined } from "@ant-design/icons"
-=======
-import { Card, Calendar, Badge, Button, Space, Spin } from "antd"
-import { PlusOutlined, CalendarOutlined } from "@ant-design/icons"
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import dayjs, { type Dayjs } from "dayjs"
 import type { Class } from "../../../types/class"
 import type { Schedule, CreateScheduleRequest, UpdateScheduleRequest } from "../../../types/schedule"
@@ -21,16 +16,12 @@ import {
 import CreateScheduleModal from "./CreateScheduleModal"
 import CreateRecurringScheduleModal from "./CreateRecurringScheduleModal"
 import ScheduleDetailModal from "./ScheduleDetailModal"
-<<<<<<< HEAD
 import "./ScheduleTab.css"
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
 interface ScheduleTabProps {
   classData: Class
 }
 
-<<<<<<< HEAD
 // Status config cho schedule
 const SCHEDULE_STATUS: Record<string, { color: string; badgeStatus: "success" | "error" | "default" | "processing" | "warning"; label: string }> = {
   ACTIVE: { color: "green", badgeStatus: "success", label: "Đang hoạt động" },
@@ -38,8 +29,6 @@ const SCHEDULE_STATUS: Record<string, { color: string; badgeStatus: "success" | 
   CANCELED: { color: "red", badgeStatus: "error", label: "Đã hủy" },
 }
 
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 const ScheduleTab = ({ classData }: ScheduleTabProps) => {
   const [schedules, setSchedules] = useState<Schedule[]>([])
   const [loading, setLoading] = useState(false)
@@ -81,7 +70,6 @@ const ScheduleTab = ({ classData }: ScheduleTabProps) => {
   // Render nội dung của mỗi ô ngày trong calendar
   const dateCellRender = (value: Dayjs) => {
     const daySchedules = getSchedulesForDate(value)
-<<<<<<< HEAD
     if (daySchedules.length === 0) return null
 
     return (
@@ -111,32 +99,6 @@ const ScheduleTab = ({ classData }: ScheduleTabProps) => {
           <Tag className="more-tag">+{daySchedules.length - 3} buổi</Tag>
         )}
       </div>
-=======
-    return (
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {daySchedules.map((schedule) => (
-          <li key={schedule.id} style={{ marginBottom: 4 }}>
-            <Badge
-              status={schedule.status === "ACTIVE" ? "success" : "default"}
-              text={
-                <span
-                  style={{
-                    cursor: "pointer",
-                    fontSize: "12px",
-                  }}
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handleScheduleClick(schedule)
-                  }}
-                >
-                  {dayjs(schedule.startAt).format("HH:mm")} - {schedule.title}
-                </span>
-              }
-            />
-          </li>
-        ))}
-      </ul>
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     )
   }
 
@@ -180,7 +142,6 @@ const ScheduleTab = ({ classData }: ScheduleTabProps) => {
     await fetchSchedules()
   }
 
-<<<<<<< HEAD
   // Thống kê nhanh
   const totalSchedules = schedules.length
   const activeSchedules = schedules.filter(s => s.status === 'ACTIVE').length
@@ -242,28 +203,6 @@ const ScheduleTab = ({ classData }: ScheduleTabProps) => {
             </Button>
           </Empty>
         )}
-=======
-  return (
-    <Card>
-      <Space style={{ marginBottom: 16 }}>
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={() => {
-            setSelectedDate(null)
-            setIsCreateModalVisible(true)
-          }}
-        >
-          Tạo lịch học
-        </Button>
-        <Button type="default" icon={<CalendarOutlined />} onClick={() => setIsRecurringModalVisible(true)}>
-          Tạo lịch học hàng tuần
-        </Button>
-      </Space>
-
-      <Spin spinning={loading}>
-        <Calendar dateCellRender={dateCellRender} onSelect={handleDateSelect} />
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
       </Spin>
 
       {/* Modal tạo lịch học đơn lẻ */}

@@ -1,15 +1,7 @@
-<<<<<<< HEAD
 import type { User } from './user';
 
 // Định nghĩa các trạng thái của lớp học để sử dụng nhất quán
 export const CLASS_STATUSES = ['PENDING', 'ACTIVE', 'FINISHED', 'CANCELED', 'PLANNING', 'CANCELLED', 'COMPLETED', 'ONGOING'] as const;
-=======
-// src/types/class.ts
-import type { User } from './user';
-
-// Định nghĩa các trạng thái của lớp học để sử dụng nhất quán
-export const CLASS_STATUSES = ['PENDING', 'ACTIVE', 'FINISHED', 'CANCELED'] as const;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 export type ClassStatus = (typeof CLASS_STATUSES)[number];
 
 export interface Class {
@@ -43,10 +35,6 @@ export interface CreateClassRequest {
     title: string;
     teacher: number;
     memberIds?: number[];
-<<<<<<< HEAD
-=======
-    // status: ClassStatus;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 export interface UpdateClassRequest extends Partial<Omit<CreateClassRequest, 'teacher'>> {
@@ -77,7 +65,6 @@ export interface ClassDetailResponse {
 }
 
 export interface ClassMember {
-<<<<<<< HEAD
     // id người dùng trong hệ thống
     id: number;
     name: string;
@@ -91,20 +78,6 @@ export interface ClassMember {
     roleInClass: 'STUDENT' | 'TEACHER';
 }
 
-=======
-  // id người dùng trong hệ thống
-  id: number;
-  name: string;
-  joinDate: string;
-  email: string;
-  phone: string | null;
-  // memberId: id bản ghi quan hệ thành viên-trong-lớp (dùng cho API xóa)
-  memberId: number;
-  address: string | null;
-  status: 'ACTIVE' | 'INACTIVE';
-  roleInClass: 'STUDENT' | 'TEACHER';
-}
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 // Request body để lấy danh sách thành viên
 export interface GetMembersRequest {
     classId: number;
@@ -121,10 +94,6 @@ export interface UpdateMembersRequest {
     memberIds: number[];
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 // Response API cho danh sách thành viên (có phân trang)
 export interface MemberPagedResponse {
     code: number;
@@ -138,7 +107,6 @@ export interface MemberPagedResponse {
             pageSize: number;
         }
     };
-<<<<<<< HEAD
 }
 
 /* ====== Class Notification types ====== */
@@ -211,6 +179,4 @@ export interface ClassNotificationDetailResponse {
     code: number;
     message: string;
     data: ClassNotification;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }

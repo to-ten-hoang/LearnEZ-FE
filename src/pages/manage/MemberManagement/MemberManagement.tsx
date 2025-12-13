@@ -1,25 +1,15 @@
-<<<<<<< HEAD
 import { Button, message, Table, Input, Select, DatePicker, Form, Switch, Modal, Row, Col } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-=======
-import { Button, message, Table, Input, Select, DatePicker, Form, Switch, Modal } from 'antd';
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import { useEffect, useState, useCallback } from 'react';
 import moment from 'moment';
 import {
     filterUsersService,
     disableUserService,
     deleteUserService,
-<<<<<<< HEAD
     createUserService,
 } from '../../../services/userService';
 import './MemberManagement.css';
 import type { FilterRequest, User, FilterResponse, CreateUserRequest } from '../../../types/user';
-=======
-} from '../../../services/userService';
-import './MemberManagement.css';
-import type { FilterRequest, User, FilterResponse } from '../../../types/user';
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import type { SortOrder } from 'antd/es/table/interface';
 
 const { Option } = Select;
@@ -34,10 +24,7 @@ const ROLE_OPTIONS = [
 
 const MemberManagement = () => {
     const [form] = Form.useForm();
-<<<<<<< HEAD
     const [createForm] = Form.useForm();
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState<User[]>([]);
     const [currentPage, setCurrentPage] = useState(0);
@@ -54,7 +41,6 @@ const MemberManagement = () => {
         userId: null as number | null,
     });
 
-<<<<<<< HEAD
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [createLoading, setCreateLoading] = useState(false);
 
@@ -84,8 +70,6 @@ const MemberManagement = () => {
         }
     };
 
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     const fetchUsers = useCallback(
         async (
             values: any = {},
@@ -139,15 +123,7 @@ const MemberManagement = () => {
                 isActive: modalState.activeChecked,
             });
             if (response.code === 200) {
-<<<<<<< HEAD
                 // Message đã được hiển thị bởi service
-=======
-                message.success(
-                    modalState.activeChecked
-                        ? 'Kích hoạt người dùng thành công!'
-                        : 'Vô hiệu hóa người dùng thành công!'
-                );
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 setUsers(
                     users.map((user) =>
                         user.id === modalState.userId
@@ -157,11 +133,7 @@ const MemberManagement = () => {
                 );
             }
         } catch (error) {
-<<<<<<< HEAD
             // Lỗi đã được hiển thị bởi service
-=======
-            message.error('Lỗi khi cập nhật trạng thái người dùng.');
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         } finally {
             setModalLoading(false);
             setModalState({ ...modalState, activeOpen: false, userId: null });
@@ -194,42 +166,21 @@ const MemberManagement = () => {
                 isActive: false,
             });
             if (response.code === 200) {
-<<<<<<< HEAD
                 // Message đã được hiển thị bởi service
-=======
-                message.success(
-                    modalState.isDelete
-                        ? 'Xóa người dùng thành công!'
-                        : 'Khôi phục người dùng thành công!'
-                );
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 setUsers(
                     users.map((user) =>
                         user.id === modalState.userId
                             ? {
-<<<<<<< HEAD
                                 ...user,
                                 isDelete: modalState.isDelete,
                                 isActive: modalState.isDelete ? false : user.isActive,
                             }
-=======
-                                  ...user,
-                                  isDelete: modalState.isDelete,
-                                  isActive: modalState.isDelete ? false : user.isActive,
-                              }
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                             : user
                     )
                 );
             }
         } catch (error) {
-<<<<<<< HEAD
             // Lỗi đã được hiển thị bởi service
-=======
-            message.error(
-                modalState.isDelete ? 'Lỗi khi xóa người dùng.' : 'Lỗi khi khôi phục người dùng.'
-            );
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         } finally {
             setModalLoading(false);
             setModalState({ ...modalState, deleteOpen: false, userId: null });
@@ -415,7 +366,6 @@ const MemberManagement = () => {
                             Xóa bộ lọc
                         </Button>
                     </Form.Item>
-<<<<<<< HEAD
                     <Button
                         type="primary"
                         icon={<PlusOutlined />}
@@ -423,8 +373,6 @@ const MemberManagement = () => {
                     >
                         Thêm thành viên
                     </Button>
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 </div>
             </Form>
             <Table
@@ -479,7 +427,6 @@ const MemberManagement = () => {
                         : 'Bạn có chắc chắn muốn khôi phục người dùng này?'}
                 </p>
             </Modal>
-<<<<<<< HEAD
             <Modal
                 title="Cấp tài khoản mới"
                 open={isCreateModalOpen}
@@ -556,8 +503,6 @@ const MemberManagement = () => {
                     </Form.Item>
                 </Form>
             </Modal>
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         </div>
     );
 };

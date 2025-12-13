@@ -34,27 +34,21 @@
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
 }
 
 /* Table responsive wrapper */
 .member-management .ant-table-wrapper {
     overflow-x: auto;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .member-management .ant-table-thead > tr > th {
     background: #fafafa;
     font-weight: 600;
-<<<<<<< HEAD
 }
 
 /* Table responsive wrapper */
 .member-management .ant-table-wrapper {
     overflow-x: auto;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .status-active {
@@ -70,10 +64,7 @@
 .action-buttons {
     display: flex;
     gap: 8px;
-<<<<<<< HEAD
     flex-wrap: wrap;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .action-buttons .ant-btn {
@@ -92,11 +83,7 @@
 .form-actions {
     display: flex;
     gap: 8px;
-<<<<<<< HEAD
     flex-wrap: wrap;
-=======
-    flex-wrap: nowrap;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     align-items: center;
 }
 
@@ -116,7 +103,6 @@
 /* Tablet */
 @media (max-width: 768px) {
     .member-management {
-<<<<<<< HEAD
         padding: 12px;
     }
 
@@ -172,29 +158,4 @@
     .member-management .ant-form {
         padding: 8px;
     }
-=======
-        margin-left: 0;
-        padding: 16px;
-    }
-
-    .member-management .ant-form {
-        flex-direction: column;
-    }
-
-    .member-management .ant-input,
-    .member-management .ant-select,
-    .member-management .ant-picker {
-        width: 100%;
-    }
-
-    .form-actions {
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-    }
-
-    .form-actions .ant-btn {
-        width: 100%;
-    }
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }

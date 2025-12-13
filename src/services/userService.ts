@@ -5,10 +5,7 @@ import {
     deleteUser,
     updateUserInfo,
     getUserProfile,
-<<<<<<< HEAD
     createUser,
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 } from '../api/userApi';
 import type {
     FilterRequest,
@@ -20,10 +17,7 @@ import type {
     UpdateUserInfoRequest,
     UpdateUserInfoResponse,
     UserProfileResponse,
-<<<<<<< HEAD
     CreateUserRequest,
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 } from '../types/user';
 
 export const filterUsersService = async (data: FilterRequest): Promise<FilterResponse> => {
@@ -98,7 +92,6 @@ export const updateUserInfoService = async (
     } catch (error: any) {
         message.error(error.response?.data?.message || 'Lỗi khi cập nhật thông tin người dùng.');
         throw error;
-<<<<<<< HEAD
     }
 };
 
@@ -115,7 +108,3 @@ export const createUserService = async (data: CreateUserRequest): Promise<any> =
         throw error;
     }
 };
-=======
-    }
-};
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

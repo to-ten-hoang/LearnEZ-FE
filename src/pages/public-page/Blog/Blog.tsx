@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState, useCallback } from 'react';
 import { Pagination, Spin, Empty, message } from 'antd';
 import { getPublicPostsService, getCategoriesService } from '../../../services/blogService';
@@ -191,10 +190,3 @@ const Blog: React.FC = () => {
 };
 
 export default Blog;
-=======
-const Blog = () => {
-    return <div>Blog</div>;
-};
-
-export default Blog;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

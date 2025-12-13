@@ -52,10 +52,7 @@ const CourseDetailDrawer = ({
     onCourseUpdated,
 }: CourseDetailDrawerProps) => {
     const [form] = Form.useForm();
-<<<<<<< HEAD
     const navigate = useNavigate();
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     const [loading, setLoading] = useState(false);
     const [uploadLoading, setUploadLoading] = useState(false);
     const [fileList, setFileList] = useState<any[]>([]);
@@ -292,7 +289,6 @@ const CourseDetailDrawer = ({
 
     const getFooterButtons = () => {
         if (isCreateMode) {
-<<<<<<< HEAD
           return (
             <div style={{ textAlign: 'right' }}>
               <Button onClick={handleClose} style={{ marginRight: 8 }}>
@@ -341,44 +337,6 @@ const CourseDetailDrawer = ({
           </div>
         );
       };
-=======
-            return (
-                <div style={{ textAlign: 'right' }}>
-                    <Button onClick={handleClose} style={{ marginRight: 8 }}>
-                        Hủy
-                    </Button>
-                    <Button type="primary" loading={loading} onClick={() => form.submit()}>
-                        Tạo mới
-                    </Button>
-                </div>
-            );
-        }
-
-        if (isViewMode) {
-            return (
-                <div style={{ textAlign: 'right' }}>
-                    <Button onClick={handleClose} style={{ marginRight: 8 }}>
-                        Đóng
-                    </Button>
-                    <Button type="primary" icon={<EditOutlined />} onClick={handleEdit}>
-                        Chỉnh sửa
-                    </Button>
-                </div>
-            );
-        }
-
-        return (
-            <div style={{ textAlign: 'right' }}>
-                <Button onClick={handleCancelEdit} style={{ marginRight: 8 }}>
-                    Hủy
-                </Button>
-                <Button type="primary" loading={loading} onClick={() => form.submit()}>
-                    Cập nhật
-                </Button>
-            </div>
-        );
-    };
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
     return (
         <Drawer

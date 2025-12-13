@@ -134,22 +134,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ visible, onClose }) => {
             <List.Item.Meta
                 avatar={
                     <Image
-<<<<<<< HEAD
                         src={item.course.thumbnailUrl || 'https://placehold.co/60x60/e8e8e8/666?text=Course'}
                         alt={item.course.title}
                         width={60}
                         height={60}
                         style={{ borderRadius: 8, objectFit: 'cover' }}
                         preview={false}
-=======
-                        src={item.course.thumbnailUrl || '/assets/default-course.jpg'}
-                        alt={item.course.title}
-                        width={60}
-                        height={60}
-                        style={{ borderRadius: 4, objectFit: 'cover' }}
-                        preview={false}
-                        fallback="/assets/default-course.jpg"
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                     />
                 }
                 title={

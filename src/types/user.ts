@@ -137,7 +137,6 @@ export interface UpdateUserInfoResponse {
     message: string;
     data: User;
 }
-<<<<<<< HEAD
 
 export interface CreateUserRequest {
     email: string;
@@ -146,5 +145,3 @@ export interface CreateUserRequest {
     lastName: string;
     role: number; // API yêu cầu số (0, 1, 2...)
 }
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

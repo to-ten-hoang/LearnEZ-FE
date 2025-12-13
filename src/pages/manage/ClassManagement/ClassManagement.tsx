@@ -5,19 +5,11 @@ import { filterClassesService } from '../../../services/classManagementService';
 import { getTeachersService } from '../../../services/courseManagementService';
 import type { Class, FilterClassesRequest } from '../../../types/class';
 import type { User } from '../../../types/user';
-<<<<<<< HEAD
 import ClassFilter from '../../../components/manage/ClassManagement/ClassFilter';
 import ClassTable from '../../../components/manage/ClassManagement/ClassTable';
 import ClassFormModal from '../../../components/manage/ClassManagement/ClassFormModal';
 import CancelClassModal from '../../../components/manage/ClassManagement/CancelClassModal';
 import RoomManagementModal from '../../../components/manage/ClassManagement/RoomManagementModal';
-=======
-import ClassFilter from '../../../components/manage/ClassManagement/ClassFilter/ClassFilter';
-import ClassTable from '../../../components/manage/ClassManagement/ClassTable/ClassTable';
-import ClassFormModal from '../../../components/manage/ClassManagement/ClassFormModal/ClassFormModal';
-import CancelClassModal from '../../../components/manage/ClassManagement/CancelClassModal/CancelClassModal';
-import './ClassManagement.css';
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
 const ClassManagementPage = () => {
     const [classes, setClasses] = useState<Class[]>([]);
@@ -32,10 +24,7 @@ const ClassManagementPage = () => {
 
     const [isFormModalVisible, setIsFormModalVisible] = useState(false);
     const [isCancelModalVisible, setIsCancelModalVisible] = useState(false);
-<<<<<<< HEAD
     const [isRoomModalVisible, setIsRoomModalVisible] = useState(false);
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     const [selectedClass, setSelectedClass] = useState<Class | null>(null);
 
     const fetchClasses = useCallback(
@@ -48,10 +37,6 @@ const ClassManagementPage = () => {
                     size: size,
                 });
                 setClasses(response.data.content);
-<<<<<<< HEAD
-=======
-                // setClasses(response.data);
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 setPagination((prev) => ({
                     ...prev,
                     total: response.data.totalElements,
@@ -69,10 +54,6 @@ const ClassManagementPage = () => {
 
     const fetchInitialData = useCallback(async () => {
         try {
-<<<<<<< HEAD
-=======
-            // Lấy danh sách giáo viên để đưa vào bộ lọc và form
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
             const teacherList = await getTeachersService();
             setTeachers(teacherList);
         } catch (error) {
@@ -90,10 +71,6 @@ const ClassManagementPage = () => {
 
     const handleFilter = (newFilters: Partial<FilterClassesRequest>) => {
         setFilters(newFilters);
-<<<<<<< HEAD
-=======
-        // Khi lọc, quay về trang 1
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         setPagination((prev) => ({ ...prev, current: 1 }));
         fetchClasses(newFilters, 1, pagination.pageSize);
     };
@@ -135,18 +112,11 @@ const ClassManagementPage = () => {
                     teachers={teachers}
                     loading={loading}
                     createClassService={() => handleOpenFormModal(null)}
-<<<<<<< HEAD
                     onManageRooms={() => setIsRoomModalVisible(true)}
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 />
             </Card>
 
             <Card>
-<<<<<<< HEAD
-=======
-
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 <ClassTable
                     data={classes}
                     loading={loading}
@@ -169,14 +139,11 @@ const ClassManagementPage = () => {
                 classData={selectedClass}
                 onClose={handleCloseCancelModal}
             />
-<<<<<<< HEAD
 
             <RoomManagementModal
                 visible={isRoomModalVisible}
                 onClose={() => setIsRoomModalVisible(false)}
             />
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         </div>
     );
 };

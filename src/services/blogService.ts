@@ -5,10 +5,7 @@ import {
     getAllPosts,
     updatePostStatus,
     getCategories,
-<<<<<<< HEAD
     getPublicPosts,
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 } from '../api/blogApi';
 import type {
     PostData,
@@ -93,7 +90,6 @@ export const getCategoriesService = async (): Promise<CategoryResponse> => {
         throw error;
     }
 };
-<<<<<<< HEAD
 
 // Service mới cho trang Blog public - không hiện message thành công
 export const getPublicPostsService = async (data: AllPostsRequest): Promise<AllPostsResponse> => {
@@ -108,5 +104,3 @@ export const getPublicPostsService = async (data: AllPostsRequest): Promise<AllP
         throw error;
     }
 };
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

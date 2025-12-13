@@ -23,10 +23,7 @@ import Orders from '../pages/student/Orders/Orders';
 import OrderStatus from '../pages/student/OrderStatus/OrderStatus';
 import ProtectedRoute from '../components/common/ProtectedRoute/ProtectedRoute';
 import ClassDetail from 'pages/manage/ClassDetail/ClassDetail';
-<<<<<<< HEAD
 import CourseDetail from '../pages/manage/CourseManagement/CourseDetail';
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
 const router = createBrowserRouter([
     {
@@ -36,7 +33,6 @@ const router = createBrowserRouter([
             // ✅ PUBLIC ROUTES
             { path: '/', element: React.createElement(Home) },
             { path: '/courses', element: React.createElement(Courses) },
-<<<<<<< HEAD
             { 
                 path: '/blog', 
                 element: React.createElement(Blog), 
@@ -44,9 +40,6 @@ const router = createBrowserRouter([
                     
                 ],
             },
-=======
-            { path: '/blog', element: React.createElement(Blog) },
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
             { path: '/test', element: React.createElement(Test) },
             { path: '/order-status', element: React.createElement(OrderStatus) },
 
@@ -124,14 +117,10 @@ const router = createBrowserRouter([
                         element: React.createElement(ProtectedRoute, {
                             allowedTab: 'course-management',
                         }),
-<<<<<<< HEAD
                         children: [
                             { path: '', element: React.createElement(CourseManagement) },
                             { path: ':courseId', element: React.createElement(CourseDetail) }
                         ],
-=======
-                        children: [{ path: '', element: React.createElement(CourseManagement) }],
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                     },
                     {
                         path: 'blog-approval',

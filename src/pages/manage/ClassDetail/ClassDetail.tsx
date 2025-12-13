@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-=======
-// src/pages/manage/ClassDetail/ClassDetail.tsx
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Spin, message, Tabs, Breadcrumb, Typography, Button, Space } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import type { Class } from '../../../types/class';
 import { getClassByIdService } from '../../../services/classManagementService';
-<<<<<<< HEAD
 // import './ClassDetail.css';
 
 // Import các component tab
@@ -17,14 +12,6 @@ import StudentListTab from '../../../components/manage/ClassDetail/StudentListTa
 import ScheduleTab from '../../../components/manage/ClassDetail/ScheduleTab';
 import NotificationTab from '../../../components/manage/ClassDetail/NotificationTab';
 import AttendanceTab from '../../../components/manage/ClassDetail/AttendanceTab';
-=======
-import './ClassDetail.css';
-
-// Import các component tab vừa tạo
-import ClassInfoTab from '../../../components/manage/ClassDetail/ClassInfoTab';
-import StudentListTab from '../../../components/manage/ClassDetail/StudentListTab';
-import ScheduleTab from '../../../components/manage/ClassDetail/ScheduleTab';
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
 const { TabPane } = Tabs;
 const { Title } = Typography;
@@ -93,22 +80,14 @@ const ClassDetail = () => {
                     <ScheduleTab classData={classData} />
                 </TabPane>
                 <TabPane tab="Thông báo" key="4">
-<<<<<<< HEAD
                     <NotificationTab classData={classData} />
                 </TabPane>
                 <TabPane tab="Điểm danh" key="5">
                     <AttendanceTab classData={classData} />
-=======
-                    <div>Chức năng đang phát triển.</div>
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 </TabPane>
             </Tabs>
         </div>
     );
 };
 
-<<<<<<< HEAD
 export default ClassDetail;
-=======
-export default ClassDetail;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

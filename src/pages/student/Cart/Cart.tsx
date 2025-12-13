@@ -173,21 +173,13 @@ const CartPage: React.FC = () => {
                     <Image
                         src={
                             item.course.thumbnailUrl ||
-<<<<<<< HEAD
                             'https://placehold.co/80x80/e8e8e8/666?text=Course'
-=======
-                            'https://symbols.vn/wp-content/uploads/2023/10/Share-hinh-anh-meo-ngu-ngon-ba-dao-nhat.jpg'
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                         }
                         alt={item.course.title}
                         width={80}
                         height={80}
                         style={{ borderRadius: 8, objectFit: 'cover' }}
                         preview={false}
-<<<<<<< HEAD
-=======
-                        fallback="/assets/default-course.jpg"
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                     />
                 }
                 title={

@@ -9,7 +9,6 @@ import {
 import type { Notification as NotificationType, ENotiType } from '../../../types/notification';
 import './Notification.css';
 
-<<<<<<< HEAD
 const NotificationComponent = () => {
     const [unreadCount, setUnreadCount] = useState<number>(0);
     const [notifications, setNotifications] = useState<NotificationType[]>([]);
@@ -191,16 +190,3 @@ const NotificationComponent = () => {
 };
 
 export default NotificationComponent;
-=======
-const Notification = () => {
-    return (
-        <div>
-            <Badge count={5} className="noti-badge">
-                <BellOutlined className="notification-icon" />
-            </Badge>
-        </div>
-    );
-};
-
-export default Notification;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

@@ -135,15 +135,7 @@ const BlogApproval = () => {
                 isActive: modalState.activeChecked,
             });
             if (response.code === 200) {
-<<<<<<< HEAD
                 // Message đã được hiển thị bởi service
-=======
-                message.success(
-                    modalState.activeChecked
-                        ? 'Duyệt bài đăng thành công!'
-                        : 'Hủy duyệt bài đăng thành công!'
-                );
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 setPosts(
                     posts.map((post) =>
                         post.id === modalState.postId
@@ -153,11 +145,7 @@ const BlogApproval = () => {
                 );
             }
         } catch (error) {
-<<<<<<< HEAD
             // Lỗi đã được hiển thị bởi service
-=======
-            message.error('Lỗi khi cập nhật trạng thái bài đăng.');
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         } finally {
             setModalLoading(false);
             setModalState({ ...modalState, activeOpen: false, postId: null });
@@ -190,42 +178,21 @@ const BlogApproval = () => {
                 isActive: false,
             });
             if (response.code === 200) {
-<<<<<<< HEAD
                 // Message đã được hiển thị bởi service
-=======
-                message.success(
-                    modalState.isDelete
-                        ? 'Xóa bài đăng thành công!'
-                        : 'Khôi phục bài đăng thành công!'
-                );
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 setPosts(
                     posts.map((post) =>
                         post.id === modalState.postId
                             ? {
-<<<<<<< HEAD
                                 ...post,
                                 isDelete: modalState.isDelete,
                                 isActive: modalState.isDelete ? false : post.isActive,
                             }
-=======
-                                  ...post,
-                                  isDelete: modalState.isDelete,
-                                  isActive: modalState.isDelete ? false : post.isActive,
-                              }
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                             : post
                     )
                 );
             }
         } catch (error) {
-<<<<<<< HEAD
             // Lỗi đã được hiển thị bởi service
-=======
-            message.error(
-                modalState.isDelete ? 'Lỗi khi xóa bài đăng.' : 'Lỗi khi khôi phục bài đăng.'
-            );
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         } finally {
             setModalLoading(false);
             setModalState({ ...modalState, deleteOpen: false, postId: null });
@@ -479,14 +446,8 @@ const BlogApproval = () => {
                         <div className="blog-preview-footer">
                             <div className="blog-preview-status">
                                 <span
-<<<<<<< HEAD
                                     className={`status-badge ${previewModal.post.isActive ? 'active' : 'inactive'
                                         }`}
-=======
-                                    className={`status-badge ${
-                                        previewModal.post.isActive ? 'active' : 'inactive'
-                                    }`}
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                                 >
                                     {previewModal.post.isActive ? '✅ Đã duyệt' : '⏳ Chưa duyệt'}
                                 </span>

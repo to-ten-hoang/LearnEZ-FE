@@ -18,7 +18,6 @@ const MainLayout = () => {
     const { isAuthenticated, user } = useAuthStore();
     const [isLoginVisible, setIsLoginVisible] = useState(false);
     const [isRegisterVisible, setIsRegisterVisible] = useState(false);
-<<<<<<< HEAD
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -65,32 +64,6 @@ const MainLayout = () => {
         // { key: 'test', label: <Link to="/test" onClick={handleMenuClick}>Kiểm tra</Link> },
     ];
 
-=======
-
-    const showLogin = () => {
-        setIsLoginVisible(true);
-    };
-
-    const handleCloseLogin = () => {
-        setIsLoginVisible(false);
-    };
-
-    const showRegister = () => {
-        setIsRegisterVisible(true);
-    };
-
-    const handleCloseRegister = () => {
-        setIsRegisterVisible(false);
-    };
-
-    const menuItems = [
-        { key: 'home', label: <Link to="/">Trang chủ</Link> },
-        { key: 'courses', label: <Link to="/courses">Khóa học</Link> },
-        { key: 'blog', label: <Link to="/blog">Blog</Link> },
-        { key: 'test', label: <Link to="/test">Kiểm tra</Link> },
-    ];
-
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     return (
         <Layout className="main-layout">
             <Header className="main-header">
@@ -101,12 +74,8 @@ const MainLayout = () => {
                         </Link>
                     </div>
 
-<<<<<<< HEAD
                     {/* Desktop Menu */}
                     <div className={`menu-container ${isMobile ? 'hidden-mobile' : ''}`}>
-=======
-                    <div className="menu-container">
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                         <Menu
                             mode="horizontal"
                             items={menuItems}
@@ -139,7 +108,6 @@ const MainLayout = () => {
                             )}
                         </div>
                     </div>
-<<<<<<< HEAD
 
                     {/* Mobile Header Actions */}
                     {isMobile && (
@@ -191,11 +159,6 @@ const MainLayout = () => {
                 )}
             </Drawer>
 
-=======
-                </div>
-            </Header>
-
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
             <main className="main-content">
                 <Outlet />
                 <LoginModal visible={isLoginVisible} onClose={handleCloseLogin} />

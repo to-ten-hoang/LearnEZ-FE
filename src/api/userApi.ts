@@ -9,10 +9,7 @@ import type {
     UserProfileResponse,
     UpdateUserInfoRequest,
     UpdateUserInfoResponse,
-<<<<<<< HEAD
     CreateUserRequest,
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 } from '../types/user';
 
 export const filterUsers = async (data: FilterRequest): Promise<FilterResponse> => {
@@ -47,11 +44,8 @@ export const updateUserInfo = async (
     const response = await api.post('/api/v1/user/update-own-info', data);
     return response.data;
 };
-<<<<<<< HEAD
 
 export const createUser = async (data: CreateUserRequest): Promise<any> => {
     const response = await api.post('/api/v1/auth/register', data);
     return response.data;
 };
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

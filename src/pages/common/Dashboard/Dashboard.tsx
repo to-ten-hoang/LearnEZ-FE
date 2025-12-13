@@ -1,13 +1,9 @@
 import './Dashboard.css';
-<<<<<<< HEAD
 import { useState, useEffect } from 'react';
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import { Outlet } from 'react-router-dom';
 import Navigation from 'components/common/Dashboard/Navigation/Navigation';
 
 const Dashboard = () => {
-<<<<<<< HEAD
     const [collapsed, setCollapsed] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -41,11 +37,6 @@ const Dashboard = () => {
             {isMobile && !collapsed && (
                 <div className="sidebar-overlay" onClick={toggleCollapsed} />
             )}
-=======
-    return (
-        <div className="dashboard">
-            <Navigation />
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
             <div className="dashboard-content">
                 <Outlet />
             </div>

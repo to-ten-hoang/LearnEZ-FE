@@ -132,10 +132,7 @@ export interface CourseUpdateRequest {
     description?: string; // ✅ Optional cho update
     price?: number; // ✅ Optional cho update
     categoryId?: number; // ✅ Optional cho update
-<<<<<<< HEAD
     authorId?: number; // ✅ Thêm authorId cho update
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     thumbnailUrl?: string; // ✅ Optional cho update
     isActive?: boolean; // ✅ Optional cho update
     isDelete?: boolean; // ✅ Optional cho update

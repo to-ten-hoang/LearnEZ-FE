@@ -1,19 +1,12 @@
 "use client"
 
 // src/components/manage/ClassDetail/CreateScheduleModal.tsx
-<<<<<<< HEAD
 import { useEffect, useState } from "react"
 import { Modal, Form, Input, DatePicker, Select, Spin } from "antd"
 import dayjs from "dayjs"
 import type { CreateScheduleRequest } from "../../../types/schedule"
 import type { Room } from "../../../types/room"
 import { filterRoomsService } from "../../../services/roomService"
-=======
-import { useEffect } from "react"
-import { Modal, Form, Input, DatePicker, InputNumber } from "antd"
-import dayjs from "dayjs"
-import type { CreateScheduleRequest } from "../../../types/schedule"
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
 interface CreateScheduleModalProps {
   visible: boolean
@@ -25,7 +18,6 @@ interface CreateScheduleModalProps {
 
 const CreateScheduleModal = ({ visible, onClose, onSubmit, classId, initialDate }: CreateScheduleModalProps) => {
   const [form] = Form.useForm()
-<<<<<<< HEAD
   const [rooms, setRooms] = useState<Room[]>([])
   const [loadingRooms, setLoadingRooms] = useState(false)
 
@@ -46,8 +38,6 @@ const CreateScheduleModal = ({ visible, onClose, onSubmit, classId, initialDate 
       fetchRooms()
     }
   }, [visible])
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
   useEffect(() => {
     if (visible) {
@@ -128,7 +118,6 @@ const CreateScheduleModal = ({ visible, onClose, onSubmit, classId, initialDate 
           <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
         </Form.Item>
 
-<<<<<<< HEAD
         <Form.Item name="roomId" label="Phòng học" rules={[{ required: true, message: "Vui lòng chọn phòng học!" }]}>
           <Select
             placeholder="Chọn phòng học"
@@ -146,10 +135,6 @@ const CreateScheduleModal = ({ visible, onClose, onSubmit, classId, initialDate 
               </Select.Option>
             ))}
           </Select>
-=======
-        <Form.Item name="roomId" label="Phòng học" rules={[{ required: true, message: "Vui lòng nhập phòng học!" }]}>
-          <InputNumber style={{ width: "100%" }} placeholder="Nhập ID phòng học" />
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         </Form.Item>
       </Form>
     </Modal>

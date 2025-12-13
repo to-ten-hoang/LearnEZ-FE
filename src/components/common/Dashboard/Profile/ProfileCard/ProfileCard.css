@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-<<<<<<< HEAD
     padding: 20px;
 }
 
@@ -14,24 +13,11 @@
     max-width: 700px;
     background: #fff;
     border: 2px solid #d9d9d9;
-=======
-}
-
-.student-card {
-    width: 80%;
-    max-width: 700px;
-    background: #fff;
-    border: 1px solid #e8e8e8;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     margin-bottom: 20px;
-<<<<<<< HEAD
-=======
-    border: 2px solid #d9d9d9;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .card-left {
@@ -48,88 +34,54 @@
 
 .card-right {
     flex: 1;
-<<<<<<< HEAD
     min-width: 0; /* Allow text to wrap properly */
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .info-row {
     display: flex;
     gap: 20px;
     margin-bottom: 10px;
-<<<<<<< HEAD
     flex-wrap: wrap;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .info-row .ant-form-item {
     flex: 1;
-<<<<<<< HEAD
     min-width: 200px;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 /* Tùy chỉnh input disabled để rõ ràng hơn */
 .ant-input[disabled] {
     background-color: #fff;
     color: #000;
-<<<<<<< HEAD
     opacity: 1;
     border-color: #d9d9d9;
-=======
-    opacity: 1; /* Loại bỏ hiệu ứng mờ */
-    border-color: #d9d9d9; /* Giữ viền nhẹ */
-    /* cursor: default; Không cho cảm giác clickable */
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 /* Tùy chỉnh picker date khi chưa chỉnh sửa */
 .ant-picker .ant-picker-input input[disabled] {
     background-color: #fff;
     color: #000;
-<<<<<<< HEAD
     opacity: 1;
     border-color: #d9d9d9;
-=======
-    opacity: 1; /* Loại bỏ hiệu ứng mờ */
-    border-color: #d9d9d9; /* Giữ viền nhẹ */
-    /* cursor: default; Không cho cảm giác clickable */
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .ant-picker.ant-picker-disabled {
     background-color: #fff;
     color: #000;
-<<<<<<< HEAD
     opacity: 1;
     border-color: #d9d9d9;
-=======
-    opacity: 1; /* Loại bỏ hiệu ứng mờ */
-    border-color: #d9d9d9; /* Giữ viền nhẹ */
-    /* cursor: default; Không cho cảm giác clickable */
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .ant-picker.ant-picker-disabled:hover:not([disabled]) {
     background-color: #fff;
     color: #000;
-<<<<<<< HEAD
     opacity: 1;
     border-color: #d9d9d9;
-=======
-    opacity: 1; /* Loại bỏ hiệu ứng mờ */
-    border-color: #d9d9d9; /* Giữ viền nhẹ */
-    /* cursor: default; Không cho cảm giác clickable */
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 .ant-select.ant-select-disabled {
     background-color: #fff;
     color: #000;
-<<<<<<< HEAD
     opacity: 1;
     border-color: #d9d9d9;
 }
@@ -144,28 +96,10 @@
 .button-group {
     width: 100%;
     max-width: 700px;
-=======
-    opacity: 1; /* Loại bỏ hiệu ứng mờ */
-    border-color: #d9d9d9; /* Giữ viền nhẹ */
-    /* cursor: default; Không cho cảm giác clickable */
-}
-.ant-select-outlined.ant-select-disabled:not(.ant-select-customize-input) .ant-select-selector {
-    background-color: #fff;
-    color: #000;
-    opacity: 1; /* Loại bỏ hiệu ứng mờ */
-    border-color: #d9d9d9; /* Giữ viền nhẹ */
-    /* cursor: default; Không cho cảm giác clickable */
-}
-
-.button-group {
-    width: 80%;
-    max-width: 800px;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     display: flex;
     justify-content: flex-end;
 }
 
-<<<<<<< HEAD
 .profile-details .ant-btn {
     height: 40px;
     font-size: 16px;
@@ -248,9 +182,4 @@
         height: 36px;
         font-size: 14px;
     }
-=======
-.ant-btn {
-    height: 40px;
-    font-size: 16px;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }

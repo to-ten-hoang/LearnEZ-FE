@@ -1,45 +1,25 @@
 /* Dashboard Layout */
 .dashboard {
     display: flex;
-<<<<<<< HEAD
     min-height: calc(100vh - 64px);
     position: relative;
-=======
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 /* Sidebar placeholder - currently managed by Navigation component */
 .dashboard .sidebar {
     width: 270px;
     min-height: 100vh;
-<<<<<<< HEAD
     position: relative;
-=======
-    background: #001529;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 /* Dashboard content area */
 .dashboard-content {
-<<<<<<< HEAD
     margin-left: 250px;
     padding: 20px;
     min-height: calc(100vh - 64px);
     background: #f5f7fa;
     width: calc(100% - 250px);
     transition: all 0.3s ease;
-=======
-    margin-left: 270px;
-    padding: 20px;
-    min-height: calc(100vh - 64px);
-    background: #f5f7fa;
-    width: 100%;
->>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 /* Collapsed sidebar state */
