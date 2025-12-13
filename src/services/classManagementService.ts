@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { message } from 'antd';
 import {
     filterClasses,
@@ -15,12 +16,18 @@ import {
     disableOrDeleteNotificationInClass,
     uploadToCloud,
 } from '../api/classApi';
+=======
+// src/services/classManagementService.ts
+import { message } from 'antd';
+import { filterClasses, createClass, updateClass, getClassDetailById, addUserToClass, removeUserFromClass, getMembersInClass } from '../api/classApi';
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import type {
     FilterClassesRequest,
     CreateClassRequest,
     UpdateClassRequest,
     ClassPagedResponse,
     ClassDetailResponse,
+<<<<<<< HEAD
     GetMembersRequest,
     MemberPagedResponse,
     UpdateMembersRequest,
@@ -31,6 +38,11 @@ import type {
     ClassNotificationPagedResponse,
     ToggleClassNotificationRequest,
     ClassNotificationDetailResponse,
+=======
+    UpdateMembersRequest,
+    GetMembersRequest,
+    MemberPagedResponse,
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 } from '../types/class';
 
 export const filterClassesService = async (
@@ -43,12 +55,24 @@ export const filterClassesService = async (
         }
         return response;
     } catch (error: any) {
+<<<<<<< HEAD
         message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy danh sách lớp học.');
+=======
+        message.error(
+            error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy danh sách lớp học.'
+        );
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         throw error;
     }
 };
 
+<<<<<<< HEAD
 export const createClassService = async (data: CreateClassRequest): Promise<ClassDetailResponse> => {
+=======
+export const createClassService = async (
+    data: CreateClassRequest
+): Promise<ClassDetailResponse> => {
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     try {
         const response = await createClass(data);
         if (response.code !== 200) {
@@ -62,7 +86,13 @@ export const createClassService = async (data: CreateClassRequest): Promise<Clas
     }
 };
 
+<<<<<<< HEAD
 export const updateClassService = async (data: UpdateClassRequest): Promise<ClassDetailResponse> => {
+=======
+export const updateClassService = async (
+    data: UpdateClassRequest
+): Promise<ClassDetailResponse> => {
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     try {
         const response = await updateClass(data);
         if (response.code !== 200) {
@@ -76,10 +106,18 @@ export const updateClassService = async (data: UpdateClassRequest): Promise<Clas
     }
 };
 
+<<<<<<< HEAD
 // Hủy/Xóa lớp học - sử dụng API /delete?ids=
 export const deleteClassesService = async (ids: number[]): Promise<{ code: number; message: string; data: null }> => {
     try {
         const response = await deleteClasses(ids);
+=======
+// Service riêng cho việc hủy lớp học để code rõ ràng hơn
+export const cancelClassService = async (classId: number): Promise<ClassDetailResponse> => {
+    try {
+        const data: UpdateClassRequest = { id: classId };
+        const response = await updateClass(data);
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         if (response.code !== 200) {
             throw new Error(response.message || 'Hủy lớp học thất bại.');
         }
@@ -91,11 +129,14 @@ export const deleteClassesService = async (ids: number[]): Promise<{ code: numbe
     }
 };
 
+<<<<<<< HEAD
 // Alias cho tương thích ngược
 export const cancelClassService = async (classId: number): Promise<{ code: number; message: string; data: null }> => {
     return deleteClassesService([classId]);
 };
 
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 export const getClassByIdService = async (classId: number): Promise<ClassDetailResponse> => {
     try {
         const response = await getClassDetailById(classId);
@@ -104,16 +145,34 @@ export const getClassByIdService = async (classId: number): Promise<ClassDetailR
         }
         return response;
     } catch (error: any) {
+<<<<<<< HEAD
         message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy thông tin lớp học.');
+=======
+        message.error(
+            error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy thông tin lớp học.'
+        );
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         throw error;
     }
 };
 
+<<<<<<< HEAD
 // Members
 export const getMembersInClassService = async (data: GetMembersRequest): Promise<MemberPagedResponse> => {
     try {
         const response = await getMembersInClass(data);
         if (response.code !== 200) throw new Error(response.message || 'Lấy danh sách học viên thất bại.');
+=======
+// NEW: Lấy danh sách học viên trong lớp (có phân trang)
+export const getMembersInClassService = async (
+    data: GetMembersRequest
+): Promise<MemberPagedResponse> => {
+    try {
+        const response = await getMembersInClass(data);
+        if (response.code !== 200) {
+            throw new Error(response.message || 'Lấy danh sách học viên thất bại.');
+        }
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         return response;
     } catch (error: any) {
         message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy danh sách học viên.');
@@ -121,10 +180,22 @@ export const getMembersInClassService = async (data: GetMembersRequest): Promise
     }
 };
 
+<<<<<<< HEAD
 export const addUsersToClassService = async (data: UpdateMembersRequest): Promise<ClassDetailResponse> => {
     try {
         const response = await addUserToClass(data);
         if (response.code !== 200) throw new Error(response.message || 'Thêm học viên thất bại.');
+=======
+// NEW: Thêm học viên vào lớp
+export const addUsersToClassService = async (
+    data: UpdateMembersRequest
+): Promise<ClassDetailResponse> => {
+    try {
+        const response = await addUserToClass(data);
+        if (response.code !== 200) {
+            throw new Error(response.message || 'Thêm học viên thất bại.');
+        }
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         message.success('Đã thêm học viên vào lớp.');
         return response;
     } catch (error: any) {
@@ -133,6 +204,7 @@ export const addUsersToClassService = async (data: UpdateMembersRequest): Promis
     }
 };
 
+<<<<<<< HEAD
 export const removeUsersFromClassService = async (data: UpdateMembersRequest): Promise<ClassDetailResponse> => {
     try {
         const response = await removeUserFromClass(data);
@@ -211,4 +283,21 @@ export const uploadFileToCloudService = async (file: File): Promise<string> => {
         message.error(error.response?.data?.message || 'Lỗi khi upload tệp.');
         throw error;
     }
+=======
+// NEW: Xóa học viên khỏi lớp
+export const removeUsersFromClassService = async (
+  data: UpdateMembersRequest // CHÚ Ý: memberIds ở đây là danh sách memberId (id bản ghi quan hệ trong lớp), KHÔNG phải user id
+): Promise<ClassDetailResponse> => {
+  try {
+    const response = await removeUserFromClass(data);
+    if (response.code !== 200) {
+      throw new Error(response.message || 'Xóa học viên thất bại.');
+    }
+    message.success('Đã xóa học viên khỏi lớp.');
+    return response;
+  } catch (error: any) {
+    message.error(error.response?.data?.message || 'Đã có lỗi xảy ra khi xóa học viên.');
+    throw error;
+  }
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 };

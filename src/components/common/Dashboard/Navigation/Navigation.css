@@ -1,13 +1,19 @@
 /* Sidebar Navigation Styles */
 .profile-sidebar {
     width: 250px;
+<<<<<<< HEAD
     min-width: 250px;
     background: #fff;
     padding: 16px 12px;
+=======
+    background: #fff;
+    padding: 20px;
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     border-right: 1px solid #e8e8e8;
     height: calc(100vh - 64px);
     position: fixed;
     top: 64px;
+<<<<<<< HEAD
     left: 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -261,3 +267,33 @@
         height: 40px;
     }
 }
+=======
+}
+
+.profile-sidebar .avatar-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-sidebar .avatar-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-section h3 {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #1890ff;
+}
+
+.ant-menu-item {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.ant-menu-item-selected {
+    background-color: #e6f7ff;
+}
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

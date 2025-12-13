@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 PS D:\Study\GraduationProject\fe_graduation_v2\src> tree /f
 Folder PATH listing for volume New Volume
 Volume serial number is 7C5B-6CE0
@@ -7,6 +8,11 @@ PS D:\DiskDVuHuyHoang\meeee\FE\src> tree /f
 Folder PATH listing
 Volume serial number is 8451-AFF0
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+PS D:\DiskDVuHuyHoang\meeee\FE\src> tree /f
+Folder PATH listing
+Volume serial number is 8451-AFF0
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 D:.
 │   App.css
 │   App.tsx
@@ -77,6 +83,7 @@ D:.
 │   ├───manage
 │   │   ├───ClassDetail
 <<<<<<< HEAD
+<<<<<<< HEAD
 │   │   │       AddStudentsModal.css
 │   │   │       AddStudentsModal.tsx
 │   │   │       ClassInfoTab.tsx
@@ -96,6 +103,8 @@ D:.
 │   │   │       ClassFormModal.tsx
 │   │   │       ClassTable.tsx
 =======
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 │   │   │       ClassInfoTab.tsx
 │   │   │       ScheduleTab.tsx
 │   │   │       StudentListTab.tsx
@@ -112,13 +121,17 @@ D:.
 │   │   │   │
 │   │   │   └───ClassTable
 │   │   │           ClassTable.tsx
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 │   │   │
 │   │   └───CourseManagement
 │   │       └───CourseDetailDrawer
 │   │               CourseDetailDrawer.css
 │   │               CourseDetailDrawer.tsx
 │   │
+<<<<<<< HEAD
 <<<<<<< HEAD
 │   ├───public-page
 │   ├───student
@@ -146,6 +159,8 @@ D:.
 │   │
 │   └───teacher
 =======
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 │   └───student
 │       ├───Cart
 │       │       CartDrawer.css
@@ -169,15 +184,21 @@ D:.
 │                   PurchaseModal.css
 │                   PurchaseModal.tsx
 │
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 ├───constants
 │       categories.ts
 │       permissions.ts
 │
 <<<<<<< HEAD
+<<<<<<< HEAD
 ├───hooks
 =======
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 ├───layouts
 │   └───MainLayout
 │           MainLayout.css
@@ -311,6 +332,7 @@ D:.
         svg.d.ts
         user.ts
 
+<<<<<<< HEAD
 PS D:\Study\GraduationProject\fe_graduation_v2\src> 
 
 import type { User } from './user';
@@ -361,6 +383,8 @@ export interface UpdateClassRequest extends Partial<Omit<CreateClassRequest, 'te
         svg.d.ts
         user.ts
 
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 PS D:\DiskDVuHuyHoang\meeee\FE\src> 
 export interface User {
     id: number;
@@ -548,7 +572,10 @@ export interface UpdateClassRequest extends Partial<Omit<CreateClassRequest, 'te
     teacher?: number;
 }
 
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 // Response cho API lấy danh sách (đã phân trang)
 export interface ClassPagedResponse {
     code: number;
@@ -562,6 +589,9 @@ export interface ClassPagedResponse {
             pageSize: number;
         };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     };
 }
 
@@ -573,6 +603,7 @@ export interface ClassDetailResponse {
 }
 
 export interface ClassMember {
+<<<<<<< HEAD
     // id người dùng trong hệ thống
     id: number;
     name: string;
@@ -702,6 +733,8 @@ export interface ClassDetailResponse {
 }
 
 export interface ClassMember {
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     id: number;
     name: string;
     joinDate: string;
@@ -1083,7 +1116,10 @@ export const updatePasswordService = async (
 };
 // services/courseManagementService.ts - Cải thiện
 import { message } from 'antd';
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import {
     getAllCourses,
     getCourseById,
@@ -1234,7 +1270,10 @@ export const getCategoriesService = async (): Promise<CategoryResponse> => {
     }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 // src/services/classManagementService.ts
 import { message } from 'antd';
 import { filterClasses, createClass, updateClass, getClassDetailById } from '../api/classApi';
@@ -1559,7 +1598,10 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 // pages/CourseManagement/CourseManagement.tsx - Cải thiện
 import { Button, message, Table, Input, Select, DatePicker, Form, Switch, Modal } from 'antd';
 import { useEffect, useState, useCallback } from 'react';
@@ -2080,6 +2122,9 @@ export default CourseManagement;
         padding: 16px;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
     .course-management .ant-form {
         flex-direction: column;
@@ -2097,6 +2142,7 @@ export default CourseManagement;
         width: 100%;
     }
 
+<<<<<<< HEAD
 =======
 
     .course-management .ant-form {
@@ -2115,6 +2161,8 @@ export default CourseManagement;
         width: 100%;
     }
 
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     .form-actions .ant-btn {
         width: 100%;
     }
@@ -2876,7 +2924,10 @@ export default MemberManagement;
         width: 100%;
     }
 
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     .form-actions .ant-btn {
         width: 100%;
     }
@@ -3443,7 +3494,10 @@ export default CourseDetailDrawer;
 .ant-drawer-content-wrapper {
 =======
 export default CourseDetailDrawer;.ant-drawer-content-wrapper {
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     padding: 16px;
 }
 
@@ -3455,7 +3509,10 @@ export default CourseDetailDrawer;.ant-drawer-content-wrapper {
     width: 100%;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 // src/components/manage/ClassManagement/ClassTable/ClassTable.tsx
 import { Table, Button, Space, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -3893,5 +3950,8 @@ export default ClassInfoTab;
 
 
 
+<<<<<<< HEAD
 >>>>>>> 0d819b82640d0089ec3f3e64fd6854818f5c2f85
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 

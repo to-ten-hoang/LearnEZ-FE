@@ -85,6 +85,7 @@ export const getCourseRoleStudent = async (data: AllCoursesRequest): Promise<Cou
     });
     return response.data;
 };
+<<<<<<< HEAD
 
 // ✅ GET purchased courses for student (using all-courses as fallback)
 export const getMyBoughtCourses = async (page = 0, size = 50): Promise<CourseResponse> => {
@@ -99,3 +100,5 @@ export const getMyBoughtCourses = async (page = 0, size = 50): Promise<CourseRes
     return response.data;
 };
 
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

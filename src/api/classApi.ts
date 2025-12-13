@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// src/api/classApi.ts
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import api from '../lib/axios';
 import type {
     FilterClassesRequest,
@@ -8,6 +12,7 @@ import type {
     GetMembersRequest,
     MemberPagedResponse,
     UpdateMembersRequest,
+<<<<<<< HEAD
     // Notifications
     CreateClassNotificationRequest,
     UpdateClassNotificationRequest,
@@ -15,6 +20,8 @@ import type {
     ClassNotificationPagedResponse,
     ToggleClassNotificationRequest,
     ClassNotificationDetailResponse,
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 } from '../types/class';
 
 export const filterClasses = async (data: FilterClassesRequest): Promise<ClassPagedResponse> => {
@@ -37,6 +44,7 @@ export const getClassDetailById = async (classId: number): Promise<ClassDetailRe
     return response.data;
 };
 
+<<<<<<< HEAD
 // Xóa/Hủy lớp học (POST /api/v1/class/delete?ids=1,2,3)
 export const deleteClasses = async (ids: number[]): Promise<{ code: number; message: string; data: null }> => {
     const response = await api.post(`/api/v1/class/delete?ids=${ids.join(',')}`);
@@ -54,11 +62,21 @@ export const getMembersInClass = async (data: GetMembersRequest): Promise<Member
     return response.data;
 };
 
+=======
+// NEW: Lấy danh sách học viên trong lớp
+export const getMembersInClass = async (data: GetMembersRequest): Promise<MemberPagedResponse> => {
+    const response = await api.post('/api/v1/class/get-members-in-class', data);
+    return response.data;
+};
+
+// NEW: Thêm học viên vào lớp
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 export const addUserToClass = async (data: UpdateMembersRequest): Promise<ClassDetailResponse> => {
     const response = await api.post('/api/v1/class/add-user-to-class', data);
     return response.data;
 };
 
+<<<<<<< HEAD
 export const removeUserFromClass = async (data: UpdateMembersRequest): Promise<ClassDetailResponse> => {
     const response = await api.post('/api/v1/class/remove-user-from-class', data);
     return response.data;
@@ -107,3 +125,10 @@ export const uploadToCloud = async (file: File): Promise<{ code: number; message
     });
     return response.data;
 };
+=======
+// NEW: Xóa học viên khỏi lớp
+export const removeUserFromClass = async (data: UpdateMembersRequest): Promise<ClassDetailResponse> => {
+    const response = await api.post('/api/v1/class/remove-user-from-class', data);
+    return response.data;
+}
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

@@ -44,6 +44,7 @@ export const getCategories = async (): Promise<CategoryResponse> => {
     const response = await api.get('/api/v1/category/post');
     return response.data;
 };
+<<<<<<< HEAD
 
 // API mới cho trang Blog public - không yêu cầu token
 export const getPublicPosts = async (data: AllPostsRequest): Promise<AllPostsResponse> => {
@@ -65,3 +66,5 @@ export const getPublicPosts = async (data: AllPostsRequest): Promise<AllPostsRes
     });
     return response.data;
 };
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

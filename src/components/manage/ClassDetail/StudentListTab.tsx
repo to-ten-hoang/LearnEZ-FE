@@ -106,12 +106,21 @@ const StudentListTab = ({ classData }: Props) => {
           <Tag color={val === 'ACTIVE' ? 'green' : 'default'}>{val}</Tag>
         ),
       },
+<<<<<<< HEAD
       //   {
       //     title: 'Vai trò',
       //     dataIndex: 'roleInClass',
       //     key: 'roleInClass',
       //     render: (v) => <Tag color="blue">{v}</Tag>,
       //   },
+=======
+    //   {
+    //     title: 'Vai trò',
+    //     dataIndex: 'roleInClass',
+    //     key: 'roleInClass',
+    //     render: (v) => <Tag color="blue">{v}</Tag>,
+    //   },
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
       {
         title: 'Thao tác',
         key: 'action',

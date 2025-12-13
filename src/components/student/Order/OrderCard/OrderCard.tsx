@@ -158,13 +158,23 @@ const OrderCard: React.FC<OrderCardProps> = ({
                     <Image
                         src={
                             order.detail.course.thumbnailUrl ||
+<<<<<<< HEAD
                             'https://placehold.co/60x60/e8e8e8/666?text=Course'
+=======
+                            'https://symbols.vn/wp-content/uploads/2023/10/Hinh-meme-meo-cuoi-de-thuong.jpg'
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                         }
                         alt={order.detail.course.title}
                         width={size === 'small' ? 50 : 60}
                         height={size === 'small' ? 50 : 60}
+<<<<<<< HEAD
                         style={{ borderRadius: 8, objectFit: 'cover' }}
                         preview={false}
+=======
+                        style={{ borderRadius: 6, objectFit: 'cover' }}
+                        preview={false}
+                        fallback="/assets/default-course.jpg"
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                     />
 
                     <div className="course-details">

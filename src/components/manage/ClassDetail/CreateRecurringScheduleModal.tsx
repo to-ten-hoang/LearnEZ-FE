@@ -1,12 +1,19 @@
 "use client"
 
 // src/components/manage/ClassDetail/CreateRecurringScheduleModal.tsx
+<<<<<<< HEAD
 import { useEffect, useState } from "react"
 import { Modal, Form, Input, DatePicker, Select, Spin } from "antd"
 import dayjs from "dayjs"
 import type { CreateScheduleRequest } from "../../../types/schedule"
 import type { Room } from "../../../types/room"
 import { filterRoomsService } from "../../../services/roomService"
+=======
+import { useEffect } from "react"
+import { Modal, Form, Input, DatePicker, InputNumber, Select } from "antd"
+import dayjs from "dayjs"
+import type { CreateScheduleRequest } from "../../../types/schedule"
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
 const { RangePicker } = DatePicker
 const { Option } = Select
@@ -30,6 +37,7 @@ const WEEKDAYS = [
 
 const CreateRecurringScheduleModal = ({ visible, onClose, onSubmit, classId }: CreateRecurringScheduleModalProps) => {
   const [form] = Form.useForm()
+<<<<<<< HEAD
   const [rooms, setRooms] = useState<Room[]>([])
   const [loadingRooms, setLoadingRooms] = useState(false)
 
@@ -50,6 +58,8 @@ const CreateRecurringScheduleModal = ({ visible, onClose, onSubmit, classId }: C
       fetchRooms()
     }
   }, [visible])
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 
   useEffect(() => {
     if (visible) {
@@ -64,7 +74,11 @@ const CreateRecurringScheduleModal = ({ visible, onClose, onSubmit, classId }: C
       const weekdays: number[] = values.weekdays
 
       const schedules: CreateScheduleRequest[] = []
+<<<<<<< HEAD
       let currentDate = dayjs(startDate)
+=======
+      const currentDate = dayjs(startDate)
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
       let sessionNumber = 1
 
       while (currentDate.isBefore(endDate, "day") || currentDate.isSame(endDate, "day")) {
@@ -88,7 +102,11 @@ const CreateRecurringScheduleModal = ({ visible, onClose, onSubmit, classId }: C
           })
           sessionNumber++
         }
+<<<<<<< HEAD
         currentDate = currentDate.add(1, "day")
+=======
+        currentDate.add(1, "day")
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
       }
 
       if (schedules.length === 0) {
@@ -166,6 +184,7 @@ const CreateRecurringScheduleModal = ({ visible, onClose, onSubmit, classId }: C
           <DatePicker.TimePicker style={{ width: "100%" }} format="HH:mm" minuteStep={15} />
         </Form.Item>
 
+<<<<<<< HEAD
         <Form.Item name="roomId" label="Phòng học" rules={[{ required: true, message: "Vui lòng chọn phòng học!" }]}>
           <Select
             placeholder="Chọn phòng học"
@@ -183,6 +202,10 @@ const CreateRecurringScheduleModal = ({ visible, onClose, onSubmit, classId }: C
               </Option>
             ))}
           </Select>
+=======
+        <Form.Item name="roomId" label="Phòng học" rules={[{ required: true, message: "Vui lòng nhập phòng học!" }]}>
+          <InputNumber style={{ width: "100%" }} placeholder="Nhập ID phòng học" />
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         </Form.Item>
       </Form>
     </Modal>

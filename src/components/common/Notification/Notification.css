@@ -24,6 +24,7 @@
 
 /* Badge count */
 .noti-badge .ant-badge-count {
+<<<<<<< HEAD
     background: #ff4d4f;
     color: #fff;
     font-size: 11px;
@@ -34,6 +35,18 @@
     box-shadow: 0 0 0 2px #fff;
     font-weight: 600;
     padding: 0 5px;
+=======
+    background: #ff4d4f; /* Màu đỏ cho notification */
+    color: #fff;
+    font-size: 12px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px #fff;
+    font-weight: 600;
+    padding: 0 6px;
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 /* Badge animation */
@@ -42,6 +55,7 @@
 }
 
 @keyframes badgePopIn {
+<<<<<<< HEAD
     0% { transform: scale(0); opacity: 0; }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); opacity: 1; }
@@ -226,10 +240,27 @@
 }
 
 /* ===== RESPONSIVE ===== */
+=======
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ✅ Mobile responsive */
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 @media (max-width: 768px) {
     .notification-icon {
         font-size: 18px;
     }
+<<<<<<< HEAD
 
     .notification-dropdown {
         width: 320px;
@@ -252,4 +283,6 @@
     .noti-type-icon {
         font-size: 16px;
     }
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }

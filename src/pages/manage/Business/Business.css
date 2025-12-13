@@ -1,12 +1,16 @@
+<<<<<<< HEAD
 .business {
     width: 100%;
 }
 
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 .business h2 {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 20px;
     color: #1890ff;
+<<<<<<< HEAD
 }
 
 /* Tablet responsive */
@@ -29,4 +33,6 @@
     .business h2 {
         font-size: 18px;
     }
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }

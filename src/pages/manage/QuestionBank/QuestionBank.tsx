@@ -12,6 +12,7 @@ const { TabPane } = Tabs;
 const QuestionBank = () => {
     return (
         <div className="question-bank">
+<<<<<<< HEAD
             <h2>Ngân Hàng Đề</h2>
 
             <Tabs defaultActiveKey="question-bank" className="question-bank-tabs">
@@ -63,6 +64,10 @@ const QuestionBank = () => {
                     <ScoreScaleTab />
                 </TabPane>
             </Tabs>
+=======
+            <h2>Ngân hàng đề</h2>
+            {/* Placeholder: Danh sách câu hỏi, bộ lọc, thêm/sửa/xóa */}
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
         </div>
     );
 };

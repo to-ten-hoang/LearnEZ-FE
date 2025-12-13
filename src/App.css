@@ -1,13 +1,25 @@
 /* Global App Styles */
 #root {
+<<<<<<< HEAD
     width: 100%;
     margin: 0 auto;
+=======
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }
 
 /* Reset hardcoded widths */
 .logo {
+<<<<<<< HEAD
     height: auto;
     padding: 0;
+=======
+    height: 6em;
+    padding: 1.5em;
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
     will-change: filter;
     transition: filter 300ms;
 }
@@ -41,6 +53,7 @@
 
 .read-the-docs {
     color: #888;
+<<<<<<< HEAD
 }
 
 /* Global responsive utilities */
@@ -54,4 +67,6 @@
     .card {
         padding: 0.75em;
     }
+=======
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 }

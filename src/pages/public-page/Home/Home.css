@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ===== Home Page Premium Styles ===== */
 
 /* Root container */
@@ -905,3 +906,12 @@
         height: 40px;
     }
 }
+=======
+.home .hot-course .ant-card .img_kh_hot {
+    height: 240px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    object-fit: 'cover';
+}
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665

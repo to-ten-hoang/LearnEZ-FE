@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // components/Dashboard/Navigation/Navigation.tsx - Updated with Orders and Collapsible Sidebar
 import { Menu, Button, Tooltip } from 'antd';
+=======
+// components/Dashboard/Navigation/Navigation.tsx - Updated with Orders
+import { Menu } from 'antd';
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
 import {
     UserOutlined,
     VideoCameraOutlined,
@@ -9,6 +14,7 @@ import {
     SolutionOutlined,
     FileTextOutlined,
     DollarOutlined,
+<<<<<<< HEAD
     ShoppingCartOutlined,
     ShoppingOutlined,
     MenuFoldOutlined,
@@ -60,11 +66,98 @@ const Navigation = ({ collapsed, onToggle, isMobile }: NavigationProps) => {
 
     const teacherItems = [
         { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
+=======
+    ShoppingCartOutlined, // ✅ Cart icon
+    ShoppingOutlined, // ✅ Orders icon
+} from '@ant-design/icons';
+import useAuthStore from 'store/authStore';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import './Navigation.css';
+
+const Navigation = () => {
+    const { user } = useAuthStore();
+    const location = useLocation();
+    const [selectedKey, setSelectedKey] = useState(location.pathname.split('/')[2] || 'profile');
+
+    // ✅ UPDATED: Student items với Cart và Orders
+    const studentItems = [
+        { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
+        {
+            key: 'video-courses',
+            icon: <VideoCameraOutlined />,
+            label: 'Khóa học online',
+        },
+        {
+            key: 'offline-classes',
+            icon: <TeamOutlined />,
+            label: 'Lớp học offline',
+        },
+        { key: 'cart', icon: <ShoppingCartOutlined />, label: 'Giỏ hàng' },
+        { key: 'orders', icon: <ShoppingOutlined />, label: 'Lịch sử đơn hàng' },
+        {
+            key: 'member-management',
+            icon: <SolutionOutlined />,
+            label: 'Quản lý thành viên',
+        },
+    ];
+
+    const teacherItems = [
+        { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
         {
             key: 'class-management',
             icon: <TeamOutlined />,
             label: 'Quản lý lớp học',
         },
+        { key: 'question-bank', icon: <BookOutlined />, label: 'Ngân hàng đề' },
+    ];
+
+    const managerItems = [
+        { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
+        { key: 'statistics', icon: <BarChartOutlined />, label: 'Xem thống kê' },
+        {
+            key: 'member-management',
+            icon: <SolutionOutlined />,
+            label: 'Quản lý thành viên',
+        },
+        {
+            key: 'course-management',
+            icon: <BookOutlined />,
+            label: 'Quản lý khóa học',
+        },
+        {
+            key: 'blog-approval',
+            icon: <FileTextOutlined />,
+            label: 'Duyệt blog',
+        },
+        {
+            key: 'question-bank',
+            icon: <BookOutlined />,
+            label: 'Ngân hàng đề',
+        },
+        { key: 'business', icon: <DollarOutlined />, label: 'Kinh doanh' },
+        {
+            key: 'class-management',
+            icon: <TeamOutlined />,
+            label: 'Quản lý lớp học',
+        },
+    ];
+
+    const consultantItems = [
+        { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
+        { key: 'write-blog', icon: <FileTextOutlined />, label: 'Viết blog' },
+        {
+            key: 'course-management',
+            icon: <BookOutlined />,
+            label: 'Quản lý khóa học',
+        },
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
+        {
+            key: 'class-management',
+            icon: <TeamOutlined />,
+            label: 'Quản lý lớp học',
+        },
+<<<<<<< HEAD
         { key: 'question-bank', icon: <BookOutlined />, label: 'Ngân hàng đề' },
     ];
 
@@ -156,12 +249,33 @@ const Navigation = ({ collapsed, onToggle, isMobile }: NavigationProps) => {
             </div>
 
             {/* Avatar centered + Name below */}
+=======
+        { key: 'business', icon: <DollarOutlined />, label: 'Kinh doanh' },
+    ];
+
+    const items = (() => {
+        switch (user?.role) {
+            case 'manager':
+                return managerItems;
+            case 'consultant':
+                return consultantItems;
+            case 'teacher':
+                return teacherItems;
+            default:
+                return studentItems;
+        }
+    })();
+
+    return (
+        <div className="profile-sidebar">
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
             <div className="avatar-section">
                 <img
                     src="https://mcdn.coolmate.me/image/March2023/meme-meo-cute-hai-huoc-1297_521.jpg"
                     alt=""
                     className="avatar-img"
                 />
+<<<<<<< HEAD
                 {!collapsed && (
                     <div className="user-info">
                         <span className="user-role">{getRoleLabel()}</span>
@@ -190,6 +304,26 @@ const Navigation = ({ collapsed, onToggle, isMobile }: NavigationProps) => {
                     label: collapsed && !isMobile ? null : (
                         <Link to={`/dashboard/${item.key}`}>{item.label}</Link>
                     ),
+=======
+                <h3>
+                    {user?.role === 'teacher'
+                        ? 'Giáo viên'
+                        : user?.role === 'manager'
+                          ? 'Quản lý'
+                          : user?.role === 'consultant'
+                            ? 'Tư vấn viên'
+                            : 'Học sinh'}
+                    :{` ${user?.firstName} ${user?.lastName}` || 'User'}
+                </h3>
+            </div>
+            <Menu
+                selectedKeys={[selectedKey]}
+                onSelect={({ key }) => setSelectedKey(key)}
+                items={items.map((item) => ({
+                    key: item.key,
+                    icon: item.icon,
+                    label: <Link to={`/dashboard/${item.key}`}>{item.label}</Link>,
+>>>>>>> b252bbff32e7fe0f77534d7a4ecfd1ae4fb7b665
                 }))}
             />
         </div>
