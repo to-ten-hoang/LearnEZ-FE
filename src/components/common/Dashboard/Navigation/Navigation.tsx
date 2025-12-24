@@ -103,6 +103,11 @@ const Navigation = ({ collapsed, onToggle, isMobile }: NavigationProps) => {
         { key: 'profile', icon: <UserOutlined />, label: 'Thông tin cá nhân' },
         { key: 'write-blog', icon: <FileTextOutlined />, label: 'Viết blog' },
         {
+            key: 'blog-approval',
+            icon: <FileTextOutlined />,
+            label: 'Duyệt blog',
+        },
+        {
             key: 'course-management',
             icon: <BookOutlined />,
             label: 'Quản lý khóa học',

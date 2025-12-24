@@ -119,6 +119,20 @@ const CourseDetailDrawer: React.FC<CourseDetailDrawerProps> = ({
                         >
                             Vào học ngay
                         </Button>
+                    ) : course.statusOrder === 'PENDING' ? (
+                        // ✅ Has pending order - show continue payment button (uses window.location for simplicity)
+                        <Button
+                            type="primary"
+                            size="large"
+                            block
+                            icon={<CreditCardOutlined />}
+                            onClick={() => {
+                                window.location.href = '/dashboard/orders';
+                            }}
+                            style={{ backgroundColor: '#faad14', borderColor: '#faad14' }}
+                        >
+                            Tiếp tục thanh toán
+                        </Button>
                     ) : (
                         <>
                             <Button

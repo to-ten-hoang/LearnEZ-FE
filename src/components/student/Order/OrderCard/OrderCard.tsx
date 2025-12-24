@@ -29,13 +29,13 @@ const OrderCard: React.FC<OrderCardProps> = ({
     // ✅ STATUS CONFIGURATION
     const getStatusConfig = () => {
         switch (order.status) {
-            case 'pending':
+            case 'Pending':
                 return { label: 'Đang chờ', color: 'orange' };
-            case 'completed':
+            case 'Completed':
                 return { label: 'Hoàn thành', color: 'green' };
-            case 'cancelled':
+            case 'Cancelled':
                 return { label: 'Đã hủy', color: 'red' };
-            case 'failed':
+            case 'Failed':
                 return { label: 'Thất bại', color: 'red' };
             default:
                 return { label: order.status, color: 'default' };
@@ -58,7 +58,7 @@ const OrderCard: React.FC<OrderCardProps> = ({
 
     // ✅ BUSINESS LOGIC
     const canCancelOrder = () => {
-        return order.status === 'pending' || order.status === 'failed';
+        return order.status === 'Pending' || order.status === 'Failed';
     };
 
     const formatPrice = (price: number) => {
@@ -223,7 +223,7 @@ const OrderCard: React.FC<OrderCardProps> = ({
                         </Button>
 
                         {/* Hiển thị "Tiếp tục thanh toán" cho pending orders */}
-                        {order.status === 'pending' && (
+                        {order.status === 'Pending' && (
                             <Button
                                 type="primary"
                                 size="small"

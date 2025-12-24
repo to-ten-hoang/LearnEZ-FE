@@ -4,7 +4,7 @@ import { message } from 'antd';
 import { createPayment } from '../api/paymentApi';
 
 /**
- * ✅ SERVICE: TẠO PAYMENT URL VÀ MỞ TRONG TAB MỚI
+ * ✅ SERVICE: TẠO PAYMENT URL VÀ REDIRECT ĐẾN VNPAY
  *
  * @param orderId - ID của đơn hàng cần thanh toán
  * @returns Promise<PaymentResponse>
@@ -15,30 +15,34 @@ export const createPaymentService = async (orderId: number): Promise<PaymentResp
 
         const response = await createPayment(orderId);
 
-        if (response.code === 200 && response.data.url) {
+        // ✅ Check for successful response with url (lowercase - matches actual API)
+        if (response.code === 200 && response.data?.url) {
             message.destroy('payment');
-            message.success('Đã tạo liên kết thanh toán! Chuyển hướng...');
+            message.success('Đã tạo liên kết thanh toán! Đang chuyển hướng...');
 
-            // ✅ Mở VNPay URL trong tab mới
-            const paymentWindow = window.open(
-                response.data.url,
-                '_blank',
-                'width=800,height=600,scrollbars=yes,resizable=yes'
-            );
-
-            // ✅ Optional: Focus vào payment window
-            if (paymentWindow) {
-                paymentWindow.focus();
-            }
+            // ✅ Redirect to VNPay using location.href (avoid popup blockers)
+            // Sử dụng timeout nhỏ để user thấy message success
+            setTimeout(() => {
+                window.location.href = response.data.url;
+            }, 500);
 
             return response;
         }
 
+        // ✅ Handle case where order is already paid
+        if (response.message?.includes('has been paid')) {
+            message.destroy('payment');
+            message.info('Đơn hàng này đã được thanh toán!');
+            return response;
+        }
+
         throw new Error(response.message || 'Tạo liên kết thanh toán thất bại.');
-    } catch (error: any) {
+    } catch (error: unknown) {
         message.destroy('payment');
         const errorMessage =
-            error.response?.data?.message || error.message || 'Lỗi khi tạo liên kết thanh toán.';
+            (error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
+            (error as Error)?.message ||
+            'Lỗi khi tạo liên kết thanh toán.';
 
         message.error(errorMessage);
         throw error;
@@ -77,14 +81,23 @@ export const formatPaymentAmount = (amount: string | null): number => {
  * @param txnRef - Transaction reference từ VNPay
  * @param paymentData - Thông tin thanh toán từ callback
  */
-export const updateOrderAfterPayment = async (txnRef: string, paymentData: any) => {
+interface PaymentCallbackData {
+    status: string | null;
+    txnRef: string | null;
+    transactionNo: string | null;
+    amount: string | null;
+    payDate: string | null;
+    formattedAmount?: number;
+}
+
+export const updateOrderAfterPayment = async (txnRef: string, paymentData: PaymentCallbackData) => {
     try {
         // ✅ Import order store
         const { default: useOrderStore } = await import('../store/orderStore');
         const { updateOrderByTxnRef, refreshOrders } = useOrderStore.getState();
 
-        // ✅ Determine order status based on payment status
-        const orderStatus = paymentData.status === 'success' ? 'COMPLETED' : 'FAILED';
+        // ✅ Determine order status based on payment status (Title Case to match backend)
+        const orderStatus = paymentData.status === 'success' ? 'Completed' : 'Failed';
 
         // ✅ Update order với thông tin thanh toán
         const orderUpdates = {

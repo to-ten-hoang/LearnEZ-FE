@@ -8,6 +8,7 @@ import type {
     UpdateStatusRequest,
     UpdateStatusResponse,
     CategoryResponse,
+    UpdatePostInfoRequest,
 } from '../types/blog';
 
 export const createPost = async (data: PostData): Promise<PostResponse> => {
@@ -47,21 +48,31 @@ export const getCategories = async (): Promise<CategoryResponse> => {
 
 // API mới cho trang Blog public - không yêu cầu token
 export const getPublicPosts = async (data: AllPostsRequest): Promise<AllPostsResponse> => {
-    const response = await api.post('/api/v1/post/get-posts', {
-        searchString: data.title || null,
-        title: data.title || null,
-        categoryPost: data.categoryPost || [],
-        categories: data.categoryPost || [],
-        fromDate: data.fromDate || null,
-        toDate: data.toDate || null,
-        isActive: null,
-        isDelete: null,
-    }, {
-        params: {
-            page: data.page || 0,
-            size: data.size || 10,
-            sort: data.sort || 'createdAt,desc',
+    const response = await api.post(
+        '/api/v1/post/get-posts',
+        {
+            searchString: data.title || null,
+            title: data.title || null,
+            categoryPost: data.categoryPost || [],
+            categories: data.categoryPost || [],
+            fromDate: data.fromDate || null,
+            toDate: data.toDate || null,
+            isActive: null,
+            isDelete: null,
         },
-    });
+        {
+            params: {
+                page: data.page || 0,
+                size: data.size || 10,
+                sort: data.sort || 'createdAt,desc',
+            },
+        }
+    );
+    return response.data;
+};
+
+// API chỉnh sửa thông tin bài viết
+export const updatePostInfo = async (data: UpdatePostInfoRequest): Promise<PostResponse> => {
+    const response = await api.post('/api/v1/post/update-info', data);
     return response.data;
 };

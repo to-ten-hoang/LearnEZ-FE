@@ -19,7 +19,14 @@ export const rolePermissions: { [key: string]: string[] } = {
         'order-management',
         'class-management',
     ],
-    consultant: ['profile', 'write-blog', 'course-management', 'business', 'class-management'],
+    consultant: [
+        'profile',
+        'write-blog',
+        'course-management',
+        'business',
+        'class-management',
+        'blog-approval',
+    ],
 };
 
 /**
@@ -50,7 +57,7 @@ export const navigationPermissions = {
 
     // Manager specific
     statistics: ['manager'],
-    'blog-approval': ['manager'],
+    'blog-approval': ['manager', 'consultant'],
     'order-management': ['manager'],
 
     // Shared between manager & consultant

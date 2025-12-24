@@ -1,12 +1,13 @@
 // services/orderService.ts
 import { message } from 'antd';
+import type { AxiosError } from 'axios';
 import {
     createOrderByCourse,
     createOrderByCartItem,
     getOrders,
     deleteOrder,
 } from '../api/orderApi';
-import type { OrderResponse, CreateOrderResponse } from '../types/order';
+import type { OrderResponse, CreateOrderResponse, SearchOrderDto } from '../types/order';
 
 /**
  * ✅ SERVICE: TẠO ĐƠN HÀNG TRỰC TIẾP TỪ KHÓA HỌC
@@ -29,9 +30,10 @@ export const createOrderByCourseService = async (
         }
 
         throw new Error(response.message || 'Tạo đơn hàng thất bại.');
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const axiosError = error as AxiosError<{ message?: string }>;
         const errorMessage =
-            error.response?.data?.message || error.message || 'Lỗi khi tạo đơn hàng.';
+            axiosError.response?.data?.message || axiosError.message || 'Lỗi khi tạo đơn hàng.';
 
         message.error(errorMessage);
         throw error;
@@ -57,9 +59,12 @@ export const createOrderByCartItemService = async (
         }
 
         throw new Error(response.message || 'Tạo đơn hàng từ giỏ hàng thất bại.');
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const axiosError = error as AxiosError<{ message?: string }>;
         const errorMessage =
-            error.response?.data?.message || error.message || 'Lỗi khi tạo đơn hàng từ giỏ hàng.';
+            axiosError.response?.data?.message ||
+            axiosError.message ||
+            'Lỗi khi tạo đơn hàng từ giỏ hàng.';
 
         message.error(errorMessage);
         throw error;
@@ -67,16 +72,21 @@ export const createOrderByCartItemService = async (
 };
 
 /**
- * ✅ SERVICE: LẤY DANH SÁCH ĐƠN HÀNG
+ * ✅ SERVICE: LẤY DANH SÁCH ĐƠN HÀNG (với server-side search & pagination)
  *
- * Xử lý logic:
- * - Call API để lấy orders
- * - Không show message (silent operation)
- * - Handle empty list gracefully
+ * @param searchDto - Search filters (searchString, statusOrder, fromDate, toDate)
+ * @param page - Page number (0-indexed)
+ * @param size - Page size
+ * @param sort - Sort field and direction (e.g., 'createdAt,desc')
  */
-export const getOrdersService = async (): Promise<OrderResponse> => {
+export const getOrdersService = async (
+    searchDto?: SearchOrderDto,
+    page = 0,
+    size = 10,
+    sort = 'createdAt,desc'
+): Promise<OrderResponse> => {
     try {
-        const response = await getOrders();
+        const response = await getOrders(searchDto, page, size, sort);
 
         if (response.code === 200) {
             console.log('Fetched orders:', response.data);
@@ -84,9 +94,12 @@ export const getOrdersService = async (): Promise<OrderResponse> => {
         }
 
         throw new Error(response.message || 'Lấy danh sách đơn hàng thất bại.');
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const axiosError = error as AxiosError<{ message?: string }>;
         const errorMessage =
-            error.response?.data?.message || error.message || 'Lỗi khi lấy danh sách đơn hàng.';
+            axiosError.response?.data?.message ||
+            axiosError.message ||
+            'Lỗi khi lấy danh sách đơn hàng.';
 
         message.error(errorMessage);
         throw error;
@@ -108,9 +121,10 @@ export const deleteOrderService = async (orderId: number): Promise<void> => {
         }
 
         throw new Error(response.message || 'Hủy đơn hàng thất bại.');
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const axiosError = error as AxiosError<{ message?: string }>;
         const errorMessage =
-            error.response?.data?.message || error.message || 'Lỗi khi hủy đơn hàng.';
+            axiosError.response?.data?.message || axiosError.message || 'Lỗi khi hủy đơn hàng.';
 
         message.error(errorMessage);
         throw error;
@@ -126,7 +140,7 @@ export const purchaseDirectlyService = async (courseId: number): Promise<CreateO
         const response = await createOrderByCourseService(courseId);
         message.destroy('purchase');
         return response;
-    } catch (error: any) {
+    } catch (error: unknown) {
         message.destroy('purchase');
         throw error;
     }
@@ -141,7 +155,7 @@ export const purchaseFromCartService = async (cartItemId: number): Promise<Creat
         const response = await createOrderByCartItemService(cartItemId);
         message.destroy('purchase-cart');
         return response;
-    } catch (error: any) {
+    } catch (error: unknown) {
         message.destroy('purchase-cart');
         throw error;
     }

@@ -7,7 +7,8 @@ import Courses from '../pages/public-page/Courses/Course';
 import Blog from '../pages/public-page/Blog/Blog';
 import Test from '../pages/public-page/Test/Test';
 import VideoCourses from '../pages/student/VideoCourses/VideoCourses';
-import OfflineClasses from '../pages/teacher/OfflineClasses/OfflineClasses';
+import StudentOfflineClasses from '../pages/student/OfflineClasses/StudentOfflineClasses';
+import StudentClassDetail from '../pages/student/OfflineClasses/StudentClassDetail';
 import ClassManagement from '../pages/manage/ClassManagement/ClassManagement';
 import Dashboard from '../pages/common/Dashboard/Dashboard';
 import Profile from '../pages/common/Profile/Profile';
@@ -33,12 +34,10 @@ const router = createBrowserRouter([
             // ✅ PUBLIC ROUTES
             { path: '/', element: React.createElement(Home) },
             { path: '/courses', element: React.createElement(Courses) },
-            { 
-                path: '/blog', 
-                element: React.createElement(Blog), 
-                children: [
-                    
-                ],
+            {
+                path: '/blog',
+                element: React.createElement(Blog),
+                children: [],
             },
             { path: '/test', element: React.createElement(Test) },
             { path: '/order-status', element: React.createElement(OrderStatus) },
@@ -68,7 +67,10 @@ const router = createBrowserRouter([
                         element: React.createElement(ProtectedRoute, {
                             allowedTab: 'offline-classes',
                         }),
-                        children: [{ path: '', element: React.createElement(OfflineClasses) }],
+                        children: [
+                            { path: '', element: React.createElement(StudentOfflineClasses) },
+                            { path: ':classId', element: React.createElement(StudentClassDetail) },
+                        ],
                     },
                     {
                         path: 'cart',
@@ -119,7 +121,7 @@ const router = createBrowserRouter([
                         }),
                         children: [
                             { path: '', element: React.createElement(CourseManagement) },
-                            { path: ':courseId', element: React.createElement(CourseDetail) }
+                            { path: ':courseId', element: React.createElement(CourseDetail) },
                         ],
                     },
                     {

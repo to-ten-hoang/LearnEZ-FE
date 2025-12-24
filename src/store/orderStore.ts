@@ -1,7 +1,7 @@
 // store/orderStore.ts - Updated with txnRef methods
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Order, OrderStatus } from '../types/order';
+import type { Order, OrderStatus, SearchOrderDto } from '../types/order';
 
 /**
  * ✅ ORDER STORE INTERFACE
@@ -16,6 +16,14 @@ interface OrderState {
 
     // Current order being processed (cho purchase flow)
     currentOrder: Order | null; // Đơn hàng đang được xử lý
+
+    // ✅ PAGINATION STATE (từ server response)
+    pagination: {
+        page: number; // Current page (0-indexed)
+        size: number; // Items per page
+        totalElements: number; // Total items
+        totalPages: number; // Total pages
+    };
 
     // ============== COMPUTED VALUES (GETTERS) ==============
     pendingOrdersCount: number; // Số đơn hàng đang chờ
@@ -36,12 +44,18 @@ interface OrderState {
     setError: (error: string | null) => void; // Set error message
 
     // --- Helper Methods ---
-    refreshOrders: () => Promise<void>; // Sync với server
+    refreshOrders: (
+        searchDto?: SearchOrderDto,
+        page?: number,
+        size?: number,
+        sort?: string
+    ) => Promise<void>; // Sync với server (support search & pagination)
     getOrderById: (orderId: number) => Order | null; // Lấy order theo ID
     getOrdersByStatus: (status: OrderStatus) => Order[]; // Lấy orders theo status
     getOrderByTxnRef: (txnRef: string) => Order | null; // ✅ NEW: Lấy order theo txnRef
     updateOrderByTxnRef: (txnRef: string, updates: Partial<Order>) => void; // ✅ NEW: Update bằng txnRef
     updateLastUpdated: () => void; // Update timestamp
+    setPagination: (page: number, size: number, totalElements: number, totalPages: number) => void; // Set pagination
 }
 
 /**
@@ -56,19 +70,25 @@ const useOrderStore = create<OrderState>()(
             error: null, // Không có lỗi
             lastUpdated: null, // Chưa update lần nào
             currentOrder: null, // Không có order đang xử lý
+            pagination: {
+                page: 0,
+                size: 10,
+                totalElements: 0,
+                totalPages: 0,
+            },
 
             // =============== COMPUTED VALUES =================
             get pendingOrdersCount() {
-                return get().orders.filter((order) => order.status === 'PENDING').length;
+                return get().orders.filter((order) => order.status === 'Pending').length;
             },
 
             get completedOrdersCount() {
-                return get().orders.filter((order) => order.status === 'COMPLETED').length;
+                return get().orders.filter((order) => order.status === 'Completed').length;
             },
 
             get totalSpent() {
                 return get()
-                    .orders.filter((order) => order.status === 'COMPLETED')
+                    .orders.filter((order) => order.status === 'Completed')
                     .reduce((total, order) => {
                         // Dùng totalAmount nếu có, nếu không dùng priceAtPurchase
                         return total + (order.totalAmount || order.detail.priceAtPurchase);
@@ -137,17 +157,20 @@ const useOrderStore = create<OrderState>()(
             // ================== HELPER METHODS ==================
 
             /**
-             * ✅ REFRESH ORDERS - Sync với server
+             * ✅ REFRESH ORDERS - Sync với server (support search & pagination)
              *
-             * Gọi API để lấy orders mới nhất từ server
+             * @param searchDto - Search filters (optional)
+             * @param page - Page number, 0-indexed (optional, default 0)
+             * @param size - Page size (optional, default 10)
+             * @param sort - Sort field and direction (optional, default 'createdAt,desc')
              */
-            refreshOrders: async () => {
+            refreshOrders: async (searchDto, page = 0, size = 10, sort = 'createdAt,desc') => {
                 set({ isLoading: true, error: null });
 
                 try {
                     // ✅ Dynamic import để tránh circular dependency
                     const { getOrdersService } = await import('../services/orderService');
-                    const response = await getOrdersService();
+                    const response = await getOrdersService(searchDto, page, size, sort);
 
                     // Sort orders theo createdAt mới nhất
                     const sortedOrders = response.data.content.sort(
@@ -159,14 +182,30 @@ const useOrderStore = create<OrderState>()(
                         isLoading: false,
                         lastUpdated: new Date().toISOString(),
                         error: null,
+                        pagination: {
+                            page: response.data.number,
+                            size: response.data.size,
+                            totalElements: response.data.totalElements,
+                            totalPages: response.data.totalPages,
+                        },
                     });
-                } catch (error: any) {
+                } catch (error: unknown) {
+                    const errorMessage =
+                        error instanceof Error ? error.message : 'Lỗi khi tải danh sách đơn hàng';
                     set({
                         isLoading: false,
-                        error: error.message || 'Lỗi khi tải danh sách đơn hàng',
+                        error: errorMessage,
                     });
                 }
             },
+
+            /**
+             * ✅ SET PAGINATION STATE
+             */
+            setPagination: (page, size, totalElements, totalPages) =>
+                set({
+                    pagination: { page, size, totalElements, totalPages },
+                }),
 
             /**
              * ✅ GET ORDER BY ID

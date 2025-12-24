@@ -144,6 +144,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, onLoginRequest }) => {
                         </Title>
                         <div className="course-card-actions">
                             {isBought ? (
+                                // ✅ User owns the course
                                 <Button
                                     type="primary"
                                     icon={<BookOutlined />}
@@ -151,7 +152,18 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, onLoginRequest }) => {
                                 >
                                     Đến khóa học
                                 </Button>
+                            ) : course.statusOrder === 'PENDING' ? (
+                                // ✅ Has pending order - show continue payment button
+                                <Button
+                                    type="primary"
+                                    icon={<CreditCardOutlined />}
+                                    onClick={() => navigate('/dashboard/orders')}
+                                    style={{ backgroundColor: '#faad14', borderColor: '#faad14' }}
+                                >
+                                    Tiếp tục thanh toán
+                                </Button>
                             ) : (
+                                // ✅ No order or cancelled - show add to cart / buy now
                                 <>
                                     <Button
                                         icon={<ShoppingCartOutlined />}

@@ -6,6 +6,7 @@ import {
     updatePostStatus,
     getCategories,
     getPublicPosts,
+    updatePostInfo,
 } from '../api/blogApi';
 import type {
     PostData,
@@ -16,6 +17,7 @@ import type {
     UpdateStatusRequest,
     UpdateStatusResponse,
     CategoryResponse,
+    UpdatePostInfoRequest,
 } from '../types/blog';
 
 export const createPostService = async (data: PostData): Promise<PostResponse> => {
@@ -101,6 +103,21 @@ export const getPublicPostsService = async (data: AllPostsRequest): Promise<AllP
         throw new Error(response.message || 'Lấy danh sách bài đăng thất bại.');
     } catch (error: any) {
         message.error(error.response?.data?.message || 'Lỗi khi lấy danh sách bài đăng.');
+        throw error;
+    }
+};
+
+// Service chỉnh sửa thông tin bài viết
+export const updatePostInfoService = async (data: UpdatePostInfoRequest): Promise<PostResponse> => {
+    try {
+        const response = await updatePostInfo(data);
+        if (response.code === 200) {
+            message.success('Cập nhật bài viết thành công!');
+            return response;
+        }
+        throw new Error(response.message || 'Cập nhật bài viết thất bại.');
+    } catch (error: any) {
+        message.error(error.response?.data?.message || 'Lỗi khi cập nhật bài viết.');
         throw error;
     }
 };

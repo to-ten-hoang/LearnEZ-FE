@@ -1,6 +1,11 @@
 // api/order/orderApi.ts
 import api from '../lib/axios';
-import type { OrderResponse, CreateOrderResponse, DeleteOrderResponse } from '../types/order';
+import type {
+    OrderResponse,
+    CreateOrderResponse,
+    DeleteOrderResponse,
+    SearchOrderDto,
+} from '../types/order';
 
 export const createOrderByCourse = async (courseId: number): Promise<CreateOrderResponse> => {
     const response = await api.post('/api/v1/order/create-order-by-course', null, {
@@ -16,8 +21,15 @@ export const createOrderByCartItem = async (cartItemId: number): Promise<CreateO
     return response.data;
 };
 
-export const getOrders = async (): Promise<OrderResponse> => {
-    const response = await api.post('/api/v1/order');
+export const getOrders = async (
+    searchDto?: SearchOrderDto,
+    page = 0,
+    size = 10,
+    sort = 'createdAt,desc'
+): Promise<OrderResponse> => {
+    const response = await api.post('/api/v1/order', searchDto || {}, {
+        params: { page, size, sort },
+    });
     return response.data;
 };
 

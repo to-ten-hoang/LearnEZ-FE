@@ -12,6 +12,7 @@ import StudentListTab from '../../../components/manage/ClassDetail/StudentListTa
 import ScheduleTab from '../../../components/manage/ClassDetail/ScheduleTab';
 import NotificationTab from '../../../components/manage/ClassDetail/NotificationTab';
 import AttendanceTab from '../../../components/manage/ClassDetail/AttendanceTab';
+import QuizManagementTab from '../../../components/manage/ClassDetail/QuizManagementTab';
 
 const { TabPane } = Tabs;
 const { Title } = Typography;
@@ -84,6 +85,9 @@ const ClassDetail = () => {
                 </TabPane>
                 <TabPane tab="Điểm danh" key="5">
                     <AttendanceTab classData={classData} />
+                </TabPane>
+                <TabPane tab="Bài kiểm tra" key="6">
+                    <QuizManagementTab classData={classData} />
                 </TabPane>
             </Tabs>
         </div>

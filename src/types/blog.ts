@@ -144,3 +144,11 @@ export interface CategoryResponse {
     message: string;
     data: Category[];
 }
+
+export interface UpdatePostInfoRequest {
+    id: number;
+    title?: string;
+    content?: string;
+    themeUrl?: string;
+    categoryId?: number;
+}

@@ -10,6 +10,8 @@ export interface SortInfo {
 // ==================== User Reference (simplified) ====================
 export interface UserReference {
     id: number;
+    fullName?: string;
+    email?: string;
     firstName?: string;
     lastName?: string;
     phone?: string;
@@ -202,10 +204,16 @@ export interface QuestionBankListResponse {
 }
 
 // ==================== AI Analysis ====================
+export interface AiResponse {
+    url: string;
+    questionBankTitle: string;
+    questions: Question[];
+}
+
 export interface AIAnalysisResponse {
     code: number;
     message: string;
-    data: Question[];
+    data: AiResponse;
 }
 
 // ==================== Cloud Upload ====================
@@ -230,7 +238,8 @@ export interface CreateQuestionBankFromAIRequest {
 
 // Range Topic (Chủ đề câu hỏi)
 export interface RangeTopic {
-    rangeTopicId: number;
+    id: number;
+    rangeTopicId?: number; // Keep for backward compatibility
     content: string;
     description: string;
     vietnamese: string;
@@ -301,7 +310,8 @@ export interface PaginationParams {
 
 // Score Scale (Mức độ câu hỏi)
 export interface ScoreScale {
-    scoreScaleId: number;
+    id: number;
+    scoreScaleId?: number; // Keep for backward compatibility
     title: string;
     fromScore: number;
     toScore: number;

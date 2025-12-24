@@ -1,10 +1,11 @@
 // pages/manage/QuestionBank/QuestionBank.tsx
 import { Tabs } from 'antd';
-import { BookOutlined, QuestionCircleOutlined, DashboardOutlined, FileTextOutlined } from '@ant-design/icons';
+import { BookOutlined, QuestionCircleOutlined, DashboardOutlined, FileTextOutlined, FormOutlined } from '@ant-design/icons';
 import RangeTopicTab from './components/RangeTopicTab';
 import ScoreScaleTab from './components/ScoreScaleTab';
 import QuestionBankTab from './components/QuestionBankTab';
 import QuestionsTab from './components/QuestionsTab';
+import QuizTab from './components/QuizTab';
 import './QuestionBank.css';
 
 const { TabPane } = Tabs;
@@ -37,6 +38,18 @@ const QuestionBank = () => {
                     key="questions"
                 >
                     <QuestionsTab />
+                </TabPane>
+
+                <TabPane
+                    tab={
+                        <span>
+                            <FormOutlined />
+                            Bài kiểm tra
+                        </span>
+                    }
+                    key="quiz"
+                >
+                    <QuizTab />
                 </TabPane>
 
                 <TabPane

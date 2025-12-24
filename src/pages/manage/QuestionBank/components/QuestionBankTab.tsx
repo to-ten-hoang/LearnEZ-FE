@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // pages/manage/QuestionBank/components/QuestionBankTab.tsx
 import { useState, useCallback, useEffect } from 'react';
 import {
@@ -26,6 +27,7 @@ import {
     UploadOutlined,
     FileTextOutlined,
     RobotOutlined,
+    SwapOutlined,
 } from '@ant-design/icons';
 import {
     filterQuestionBanksService,
@@ -36,6 +38,7 @@ import {
     analysisQuestionService,
     createQuestionBankFromAIService,
 } from '../../../../services/questionBankService';
+import { convertBankToQuizService } from '../../../../services/quizService';
 import type {
     QuestionBank,
     QuestionBankCreateRequest,
@@ -74,6 +77,9 @@ const QuestionBankTab = () => {
     const [analysisLoading, setAnalysisLoading] = useState(false);
     const [analyzedQuestions, setAnalyzedQuestions] = useState<Question[]>([]);
     const [uploadedUrl, setUploadedUrl] = useState<string>('');
+
+    // State for questions in edit modal
+    const [editQuestions, setEditQuestions] = useState<Question[]>([]);
 
     // Fetch question banks
     const fetchQuestionBanks = useCallback(
@@ -183,12 +189,14 @@ const QuestionBankTab = () => {
                 url: values.url || '',
                 isActive: values.isActive,
                 isDeleted: values.isDeleted,
+                questions: editQuestions,
             };
 
             await updateQuestionBankService(requestData);
             setIsEditModalOpen(false);
             editForm.resetFields();
             setSelectedQuestionBank(null);
+            setEditQuestions([]);
             // Preserve current search state
             const searchValues = form.getFieldsValue();
             fetchQuestionBanks(searchValues.searchString ?? null, currentPage, pageSize);
@@ -199,16 +207,40 @@ const QuestionBankTab = () => {
         }
     };
 
-    // Open edit modal
-    const openEditModal = (questionBank: QuestionBank) => {
-        setSelectedQuestionBank(questionBank);
-        editForm.setFieldsValue({
-            questionBankTitle: questionBank.questionBankTitle,
-            url: questionBank.url,
-            isActive: questionBank.isActive,
-            isDeleted: questionBank.isDeleted,
+    // Open edit modal with full details
+    const openEditModal = async (questionBank: QuestionBank) => {
+        try {
+            setModalLoading(true);
+            const response = await getQuestionBankByIdService(questionBank.id!);
+            const fullQuestionBank = response.data;
+            setSelectedQuestionBank(fullQuestionBank);
+            setEditQuestions(fullQuestionBank.questions || []);
+            editForm.setFieldsValue({
+                questionBankTitle: fullQuestionBank.questionBankTitle,
+                url: fullQuestionBank.url,
+                isActive: fullQuestionBank.isActive,
+                isDeleted: fullQuestionBank.isDeleted,
+            });
+            setIsEditModalOpen(true);
+        } catch (error) {
+            console.error('Error fetching question bank details:', error);
+        } finally {
+            setModalLoading(false);
+        }
+    };
+
+    // Remove question from edit list
+    const removeQuestionFromEdit = (questionId: number) => {
+        Modal.confirm({
+            title: 'Xác nhận xóa',
+            content: 'Bạn có chắc muốn xóa câu hỏi này khỏi ngân hàng đề?',
+            okText: 'Xóa',
+            okType: 'danger',
+            cancelText: 'Hủy',
+            onOk: () => {
+                setEditQuestions(prev => prev.filter(q => q.id !== questionId));
+            },
         });
-        setIsEditModalOpen(true);
     };
 
     // Open detail drawer
@@ -227,12 +259,19 @@ const QuestionBankTab = () => {
 
     // Handle file upload for AI analysis
     const handleUploadFile = async () => {
-        if (fileList.length === 0) return;
+        if (fileList.length === 0) return null;
 
-        const file = fileList[0].originFileObj as File;
+        const uploadFile = fileList[0];
+        const file = uploadFile.originFileObj || (uploadFile as unknown as File);
+
+        if (!file || file === undefined) {
+            console.error('File is undefined');
+            return null;
+        }
+
         setUploadLoading(true);
         try {
-            const response = await uploadFileToCloudService(file);
+            const response = await uploadFileToCloudService(file as File);
             setUploadedUrl(response.data);
             return response.data;
         } catch (error) {
@@ -257,7 +296,7 @@ const QuestionBankTab = () => {
         setAnalysisLoading(true);
         try {
             const response = await analysisQuestionService(url);
-            setAnalyzedQuestions(response.data || []);
+            setAnalyzedQuestions(response.data?.questions || []);
         } catch (error) {
             console.error('Error analyzing file:', error);
         } finally {
@@ -333,7 +372,7 @@ const QuestionBankTab = () => {
             key: 'createdBy',
             width: 150,
             render: (createdBy: any) =>
-                createdBy ? `${createdBy.firstName || ''} ${createdBy.lastName || ''}` : 'N/A',
+                createdBy ? createdBy.fullName || 'N/A' : 'N/A',
         },
         {
             title: 'Trạng thái',
@@ -363,6 +402,22 @@ const QuestionBankTab = () => {
                         icon={<EditOutlined />}
                         onClick={() => openEditModal(record)}
                         title="Chỉnh sửa"
+                    />
+                    <Button
+                        type="text"
+                        icon={<SwapOutlined />}
+                        onClick={() => {
+                            Modal.confirm({
+                                title: 'Chuyển sang bài kiểm tra',
+                                content: `Bạn có muốn chuyển ngân hàng đề "${record.questionBankTitle}" thành bài kiểm tra?`,
+                                okText: 'Chuyển đổi',
+                                cancelText: 'Hủy',
+                                onOk: async () => {
+                                    await convertBankToQuizService(record.id!);
+                                },
+                            });
+                        }}
+                        title="Chuyển thành bài kiểm tra"
                     />
                 </Space>
             ),
@@ -468,11 +523,12 @@ const QuestionBankTab = () => {
                     setIsEditModalOpen(false);
                     editForm.resetFields();
                     setSelectedQuestionBank(null);
+                    setEditQuestions([]);
                 }}
                 okText="Cập nhật"
                 cancelText="Hủy"
                 confirmLoading={modalLoading}
-                width={600}
+                width={800}
             >
                 <Form form={editForm} layout="vertical">
                     <Form.Item
@@ -491,6 +547,39 @@ const QuestionBankTab = () => {
                     <Form.Item name="isDeleted" label="Đánh dấu xóa" valuePropName="checked">
                         <Switch checkedChildren="Đã xóa" unCheckedChildren="Chưa xóa" />
                     </Form.Item>
+
+                    {/* Question List */}
+                    {editQuestions.length > 0 && (
+                        <div style={{ marginTop: 16 }}>
+                            <h4>Danh sách câu hỏi ({editQuestions.length}):</h4>
+                            <div style={{ maxHeight: 300, overflow: 'auto' }}>
+                                <List
+                                    dataSource={editQuestions}
+                                    renderItem={(question, index) => (
+                                        <Card 
+                                            size="small" 
+                                            style={{ marginBottom: 8 }}
+                                            extra={
+                                                <Button
+                                                    type="text"
+                                                    danger
+                                                    size="small"
+                                                    onClick={() => removeQuestionFromEdit(question.id!)}
+                                                >
+                                                    Xóa
+                                                </Button>
+                                            }
+                                        >
+                                            <strong>Câu {index + 1}:</strong> {question.questionContent}
+                                            <div style={{ marginTop: 4, fontSize: 12, color: '#888' }}>
+                                                Chủ đề: {question.category || 'N/A'} | Độ khó: {question.difficulty || 'N/A'}
+                                            </div>
+                                        </Card>
+                                    )}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </Form>
             </Modal>
 
@@ -520,7 +609,14 @@ const QuestionBankTab = () => {
                             <Upload
                                 fileList={fileList}
                                 beforeUpload={(file) => {
-                                    setFileList([file as unknown as UploadFile]);
+                                    // Create proper UploadFile object with originFileObj
+                                    const uploadFile: UploadFile = {
+                                        uid: `-${Date.now()}`,
+                                        name: file.name,
+                                        status: 'done',
+                                        originFileObj: file as any,
+                                    };
+                                    setFileList([uploadFile]);
                                     setUploadedUrl('');
                                     setAnalyzedQuestions([]);
                                     return false;
@@ -545,8 +641,8 @@ const QuestionBankTab = () => {
                                 {uploadLoading
                                     ? 'Đang tải lên...'
                                     : analysisLoading
-                                      ? 'Đang phân tích...'
-                                      : 'Phân tích file'}
+                                        ? 'Đang phân tích...'
+                                        : 'Phân tích file'}
                             </Button>
                         </Space>
                     </Form.Item>
@@ -643,7 +739,7 @@ const QuestionBankTab = () => {
                             </Descriptions.Item>
                             <Descriptions.Item label="Người tạo">
                                 {selectedQuestionBank.createdBy
-                                    ? `${selectedQuestionBank.createdBy.firstName || ''} ${selectedQuestionBank.createdBy.lastName || ''}`
+                                    ? selectedQuestionBank.createdBy.fullName || 'N/A'
                                     : 'N/A'}
                             </Descriptions.Item>
                             <Descriptions.Item label="Trạng thái">
@@ -652,15 +748,15 @@ const QuestionBankTab = () => {
                                         selectedQuestionBank.isDeleted
                                             ? 'red'
                                             : selectedQuestionBank.isActive
-                                              ? 'green'
-                                              : 'orange'
+                                                ? 'green'
+                                                : 'orange'
                                     }
                                 >
                                     {selectedQuestionBank.isDeleted
                                         ? 'Đã xóa'
                                         : selectedQuestionBank.isActive
-                                          ? 'Hoạt động'
-                                          : 'Tạm dừng'}
+                                            ? 'Hoạt động'
+                                            : 'Tạm dừng'}
                                 </Tag>
                             </Descriptions.Item>
                         </Descriptions>

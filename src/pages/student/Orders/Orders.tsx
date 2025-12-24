@@ -1,6 +1,19 @@
-// pages/Orders/Orders.tsx - Updated with Auto-refresh
-import React, { useEffect, useState } from 'react';
-import { Card, Typography, Empty, Tabs, Row, Col, Statistic, Select, Input, Button } from 'antd';
+// pages/Orders/Orders.tsx - Updated with Server-side Search & Pagination
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import {
+    Card,
+    Typography,
+    Empty,
+    Tabs,
+    Row,
+    Col,
+    Statistic,
+    Select,
+    Input,
+    Button,
+    DatePicker,
+    Pagination,
+} from 'antd';
 import {
     ShoppingOutlined,
     ClockCircleOutlined,
@@ -8,61 +21,127 @@ import {
     CloseCircleOutlined,
     SearchOutlined,
     ReloadOutlined,
+    CalendarOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-// import moment from 'moment';
+import type { Dayjs } from 'dayjs';
 import useOrderStore from '../../../store/orderStore';
 import OrderCard from '../../../components/student/Order/OrderCard/OrderCard';
-import type { Order } from '../../../types/order';
+import type { Order, SearchOrderDto } from '../../../types/order';
 import './Orders.css';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
 const { Option } = Select;
+const { RangePicker } = DatePicker;
+
+// Helper function to map tab key to backend status (Title Case)
+const TAB_TO_STATUS: Record<string, string> = {
+    pending: 'Pending',
+    completed: 'Completed',
+    cancelled: 'Cancelled',
+    failed: 'Failed',
+};
 
 const OrdersPage: React.FC = () => {
     const navigate = useNavigate();
 
-    // ✅ ZUSTAND STATE
-    const {
-        orders,
-        pendingOrdersCount,
-        completedOrdersCount,
-        totalSpent,
-        isLoading,
-        refreshOrders,
-    } = useOrderStore();
+    // ✅ ZUSTAND STATE (includes pagination now)
+    const { orders, isLoading, refreshOrders, pagination } = useOrderStore();
 
-    // ✅ LOCAL STATE cho filtering
+    // ✅ COMPUTED VALUES (using useMemo for reactivity)
+    const pendingOrdersCount = useMemo(
+        () => orders.filter((order) => order.status === 'Pending').length,
+        [orders]
+    );
+
+    const completedOrdersCount = useMemo(
+        () => orders.filter((order) => order.status === 'Completed').length,
+        [orders]
+    );
+
+    const totalSpent = useMemo(
+        () =>
+            orders
+                .filter((order) => order.status === 'Completed')
+                .reduce((total, order) => {
+                    return total + (order.totalAmount || order.detail.priceAtPurchase);
+                }, 0),
+        [orders]
+    );
+
+    // ✅ LOCAL STATE for filtering
     const [activeTab, setActiveTab] = useState<string>('all');
     const [searchQuery, setSearchQuery] = useState('');
-    const [sortBy, setSortBy] = useState<string>('createdAt_desc');
+    const [debouncedSearch, setDebouncedSearch] = useState('');
+    const [sortBy, setSortBy] = useState<string>('createdAt,desc');
+    const [dateRange, setDateRange] = useState<[Dayjs, Dayjs] | null>(null);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [pageSize, setPageSize] = useState(10);
     const [refreshing, setRefreshing] = useState(false);
 
-    // ✅ LOAD DATA khi component mount và auto-refresh
+    // ✅ DEBOUNCE SEARCH (500ms delay)
     useEffect(() => {
-        refreshOrders();
+        const timer = setTimeout(() => {
+            setDebouncedSearch(searchQuery);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [searchQuery]);
 
-        // ✅ Auto refresh mỗi 30s để cập nhật order status từ server
-        const interval = setInterval(() => {
-            console.log('Auto-refreshing orders...');
-            refreshOrders();
-        }, 30000); // 30 seconds
+    // ✅ BUILD SEARCH DTO from filters (server-side only: search, date)
+    // NOTE: Tab filtering is done locally for better UX
+    const buildSearchDto = useCallback((): SearchOrderDto => {
+        const dto: SearchOrderDto = {};
 
-        return () => clearInterval(interval);
-    }, [refreshOrders]);
+        if (debouncedSearch.trim()) {
+            dto.searchString = debouncedSearch.trim();
+        }
 
-    // ✅ Listen for focus event để refresh khi user quay lại tab
+        // ❌ REMOVED: Tab filtering is now local for instant switching
+        // if (activeTab !== 'all') {
+        //     dto.statusOrder = [TAB_TO_STATUS[activeTab] as StatusOrderFilter];
+        // }
+
+        if (dateRange) {
+            dto.fromDate = dateRange[0].format('YYYY-MM-DD');
+            dto.toDate = dateRange[1].format('YYYY-MM-DD');
+        }
+
+        return dto;
+    }, [debouncedSearch, dateRange]);
+
+    // ✅ LOCAL FILTERING by tab (instant UX)
+    const getFilteredOrders = useMemo((): Order[] => {
+        if (activeTab === 'all') {
+            return orders;
+        }
+        return orders.filter((order) => order.status === TAB_TO_STATUS[activeTab]);
+    }, [orders, activeTab]);
+
+    // ✅ FETCH ORDERS when server-side filters change (NOT tab)
+    useEffect(() => {
+        const searchDto = buildSearchDto();
+        refreshOrders(searchDto, currentPage, pageSize, sortBy);
+    }, [debouncedSearch, dateRange, currentPage, pageSize, sortBy, buildSearchDto, refreshOrders]);
+
+    // ✅ Reset page when server-side filters change
+    useEffect(() => {
+        setCurrentPage(0);
+    }, [debouncedSearch, dateRange, sortBy]);
+
+    // ✅ Listen for focus event to refresh when user returns to tab
     useEffect(() => {
         const handleFocus = () => {
             console.log('Window focused, refreshing orders...');
-            refreshOrders();
+            const searchDto = buildSearchDto();
+            refreshOrders(searchDto, currentPage, pageSize, sortBy);
         };
 
         const handleVisibilityChange = () => {
             if (!document.hidden) {
                 console.log('Tab became visible, refreshing orders...');
-                refreshOrders();
+                const searchDto = buildSearchDto();
+                refreshOrders(searchDto, currentPage, pageSize, sortBy);
             }
         };
 
@@ -73,7 +152,7 @@ const OrdersPage: React.FC = () => {
             window.removeEventListener('focus', handleFocus);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, [refreshOrders]);
+    }, [buildSearchDto, currentPage, pageSize, sortBy, refreshOrders]);
 
     // ✅ FORMAT PRICE HELPER
     const formatPrice = (price: number) => {
@@ -81,61 +160,6 @@ const OrdersPage: React.FC = () => {
             style: 'currency',
             currency: 'VND',
         }).format(price);
-    };
-
-    // ✅ GET FILTERED ORDERS
-    const getFilteredOrders = (): Order[] => {
-        let filtered = orders;
-
-        // Filter by tab (status)
-        if (activeTab !== 'all') {
-            filtered = filtered.filter((order) => order.status === activeTab.toUpperCase());
-        }
-
-        // Filter by search query
-        if (searchQuery.trim()) {
-            const query = searchQuery.toLowerCase().trim();
-            filtered = filtered.filter(
-                (order) =>
-                    order.detail.course.title.toLowerCase().includes(query) ||
-                    order.detail.course.authorName?.toLowerCase().includes(query) ||
-                    order.id.toString().includes(query)
-            );
-        }
-
-        // Sort orders
-        const [field, direction] = sortBy.split('_');
-        filtered.sort((a, b) => {
-            let aValue: any, bValue: any;
-
-            switch (field) {
-                case 'createdAt':
-                    aValue = new Date(a.createdAt).getTime();
-                    bValue = new Date(b.createdAt).getTime();
-                    break;
-                case 'price':
-                    aValue = a.detail.priceAtPurchase;
-                    bValue = b.detail.priceAtPurchase;
-                    break;
-                case 'status':
-                    aValue = a.status;
-                    bValue = b.status;
-                    break;
-                default:
-                    return 0;
-            }
-
-            if (field === 'status') {
-                return direction === 'desc'
-                    ? String(bValue).localeCompare(String(aValue))
-                    : String(aValue).localeCompare(String(bValue));
-            }
-            return direction === 'desc'
-                ? Number(bValue) - Number(aValue)
-                : Number(aValue) - Number(bValue);
-        });
-
-        return filtered;
     };
 
     // ✅ EVENT HANDLERS
@@ -151,13 +175,39 @@ const OrdersPage: React.FC = () => {
     const handleManualRefresh = async () => {
         setRefreshing(true);
         try {
-            await refreshOrders();
+            const searchDto = buildSearchDto();
+            await refreshOrders(searchDto, currentPage, pageSize, sortBy);
         } finally {
             setRefreshing(false);
         }
     };
 
-    const filteredOrders = getFilteredOrders();
+    // ✅ PAGINATION HANDLERS
+    const handlePageChange = (page: number, size?: number) => {
+        setCurrentPage(page - 1); // Ant Design uses 1-indexed, API uses 0-indexed
+        if (size && size !== pageSize) {
+            setPageSize(size);
+        }
+    };
+
+    // ✅ DATE RANGE HANDLER
+    const handleDateRangeChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
+        if (dates && dates[0] && dates[1]) {
+            setDateRange([dates[0], dates[1]]);
+        } else {
+            setDateRange(null);
+        }
+    };
+
+    // ✅ CLEAR ALL FILTERS
+    const handleClearFilters = () => {
+        setSearchQuery('');
+        setDebouncedSearch('');
+        setActiveTab('all');
+        setDateRange(null);
+        setSortBy('createdAt,desc');
+        setCurrentPage(0);
+    };
 
     // ✅ RENDER FILTERS & CONTROLS
     const renderFiltersAndControls = () => (
@@ -174,33 +224,45 @@ const OrdersPage: React.FC = () => {
                 <div
                     style={{
                         display: 'flex',
-                        gap: 16,
+                        gap: 12,
                         alignItems: 'center',
                         flex: 1,
-                        minWidth: 300,
+                        flexWrap: 'wrap',
                     }}
                 >
                     <Input
-                        placeholder="Tìm kiếm theo tên khóa học, tác giả hoặc mã đơn hàng..."
+                        placeholder="Tìm kiếm theo tên khóa học..."
                         prefix={<SearchOutlined />}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        style={{ flex: 1, maxWidth: 300 }}
+                        style={{ width: 250 }}
                         allowClear
+                    />
+
+                    <RangePicker
+                        value={dateRange}
+                        onChange={handleDateRangeChange}
+                        format="DD/MM/YYYY"
+                        placeholder={['Từ ngày', 'Đến ngày']}
+                        style={{ width: 250 }}
+                        suffixIcon={<CalendarOutlined />}
                     />
 
                     <Select
                         value={sortBy}
                         onChange={setSortBy}
-                        style={{ width: 180 }}
+                        style={{ width: 150 }}
                         placeholder="Sắp xếp theo"
                     >
-                        <Option value="createdAt_desc">Mới nhất</Option>
-                        <Option value="createdAt_asc">Cũ nhất</Option>
-                        <Option value="price_desc">Giá cao nhất</Option>
-                        <Option value="price_asc">Giá thấp nhất</Option>
-                        <Option value="status_asc">Trạng thái A-Z</Option>
+                        <Option value="createdAt,desc">Mới nhất</Option>
+                        <Option value="createdAt,asc">Cũ nhất</Option>
                     </Select>
+
+                    {(searchQuery || dateRange || activeTab !== 'all') && (
+                        <Button size="small" onClick={handleClearFilters}>
+                            Xóa bộ lọc
+                        </Button>
+                    )}
                 </div>
 
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -212,28 +274,6 @@ const OrdersPage: React.FC = () => {
                     >
                         Làm mới
                     </Button>
-
-                    {/* ✅ Auto-refresh indicator */}
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 4,
-                            color: '#52c41a',
-                            fontSize: 12,
-                        }}
-                    >
-                        <div
-                            style={{
-                                width: 8,
-                                height: 8,
-                                borderRadius: '50%',
-                                backgroundColor: '#52c41a',
-                                animation: 'pulse 2s infinite',
-                            }}
-                        />
-                        Tự động cập nhật
-                    </div>
                 </div>
             </div>
         </Card>
@@ -303,15 +343,34 @@ const OrdersPage: React.FC = () => {
         }
 
         return (
-            <div className="order-list">
-                <Row gutter={[16, 16]}>
-                    {orderList.map((order) => (
-                        <Col key={order.id} xs={24} sm={24} md={12} lg={8}>
-                            <OrderCard order={order} />
-                        </Col>
-                    ))}
-                </Row>
-            </div>
+            <>
+                <div className="order-list">
+                    <Row gutter={[16, 16]}>
+                        {orderList.map((order) => (
+                            <Col key={order.id} xs={24} sm={24} md={12} lg={8}>
+                                <OrderCard order={order} />
+                            </Col>
+                        ))}
+                    </Row>
+                </div>
+
+                {/* ✅ PAGINATION */}
+                {pagination.totalElements > 0 && (
+                    <div style={{ marginTop: 24, textAlign: 'center' }}>
+                        <Pagination
+                            current={currentPage + 1}
+                            pageSize={pageSize}
+                            total={pagination.totalElements}
+                            onChange={handlePageChange}
+                            showSizeChanger
+                            showTotal={(total, range) =>
+                                `${range[0]}-${range[1]} / ${total} đơn hàng`
+                            }
+                            pageSizeOptions={['5', '10', '20', '50']}
+                        />
+                    </div>
+                )}
+            </>
         );
     };
 
@@ -357,10 +416,7 @@ const OrdersPage: React.FC = () => {
                             </span>
                         }
                         key="all"
-                    >
-                        {renderOrderList(filteredOrders)}
-                    </TabPane>
-
+                    />
                     <TabPane
                         tab={
                             <span>
@@ -369,10 +425,7 @@ const OrdersPage: React.FC = () => {
                             </span>
                         }
                         key="pending"
-                    >
-                        {renderOrderList(filteredOrders)}
-                    </TabPane>
-
+                    />
                     <TabPane
                         tab={
                             <span>
@@ -381,10 +434,7 @@ const OrdersPage: React.FC = () => {
                             </span>
                         }
                         key="completed"
-                    >
-                        {renderOrderList(filteredOrders)}
-                    </TabPane>
-
+                    />
                     <TabPane
                         tab={
                             <span>
@@ -393,10 +443,11 @@ const OrdersPage: React.FC = () => {
                             </span>
                         }
                         key="cancelled"
-                    >
-                        {renderOrderList(filteredOrders)}
-                    </TabPane>
+                    />
                 </Tabs>
+
+                {/* ✅ ORDER LIST - uses local filtered orders */}
+                {renderOrderList(getFilteredOrders)}
             </Card>
         </div>
     );

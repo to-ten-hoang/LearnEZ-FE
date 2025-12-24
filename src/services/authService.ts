@@ -1,5 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { message } from 'antd';
-import { login, register, logout, refreshToken, updatePassword } from '../api/authApi';
+import {
+    login,
+    register,
+    logout,
+    refreshToken,
+    updatePassword,
+    verifyEmail,
+    verifyOtp,
+    resetPassword,
+} from '../api/authApi';
 import useAuthStore from '../store/authStore';
 import type {
     RegisterRequest,
@@ -7,6 +17,7 @@ import type {
     AuthResponse,
     LogoutResponse,
     UpdatePasswordRequest,
+    VerifyOtpResponse,
 } from '../types/auth';
 import type { UserProfileResponse } from 'types/user';
 import { getUserProfile } from '../api/userApi';
@@ -95,6 +106,52 @@ export const updatePasswordService = async (
         const response = await updatePassword(data);
         if (response.code === 200 && response.data) {
             message.success('Đổi mật khẩu thành công');
+            return response;
+        }
+        throw new Error(response.message || 'Đổi mật khẩu thất bại.');
+    } catch (error: any) {
+        message.error(error.message || 'Đã có lỗi xảy ra khi đổi mật khẩu.');
+        throw error;
+    }
+};
+
+// Forgot Password Services
+export const verifyEmailService = async (email: string): Promise<LogoutResponse> => {
+    try {
+        const response = await verifyEmail({ email });
+        if (response.code === 200) {
+            message.success('Mã OTP đã được gửi đến email của bạn.');
+            return response;
+        }
+        throw new Error(response.message || 'Gửi mã OTP thất bại.');
+    } catch (error: any) {
+        message.error(error.message || 'Đã có lỗi xảy ra khi gửi mã OTP.');
+        throw error;
+    }
+};
+
+export const verifyOtpService = async (email: string, otp: number): Promise<VerifyOtpResponse> => {
+    try {
+        const response = await verifyOtp({ email, otp });
+        if (response.code === 200 && response.data?.token) {
+            message.success('Xác thực OTP thành công.');
+            return response;
+        }
+        throw new Error(response.message || 'Xác thực OTP thất bại.');
+    } catch (error: any) {
+        message.error(error.message || 'Đã có lỗi xảy ra khi xác thực OTP.');
+        throw error;
+    }
+};
+
+export const resetPasswordService = async (
+    token: string,
+    password: string
+): Promise<LogoutResponse> => {
+    try {
+        const response = await resetPassword({ token, password });
+        if (response.code === 200) {
+            message.success('Đổi mật khẩu thành công! Vui lòng đăng nhập lại.');
             return response;
         }
         throw new Error(response.message || 'Đổi mật khẩu thất bại.');

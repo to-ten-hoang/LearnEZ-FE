@@ -89,9 +89,17 @@ export interface DeleteOrderResponse {
 /**
  * ✅ UNION TYPES cho type safety
  */
-export type PaymentMethod = 'VN_PAY' | 'MOMO' | 'BANK_TRANSFER';
+export type PaymentMethod = 'VN_PAY' | 'MOMO' | 'ZALO_PAY';
 
-export type OrderStatus = 'PENDING' | 'COMPLETED' | 'CANCELLED' | 'FAILED';
+export type OrderStatus = 'Pending' | 'Completed' | 'Cancelled' | 'Failed';
+
+// Helper constant for status mapping (matches backend EStatusOrder)
+export const ORDER_STATUS = {
+    PENDING: 'Pending',
+    COMPLETED: 'Completed',
+    FAILED: 'Failed',
+    CANCELLED: 'Cancelled',
+} as const;
 
 /**
  * ✅ ORDER SUMMARY cho UI (computed values)
@@ -105,11 +113,37 @@ export interface OrderSummary {
 }
 
 /**
- * ✅ ORDER FILTER cho search/filter functionality
+ * ✅ ORDER FILTER cho search/filter functionality (local)
  */
 export interface OrderFilter {
     status?: OrderStatus[]; // Filter theo status
     paymentMethod?: PaymentMethod[]; // Filter theo payment method
     dateRange?: [string, string]; // Filter theo khoảng thời gian
     searchQuery?: string; // Search theo tên khóa học hoặc order ID
+}
+
+/**
+ * ✅ STATUS ORDER FILTER - Giá trị để filter (REQUEST) - VIẾT HOA
+ * API yêu cầu enum values uppercase
+ */
+export type StatusOrderFilter = 'PENDING' | 'COMPLETED' | 'FAILED' | 'CANCELLED';
+
+/**
+ * ✅ SEARCH ORDER DTO - Body cho POST /api/v1/order
+ * Dùng để server-side filtering
+ */
+export interface SearchOrderDto {
+    searchString?: string; // Search theo tên khóa học, mô tả
+    statusOrder?: StatusOrderFilter[]; // Filter theo status - PHẢI VIẾT HOA
+    fromDate?: string; // Start date (ISO format: YYYY-MM-DD)
+    toDate?: string; // End date (ISO format: YYYY-MM-DD)
+}
+
+/**
+ * ✅ ORDER PAGINATION PARAMS - Query params cho phân trang
+ */
+export interface OrderPaginationParams {
+    page?: number; // 0-indexed page number
+    size?: number; // Number of items per page (default 10)
+    sort?: string; // Sort field and direction (e.g., 'createdAt,desc')
 }

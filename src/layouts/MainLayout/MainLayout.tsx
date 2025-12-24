@@ -7,6 +7,7 @@ import useAuthStore from '../../store/authStore';
 import logo from '../../assets/logo.svg';
 import LoginModal from '../../components/common/Auth/LoginModal/LoginModal';
 import RegisterModal from '../../components/common/Auth/RegisterModal/RegisterModal';
+import ForgotPasswordModal from '../../components/common/Auth/ForgotPasswordModal/ForgotPasswordModal';
 import Notification from '../../components/common/Notification/Notification';
 import UserMenu from '../../components/common/UserMenu/UserMenu';
 import CartBadge from '../../components/common/CartBadge/CartBadge';
@@ -18,6 +19,7 @@ const MainLayout = () => {
     const { isAuthenticated, user } = useAuthStore();
     const [isLoginVisible, setIsLoginVisible] = useState(false);
     const [isRegisterVisible, setIsRegisterVisible] = useState(false);
+    const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -51,6 +53,18 @@ const MainLayout = () => {
 
     const handleCloseRegister = () => {
         setIsRegisterVisible(false);
+    };
+
+    const showForgotPassword = () => {
+        setIsForgotPasswordVisible(true);
+    };
+
+    const handleCloseForgotPassword = () => {
+        setIsForgotPasswordVisible(false);
+    };
+
+    const handleBackToLogin = () => {
+        setIsLoginVisible(true);
     };
 
     const handleMenuClick = () => {
@@ -161,11 +175,21 @@ const MainLayout = () => {
 
             <main className="main-content">
                 <Outlet />
-                <LoginModal visible={isLoginVisible} onClose={handleCloseLogin} />
+                <LoginModal 
+                    visible={isLoginVisible} 
+                    onClose={handleCloseLogin} 
+                    onForgotPassword={showForgotPassword}
+                />
                 <RegisterModal visible={isRegisterVisible} onClose={handleCloseRegister} />
+                <ForgotPasswordModal 
+                    visible={isForgotPasswordVisible} 
+                    onClose={handleCloseForgotPassword}
+                    onBackToLogin={handleBackToLogin}
+                />
             </main>
         </Layout>
     );
 };
 
 export default MainLayout;
+

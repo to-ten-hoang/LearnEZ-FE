@@ -6,9 +6,10 @@ import './LoginModal.css';
 interface LoginModalProps {
     visible: boolean;
     onClose: () => void;
+    onForgotPassword?: () => void;
 }
 
-const LoginModal = ({ visible, onClose }: LoginModalProps) => {
+const LoginModal = ({ visible, onClose, onForgotPassword }: LoginModalProps) => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
 
@@ -32,6 +33,14 @@ const LoginModal = ({ visible, onClose }: LoginModalProps) => {
         if (!loading) {
             onClose();
             form.resetFields();
+        }
+    };
+
+    const handleForgotPassword = () => {
+        if (!loading && onForgotPassword) {
+            onClose();
+            form.resetFields();
+            onForgotPassword();
         }
     };
 
@@ -63,6 +72,13 @@ const LoginModal = ({ visible, onClose }: LoginModalProps) => {
                 >
                     <Input.Password placeholder="Nhập mật khẩu" disabled={loading} />
                 </Form.Item>
+                {onForgotPassword && (
+                    <div style={{ textAlign: 'right', marginBottom: 16, marginTop: -8 }}>
+                        <Button type="link" onClick={handleForgotPassword} disabled={loading} style={{ padding: 0 }}>
+                            Quên mật khẩu?
+                        </Button>
+                    </div>
+                )}
                 <Form.Item>
                     <Button
                         type="primary"

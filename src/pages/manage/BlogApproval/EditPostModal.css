@@ -1,0 +1,46 @@
+.edit-post-modal .ant-modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.edit-post-modal .theme-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.edit-post-modal .theme-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.edit-post-modal .theme-preview .ant-image {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-post-modal .content-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.edit-post-modal .content-stats .warning {
+    color: #faad14;
+}
+
+.edit-post-modal .content-stats .success {
+    color: #52c41a;
+}
+
+/* TipTap Editor styling */
+.edit-post-modal .ProseMirror {
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+}

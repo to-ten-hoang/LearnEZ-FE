@@ -32,8 +32,13 @@ import type {
 export const createRangeTopic = async (
     data: RangeTopicCreateRequest
 ): Promise<RangeTopicResponse> => {
-    const response = await api.post('/api/v1/range-topic/create', null, {
-        params: data,
+    const response = await api.post('/api/v1/range-topic/create', {
+        rangeTopicId: null,
+        content: data.content,
+        description: data.description || '',
+        vietnamese: data.vietnamese || '',
+        isDelete: data.isDelete ?? false,
+        isActive: data.isActive ?? true,
     });
     return response.data;
 };
@@ -42,8 +47,13 @@ export const createRangeTopic = async (
 export const updateRangeTopic = async (
     data: RangeTopicUpdateRequest
 ): Promise<RangeTopicResponse> => {
-    const response = await api.post('/api/v1/range-topic/update', null, {
-        params: data,
+    const response = await api.post('/api/v1/range-topic/update', {
+        rangeTopicId: data.rangeTopicId,
+        content: data.content,
+        description: data.description || '',
+        vietnamese: data.vietnamese || '',
+        isDelete: data.isDelete ?? false,
+        isActive: data.isActive ?? true,
     });
     return response.data;
 };
@@ -62,18 +72,14 @@ export const filterRangeTopics = async (
     pagination: PaginationParams = {}
 ): Promise<RangeTopicListResponse> => {
     const { page = 0, size = 10, sort = [] } = pagination;
-    const response = await api.post('/api/v1/range-topic/filter', null, {
-        params: {
-            ...filterData,
-            page,
-            size,
-            // Sort format: "field,direction" (e.g., "content,asc")
-            sort: sort.length > 0 ? sort : undefined,
-        },
-        paramsSerializer: {
-            indexes: null, // This allows arrays to be serialized without brackets
-        },
-    });
+    const sortParam = sort.length > 0 ? sort.join(',') : 'id,asc';
+    const response = await api.post(
+        '/api/v1/range-topic/filter',
+        { searchString: filterData.searchString || '' },
+        {
+            params: { page, size, sort: sortParam },
+        }
+    );
     return response.data;
 };
 
@@ -83,8 +89,13 @@ export const filterRangeTopics = async (
 export const createScoreScale = async (
     data: ScoreScaleCreateRequest
 ): Promise<ScoreScaleResponse> => {
-    const response = await api.post('/api/v1/score-scale/create', null, {
-        params: data,
+    const response = await api.post('/api/v1/score-scale/create', {
+        scoreScaleId: null,
+        title: data.title,
+        fromScore: data.fromScore,
+        toScore: data.toScore,
+        isActive: data.isActive ?? true,
+        isDelete: data.isDelete ?? false,
     });
     return response.data;
 };
@@ -93,8 +104,13 @@ export const createScoreScale = async (
 export const updateScoreScale = async (
     data: ScoreScaleUpdateRequest
 ): Promise<ScoreScaleResponse> => {
-    const response = await api.post('/api/v1/score-scale/update', null, {
-        params: data,
+    const response = await api.post('/api/v1/score-scale/update', {
+        scoreScaleId: data.scoreScaleId,
+        title: data.title,
+        fromScore: data.fromScore,
+        toScore: data.toScore,
+        isActive: data.isActive ?? true,
+        isDelete: data.isDelete ?? false,
     });
     return response.data;
 };
@@ -113,18 +129,14 @@ export const filterScoreScales = async (
     pagination: PaginationParams = {}
 ): Promise<ScoreScaleListResponse> => {
     const { page = 0, size = 10, sort = [] } = pagination;
-    const response = await api.post('/api/v1/score-scale/filter', null, {
-        params: {
-            ...filterData,
-            page,
-            size,
-            // Sort format: "field,direction" (e.g., "title,asc")
-            sort: sort.length > 0 ? sort : undefined,
-        },
-        paramsSerializer: {
-            indexes: null, // This allows arrays to be serialized without brackets
-        },
-    });
+    const sortParam = sort.length > 0 ? sort.join(',') : 'id,asc';
+    const response = await api.post(
+        '/api/v1/score-scale/filter',
+        { searchString: filterData.searchString || '' },
+        {
+            params: { page, size, sort: sortParam },
+        }
+    );
     return response.data;
 };
 
@@ -146,8 +158,14 @@ export const uploadFileToCloud = async (file: File): Promise<CloudUploadResponse
 
 // Analyze question from file URL
 export const analysisQuestion = async (url: string): Promise<AIAnalysisResponse> => {
+    // Don't encode URL - backend expects raw URL
     const response = await api.get('/api/v1/ai/analysis-question', {
         params: { url },
+        paramsSerializer: (params) => {
+            return Object.entries(params)
+                .map(([key, value]) => `${key}=${value}`)
+                .join('&');
+        },
     });
     return response.data;
 };
@@ -184,13 +202,15 @@ export const filterQuestionBanks = async (
     pagination: PaginationParams = {}
 ): Promise<QuestionBankListResponse> => {
     const { page = 0, size = 10, sort = [] } = pagination;
-    const pageable = {
-        page,
-        size,
-        sort: sort.length > 0 ? sort : undefined,
+    const sortParam = sort.length > 0 ? sort.join(',') : 'id,asc';
+    const requestBody = {
+        searchString: filterData.searchString || '',
+        createByIds: filterData.createByIds?.length ? filterData.createByIds : null,
+        isActive: filterData.isActive ?? null,
+        isDelete: filterData.isDelete ?? null,
     };
-    const response = await api.post('/api/v1/question-bank/filter', filterData, {
-        params: { pageable: JSON.stringify(pageable) },
+    const response = await api.post('/api/v1/question-bank/filter', requestBody, {
+        params: { page, size, sort: sortParam },
     });
     return response.data;
 };
@@ -227,7 +247,15 @@ export const filterQuestions = async (
         size,
         sort: sort.length > 0 ? sort : undefined,
     };
-    const response = await api.post('/api/v1/question/filter-question', filterData, {
+    const requestBody = {
+        searchString: filterData.searchString || '',
+        scoreScales: filterData.scoreScales || [],
+        rangeTopics: filterData.rangeTopics || [],
+        idQuestionBank: filterData.idQuestionBank ?? null,
+        isActive: filterData.isActive ?? null,
+        isDelete: filterData.isDelete ?? null,
+    };
+    const response = await api.post('/api/v1/question/filter-question', requestBody, {
         params: { pageable: JSON.stringify(pageable) },
     });
     return response.data;

@@ -6,6 +6,10 @@ import type {
     AuthResponse,
     LogoutResponse,
     UpdatePasswordRequest,
+    VerifyEmailRequest,
+    VerifyOtpRequest,
+    ResetPasswordRequest,
+    VerifyOtpResponse,
 } from '../types/auth';
 
 export const register = async (data: RegisterRequest): Promise<LogoutResponse> => {
@@ -30,5 +34,21 @@ export const refreshToken = async (): Promise<AuthResponse> => {
 
 export const updatePassword = async (data: UpdatePasswordRequest): Promise<UserProfileResponse> => {
     const response = await api.post('/api/v1/user/update-own-info', data);
+    return response.data;
+};
+
+// Forgot Password APIs
+export const verifyEmail = async (data: VerifyEmailRequest): Promise<LogoutResponse> => {
+    const response = await api.post('/api/v1/auth/verify-email', data);
+    return response.data;
+};
+
+export const verifyOtp = async (data: VerifyOtpRequest): Promise<VerifyOtpResponse> => {
+    const response = await api.post('/api/v1/auth/verify-otp', data);
+    return response.data;
+};
+
+export const resetPassword = async (data: ResetPasswordRequest): Promise<LogoutResponse> => {
+    const response = await api.post('/api/v1/auth/reset-password', data);
     return response.data;
 };

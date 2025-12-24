@@ -31,3 +31,25 @@ export interface UpdatePasswordRequest {
     password: string;
     oldPassword: string;
 }
+
+// Forgot Password - Request types
+export interface VerifyEmailRequest {
+    email: string;
+}
+
+export interface VerifyOtpRequest {
+    email: string;
+    otp: number;
+}
+
+export interface ResetPasswordRequest {
+    token: string;
+    password: string;
+}
+
+// Forgot Password - Response types
+export interface VerifyOtpResponse {
+    code: number;
+    message: string;
+    data: { token: string } | null;
+}

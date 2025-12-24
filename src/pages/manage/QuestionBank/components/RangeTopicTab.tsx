@@ -141,7 +141,7 @@ const RangeTopicTab = () => {
             setModalLoading(true);
 
             const requestData: RangeTopicUpdateRequest = {
-                rangeTopicId: selectedTopic.rangeTopicId,
+                rangeTopicId: selectedTopic.id,
                 content: values.content,
                 description: values.description ?? '',
                 vietnamese: values.vietnamese ?? '',
@@ -291,7 +291,7 @@ const RangeTopicTab = () => {
                 columns={columns}
                 dataSource={topics}
                 loading={loading}
-                rowKey="rangeTopicId"
+                rowKey="id"
                 pagination={{
                     current: currentPage + 1,
                     pageSize: pageSize,
@@ -399,7 +399,7 @@ const RangeTopicTab = () => {
                 {selectedTopic && (
                     <Descriptions bordered column={1} size="small">
                         <Descriptions.Item label="ID">
-                            {selectedTopic.rangeTopicId}
+                            {selectedTopic.id}
                         </Descriptions.Item>
                         <Descriptions.Item label="Nội dung (Content)">
                             {selectedTopic.content}

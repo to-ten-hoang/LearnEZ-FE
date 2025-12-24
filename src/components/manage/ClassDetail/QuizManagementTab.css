@@ -1,0 +1,150 @@
+.quiz-management-tab {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: hidden;
+}
+
+/* Toolbar - matching NotificationTab pattern */
+.quiz-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+/* Submitted List Modal Filter */
+.submitted-list-filter {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.submitted-list-filter > * {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* Score styling - matching system colors */
+.submitted-score {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.submitted-score.high {
+    color: #52c41a;
+}
+
+.submitted-score.medium {
+    color: #faad14;
+}
+
+.submitted-score.low {
+    color: #ff4d4f;
+}
+
+/* Statistics Modal - donut chart */
+.statistic-modal-content {
+    text-align: center;
+}
+
+.statistic-legend {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+.legend-dot.pass {
+    background: #52c41a;
+}
+
+.legend-dot.fail {
+    background: #ff4d4f;
+}
+
+.score-threshold-container {
+    background: #fafafa;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+/* Detail Modal - question/answer display */
+.detail-question-item {
+    background: #fafafa;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.detail-question-header {
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.detail-answer {
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-answer.correct {
+    background: #f6ffed;
+    border: 1px solid #b7eb8f;
+}
+
+/* Time inputs in PullQuizModal */
+.time-range-inputs {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.time-range-inputs > div {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quiz-management-tab {
+        padding: 12px;
+    }
+
+    .quiz-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .submitted-list-filter {
+        flex-direction: column;
+    }
+
+    .time-range-inputs {
+        flex-direction: column;
+    }
+
+    .statistic-legend {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

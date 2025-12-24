@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
     Button,
     message,
@@ -9,8 +12,9 @@ import {
     Switch,
     Modal,
     Image,
+    Tooltip,
 } from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, DeleteOutlined, UndoOutlined } from '@ant-design/icons';
 import { useEffect, useState, useCallback } from 'react';
 import {
     getAllPostsService,
@@ -19,6 +23,7 @@ import {
 } from '../../../services/blogService';
 import moment from 'moment';
 import './BlogApproval.css';
+import EditPostModal from './EditPostModal';
 import type { AllPostsRequest, Post, Category } from '../../../types/blog';
 import type { SortOrder } from 'antd/es/table/interface';
 
@@ -49,6 +54,12 @@ const BlogApproval = () => {
         deleteOpen: false,
         isDelete: false,
         postId: null as number | null,
+    });
+
+    // Edit modal state
+    const [editModal, setEditModal] = useState({
+        open: false,
+        post: null as Post | null,
     });
 
     const fetchCategories = useCallback(async () => {
@@ -112,6 +123,27 @@ const BlogApproval = () => {
             open: false,
             post: null,
         });
+    };
+
+    // Edit functionality
+    const handleEdit = useCallback((post: Post) => {
+        setEditModal({
+            open: true,
+            post,
+        });
+    }, []);
+
+    const handleCloseEdit = () => {
+        setEditModal({
+            open: false,
+            post: null,
+        });
+    };
+
+    const handleEditSuccess = () => {
+        fetchPosts(form.getFieldsValue(), currentPage, pageSize, 
+            sortField && sortOrder ? `${sortField},${sortOrder === 'ascend' ? 'asc' : 'desc'}` : null
+        );
     };
 
     const handleToggleActive = useCallback(
@@ -285,34 +317,47 @@ const BlogApproval = () => {
         {
             title: 'Hành động',
             key: 'action',
-            width: 200,
+            width: 120,
+            fixed: 'right' as const,
             render: (_: any, record: Post) => (
-                <div className="action-buttons">
-                    <Button
-                        size="small"
-                        icon={<EyeOutlined />}
-                        onClick={() => handlePreview(record)}
-                        title="Xem trước"
-                    >
-                        Xem
-                    </Button>
+                <div className="action-icons">
+                    <Tooltip title="Xem trước">
+                        <Button
+                            type="text"
+                            icon={<EyeOutlined />}
+                            onClick={() => handlePreview(record)}
+                            className="action-icon-btn view"
+                        />
+                    </Tooltip>
+                    {(record.isOwn === true || record.isOwn === null) && !record.isDelete && (
+                        <Tooltip title="Chỉnh sửa">
+                            <Button
+                                type="text"
+                                icon={<EditOutlined />}
+                                onClick={() => handleEdit(record)}
+                                className="action-icon-btn edit"
+                            />
+                        </Tooltip>
+                    )}
                     {record.isDelete ? (
-                        <Button
-                            size="small"
-                            onClick={() => handleDeleteOrRestore(record.id, false)}
-                            className="action-button-fixed"
-                        >
-                            Khôi phục
-                        </Button>
+                        <Tooltip title="Khôi phục">
+                            <Button
+                                type="text"
+                                icon={<UndoOutlined />}
+                                onClick={() => handleDeleteOrRestore(record.id, false)}
+                                className="action-icon-btn restore"
+                            />
+                        </Tooltip>
                     ) : (
-                        <Button
-                            danger
-                            size="small"
-                            onClick={() => handleDeleteOrRestore(record.id, true)}
-                            className="action-button-fixed"
-                        >
-                            Xóa
-                        </Button>
+                        <Tooltip title="Xóa">
+                            <Button
+                                type="text"
+                                danger
+                                icon={<DeleteOutlined />}
+                                onClick={() => handleDeleteOrRestore(record.id, true)}
+                                className="action-icon-btn delete"
+                            />
+                        </Tooltip>
                     )}
                 </div>
             ),
@@ -509,6 +554,14 @@ const BlogApproval = () => {
                         : 'Bạn có chắc chắn muốn khôi phục bài đăng này?'}
                 </p>
             </Modal>
+
+            {/* Edit Post Modal */}
+            <EditPostModal
+                visible={editModal.open}
+                post={editModal.post}
+                onClose={handleCloseEdit}
+                onSuccess={handleEditSuccess}
+            />
         </div>
     );
 };

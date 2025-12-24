@@ -142,7 +142,7 @@ const ScoreScaleTab = () => {
             setModalLoading(true);
 
             const requestData: ScoreScaleUpdateRequest = {
-                scoreScaleId: selectedScoreScale.scoreScaleId,
+                scoreScaleId: selectedScoreScale.id,
                 title: values.title,
                 fromScore: values.fromScore,
                 toScore: values.toScore,
@@ -190,11 +190,11 @@ const ScoreScaleTab = () => {
     const columns = [
         {
             title: 'ID',
-            dataIndex: 'scoreScaleId',
-            key: 'scoreScaleId',
+            dataIndex: 'id',
+            key: 'id',
             width: 80,
             sorter: true,
-            sortOrder: sortField === 'scoreScaleId' ? sortOrder : undefined,
+            sortOrder: sortField === 'id' ? sortOrder : undefined,
         },
         {
             title: 'Tiêu đề',
@@ -297,7 +297,7 @@ const ScoreScaleTab = () => {
                 columns={columns}
                 dataSource={scoreScales}
                 loading={loading}
-                rowKey="scoreScaleId"
+                rowKey="id"
                 pagination={{
                     current: currentPage + 1,
                     pageSize: pageSize,
@@ -477,7 +477,7 @@ const ScoreScaleTab = () => {
                 {selectedScoreScale && (
                     <Descriptions bordered column={1} size="small">
                         <Descriptions.Item label="ID">
-                            {selectedScoreScale.scoreScaleId}
+                            {selectedScoreScale.id}
                         </Descriptions.Item>
                         <Descriptions.Item label="Tiêu đề">
                             {selectedScoreScale.title}

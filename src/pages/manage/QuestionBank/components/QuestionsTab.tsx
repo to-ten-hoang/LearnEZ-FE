@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // pages/manage/QuestionBank/components/QuestionsTab.tsx
 import { useState, useCallback, useEffect } from 'react';
 import {
@@ -29,12 +30,16 @@ import {
     getQuestionDetailService,
     filterQuestionBanksService,
     addQuestionToBankService,
+    filterRangeTopicsService,
+    filterScoreScalesService,
 } from '../../../../services/questionBankService';
 import type {
     Question,
     QuestionRequest,
     QuestionBank,
     AnswerRequest,
+    RangeTopic,
+    ScoreScale,
 } from '../../../../types/questionBank';
 import type { SortOrder } from 'antd/es/table/interface';
 
@@ -79,6 +84,10 @@ const QuestionsTab = () => {
     const [answers, setAnswers] = useState<AnswerRequest[]>(createDefaultAnswers());
     const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number>(0);
 
+    // State for RangeTopic and ScoreScale dropdowns
+    const [rangeTopics, setRangeTopics] = useState<RangeTopic[]>([]);
+    const [scoreScales, setScoreScales] = useState<ScoreScale[]>([]);
+
     // Fetch question banks for dropdown
     const fetchQuestionBanks = useCallback(async () => {
         try {
@@ -119,10 +128,32 @@ const QuestionsTab = () => {
         []
     );
 
+    // Fetch RangeTopic for category dropdown
+    const fetchRangeTopics = useCallback(async () => {
+        try {
+            const response = await filterRangeTopicsService({ searchString: null }, { page: 0, size: 100 });
+            setRangeTopics(response.data.content);
+        } catch (error) {
+            console.error('Error fetching range topics:', error);
+        }
+    }, []);
+
+    // Fetch ScoreScale for difficulty dropdown
+    const fetchScoreScales = useCallback(async () => {
+        try {
+            const response = await filterScoreScalesService({ searchString: null }, { page: 0, size: 100 });
+            setScoreScales(response.data.content);
+        } catch (error) {
+            console.error('Error fetching score scales:', error);
+        }
+    }, []);
+
     useEffect(() => {
         fetchQuestionBanks();
         fetchQuestions();
-    }, [fetchQuestionBanks, fetchQuestions]);
+        fetchRangeTopics();
+        fetchScoreScales();
+    }, [fetchQuestionBanks, fetchQuestions, fetchRangeTopics, fetchScoreScales]);
 
     // Handle search
     const handleSearch = (values: { searchString?: string; idQuestionBank?: number }) => {
@@ -182,18 +213,23 @@ const QuestionsTab = () => {
 
             // Update correct answer
             const updatedAnswers = answers.map((answer, index) => ({
-                ...answer,
+                id: undefined,
+                content: answer.content,
                 correct: index === correctAnswerIndex,
             }));
 
             const requestData: QuestionRequest = {
+                id: undefined,
                 questionContent: values.questionContent,
                 category: values.category || '',
                 difficulty: values.difficulty || '',
                 answers: updatedAnswers,
                 explanation: {
+                    id: undefined,
                     explanationVietnamese: values.explanationVietnamese || '',
                     explanationEnglish: values.explanationEnglish || '',
+                    isActive: true,
+                    isDelete: false,
                 },
                 active: true,
                 delete: false,
@@ -574,17 +610,34 @@ const QuestionsTab = () => {
                     >
                         <Input.TextArea rows={3} placeholder="Nhập nội dung câu hỏi" />
                     </Form.Item>
-                    <Form.Item name="category" label="Danh mục">
-                        <Input placeholder="Nhập danh mục" />
-                    </Form.Item>
-                    <Form.Item name="difficulty" label="Độ khó">
+                    <Form.Item
+                        name="category"
+                        label="Chủ đề (RangeTopic)"
+                        rules={[{ required: true, message: 'Vui lòng chọn chủ đề!' }]}
+                    >
                         <Select
-                            placeholder="Chọn độ khó"
-                            options={[
-                                { value: 'easy', label: 'Dễ' },
-                                { value: 'medium', label: 'Trung bình' },
-                                { value: 'hard', label: 'Khó' },
-                            ]}
+                            placeholder="Chọn chủ đề"
+                            showSearch
+                            optionFilterProp="label"
+                            options={rangeTopics.map((topic) => ({
+                                value: topic.content,
+                                label: `${topic.content} - ${topic.vietnamese}`,
+                            }))}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="difficulty"
+                        label="Mức độ (ScoreScale)"
+                        rules={[{ required: true, message: 'Vui lòng chọn mức độ!' }]}
+                    >
+                        <Select
+                            placeholder="Chọn mức độ"
+                            showSearch
+                            optionFilterProp="label"
+                            options={scoreScales.map((scale) => ({
+                                value: scale.title,
+                                label: `${scale.title} (${scale.fromScore}-${scale.toScore})`,
+                            }))}
                         />
                     </Form.Item>
 
@@ -625,17 +678,34 @@ const QuestionsTab = () => {
                     >
                         <Input.TextArea rows={3} placeholder="Nhập nội dung câu hỏi" />
                     </Form.Item>
-                    <Form.Item name="category" label="Danh mục">
-                        <Input placeholder="Nhập danh mục" />
-                    </Form.Item>
-                    <Form.Item name="difficulty" label="Độ khó">
+                    <Form.Item
+                        name="category"
+                        label="Chủ đề (RangeTopic)"
+                        rules={[{ required: true, message: 'Vui lòng chọn chủ đề!' }]}
+                    >
                         <Select
-                            placeholder="Chọn độ khó"
-                            options={[
-                                { value: 'easy', label: 'Dễ' },
-                                { value: 'medium', label: 'Trung bình' },
-                                { value: 'hard', label: 'Khó' },
-                            ]}
+                            placeholder="Chọn chủ đề"
+                            showSearch
+                            optionFilterProp="label"
+                            options={rangeTopics.map((topic) => ({
+                                value: topic.content,
+                                label: `${topic.content} - ${topic.vietnamese}`,
+                            }))}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="difficulty"
+                        label="Mức độ (ScoreScale)"
+                        rules={[{ required: true, message: 'Vui lòng chọn mức độ!' }]}
+                    >
+                        <Select
+                            placeholder="Chọn mức độ"
+                            showSearch
+                            optionFilterProp="label"
+                            options={scoreScales.map((scale) => ({
+                                value: scale.title,
+                                label: `${scale.title} (${scale.fromScore}-${scale.toScore})`,
+                            }))}
                         />
                     </Form.Item>
 
@@ -688,10 +758,10 @@ const QuestionsTab = () => {
                                         selectedQuestion.difficulty?.toLowerCase() === 'easy'
                                             ? 'green'
                                             : selectedQuestion.difficulty?.toLowerCase() === 'medium'
-                                              ? 'orange'
-                                              : selectedQuestion.difficulty?.toLowerCase() === 'hard'
-                                                ? 'red'
-                                                : 'default'
+                                                ? 'orange'
+                                                : selectedQuestion.difficulty?.toLowerCase() === 'hard'
+                                                    ? 'red'
+                                                    : 'default'
                                     }
                                 >
                                     {selectedQuestion.difficulty || 'N/A'}
@@ -703,15 +773,15 @@ const QuestionsTab = () => {
                                         selectedQuestion.isDelete
                                             ? 'red'
                                             : selectedQuestion.isActive
-                                              ? 'green'
-                                              : 'orange'
+                                                ? 'green'
+                                                : 'orange'
                                     }
                                 >
                                     {selectedQuestion.isDelete
                                         ? 'Đã xóa'
                                         : selectedQuestion.isActive
-                                          ? 'Hoạt động'
-                                          : 'Tạm dừng'}
+                                            ? 'Hoạt động'
+                                            : 'Tạm dừng'}
                                 </Tag>
                             </Descriptions.Item>
                         </Descriptions>

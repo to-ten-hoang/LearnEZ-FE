@@ -3,7 +3,7 @@ export interface PaymentResponse {
     message: string;
     data: {
         status: string;
-        url: string;
+        url: string; // lowercase - matches actual API response
         message: string;
     };
 }

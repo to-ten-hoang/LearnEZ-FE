@@ -1,7 +1,16 @@
 import type { User } from './user';
 
 // Định nghĩa các trạng thái của lớp học để sử dụng nhất quán
-export const CLASS_STATUSES = ['PENDING', 'ACTIVE', 'FINISHED', 'CANCELED', 'PLANNING', 'CANCELLED', 'COMPLETED', 'ONGOING'] as const;
+export const CLASS_STATUSES = [
+    'PENDING',
+    'ACTIVE',
+    'FINISHED',
+    'CANCELED',
+    'PLANNING',
+    'CANCELLED',
+    'COMPLETED',
+    'ONGOING',
+] as const;
 export type ClassStatus = (typeof CLASS_STATUSES)[number];
 
 export interface Class {
@@ -105,11 +114,17 @@ export interface MemberPagedResponse {
         pageable: {
             pageNumber: number;
             pageSize: number;
-        }
+        };
     };
 }
 
 /* ====== Class Notification types ====== */
+
+export interface AttachDocumentClass {
+    id?: number;
+    linkUrl: string;
+    name?: string;
+}
 
 export type NotificationTypeNumber = 1 | 2; // 1: Thông báo thường, 2: Bài tập (có thời gian)
 export interface ClassNotification {
@@ -126,8 +141,7 @@ export interface ClassNotification {
     updatedAt: string | null;
     createdBy: User;
     updatedBy: User | null;
-    // Backend trả về mảng object/file hoặc rỗng, không có schema cụ thể -> để any[]
-    attachDocumentClasses: any[];
+    attachDocumentClasses: AttachDocumentClass[];
 }
 
 export interface CreateClassNotificationRequest {
@@ -136,11 +150,12 @@ export interface CreateClassNotificationRequest {
     isPin: boolean;
     typeNotification: NotificationTypeNumber;
     fromDate: string | null; // "YYYY-MM-DD HH:mm:ss" hoặc null
-    toDate: string | null;   // "YYYY-MM-DD HH:mm:ss" hoặc null
+    toDate: string | null; // "YYYY-MM-DD HH:mm:ss" hoặc null
     urlAttachment: string[]; // các URL cuối cùng
 }
 
-export interface UpdateClassNotificationRequest extends Omit<CreateClassNotificationRequest, 'classId'> {
+export interface UpdateClassNotificationRequest
+    extends Omit<CreateClassNotificationRequest, 'classId'> {
     classId: number;
     classNotificationId: number;
 }

@@ -29,6 +29,9 @@ export interface Course {
     createdBy: Author | null;
     updatedBy: Author | null;
     lessons: Lesson[] | null;
+    // ✅ Order status fields - from API response
+    isOrdered: number | null; // Order ID if course has been ordered
+    statusOrder: string | null; // "PENDING" | "COMPLETED" | "CANCELLED" | null
 }
 
 // ✅ Thêm interface cho Author từ API response
